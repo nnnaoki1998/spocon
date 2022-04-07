@@ -1,0 +1,6 @@
+# spocon
+
+## Gemfileのライブラリをインストール
+```
+$ bundle install
+```
