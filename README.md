@@ -8,7 +8,7 @@ $ bundle install
 ```
 
 ### reactで利用するライブラリ
-// uiディレクトリ直下で実行
+uiディレクトリ直下で実行
 ```
 $ npm install
 ```
@@ -21,7 +21,7 @@ $ rails server
 ```
 
 ### react起動
-// uiディレクトリ直下で実行
+uiディレクトリ直下で実行
 ```
 $ npm run start
 ```
