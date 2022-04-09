@@ -1,27 +1,25 @@
 # spocon
 
-## ライブラリをインストール
+## 起動準備
 
-### railsで利用するライブラリ
+### dockerコンテナをビルド
 ```
-$ bundle install
+$ docker-compose build
 ```
 
 ### reactで利用するライブラリ
-uiディレクトリ直下で実行
 ```
-$ npm install
+$ npm --prefix ui install
 ```
 
 ## 起動
 
-### rails起動
+### dockerでrails起動
 ```
-$ rails server
+$ docker-compose up
 ```
 
 ### react起動
-uiディレクトリ直下で実行
 ```
-$ npm run start
+$ npm --prefix ui run start
 ```
