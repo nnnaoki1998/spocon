@@ -9,3 +9,18 @@ $ bundle install
 ```
 $ rails server
 ```
+
+## フロントで使用するライブラリをインストール
+```
+// uiディレクトリ直下で実行
+$ npm install
+```
+
+## フロント起動
+```
+// uiディレクトリ直下で実行
+$ npm run start
+```
+
+
+

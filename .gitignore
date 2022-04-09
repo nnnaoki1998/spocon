@@ -25,3 +25,6 @@
 /config/master.key
 
 /vendor/bundle
+
+# Ignore node_modules
+/ui/node_modules
