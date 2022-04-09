@@ -5,6 +5,6 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ".:/root/play-rails"
-    working_dir: /root/play-rails
+      - ".:/root/rails-docker"
+    working_dir: /root/rails-docker
     entrypoint: bash -c "rails server -b 0.0.0.0"
