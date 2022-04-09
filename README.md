@@ -23,3 +23,10 @@ $ docker-compose up
 ```
 $ npm --prefix ui run start
 ```
+
+## コード整形
+
+### フロントエンド
+```
+$ npm run lint
+```
