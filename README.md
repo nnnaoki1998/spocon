@@ -4,3 +4,8 @@
 ```
 $ bundle install
 ```
+
+## 起動
+```
+$ rails server
+```
