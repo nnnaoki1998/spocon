@@ -6,7 +6,8 @@ const Hello: React.FC = () => {
     const hours = date.getHours();
     if (hours > 5 && hours < 11) {
       return 'おはようございます！';
-    } if (hours >= 11 && hours < 18) {
+    }
+    if (hours >= 11 && hours < 18) {
       return 'こんにちは！';
     }
     return 'こんばんは！';
