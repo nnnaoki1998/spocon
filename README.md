@@ -16,12 +16,12 @@ $ npm --prefix ui install
 
 ### dockerでrails起動
 ```
-$ docker-compose up
+$ docker-compose up rails
 ```
 
-### フロントエンド起動
+### dockerでフロントエンド起動
 ```
-$ npm --prefix ui run start
+$ docker-compose up react
 ```
 
 ## コード整形
