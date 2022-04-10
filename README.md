@@ -28,5 +28,5 @@ $ npm --prefix ui run start
 
 ### フロントエンド
 ```
-$ npm --prefix ui run lint
+$ npm --prefix ui run fmt
 ```
