@@ -3,4 +3,8 @@
 
 echo "runnnig prettier and eslint."
 # TODO: lint-stagedを導入
-cd ui && npm run fmt
+
+CHENGED_UI_FILE_COUNT=`git status | grep modified | grep -c ui/`
+if $CHENGED_UI_FILE_COUNT > 0:
+  cd ui && npm run fmt
+fi
