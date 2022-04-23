@@ -13,14 +13,17 @@ default: &default
   adapter: mysql2
   encoding: utf8
   pool: 5
-  username: <%= ENV['DATABASE_DEV_USER'] %>
-  password: <%= ENV['DATABASE_DEV_PASSWORD'] %>
-  host: <%= ENV['DATABASE_DEV_HOST'] %>
-  socket: /var/run/mysqld/mysqld.sock
+  # TODO: mysqlの接続情報を環境変数で管理する
+  # username: <%= ENV['DATABASE_DEV_USER'] %>
+  # password: <%= ENV['DATABASE_DEV_PASSWORD'] %>
+  # host: <%= ENV['DATABASE_DEV_HOST'] %>
 
 development:
   <<: *default
   database: spocon_db
+  host: 127.0.0.1
+  username: root
+  password: mysql
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
