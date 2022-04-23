@@ -3,5 +3,4 @@
 
 echo "runnnig prettier and eslint."
 # TODO: lint-stagedを導入
-
 cd ui && npm run fmt
