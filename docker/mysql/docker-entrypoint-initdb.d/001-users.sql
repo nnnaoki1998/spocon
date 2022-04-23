@@ -1,6 +1,6 @@
 use spocon_db;
 
-create table user
+create table users
 (
   id int unsigned not null auto_increment,
   name varchar(255) not null,
