@@ -7,7 +7,7 @@
 $ docker-compose build
 ```
 
-### reactで利用するライブラリ
+### フロントエンドで利用するライブラリ
 ```
 $ npm --prefix ui install
 ```
@@ -16,10 +16,17 @@ $ npm --prefix ui install
 
 ### dockerでrails起動
 ```
-$ docker-compose up
+$ docker-compose up rails
 ```
 
-### react起動
+### dockerでフロントエンド起動
 ```
-$ npm --prefix ui run start
+$ docker-compose up react
+```
+
+## コード整形
+
+### フロントエンド
+```
+$ npm --prefix ui run fmt
 ```
