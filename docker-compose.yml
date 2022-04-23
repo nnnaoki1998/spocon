@@ -20,6 +20,7 @@ services:
 
   mysql:
     image: mysql:8
+    container_name: spocon-mysql
     volumes:
       - ./docker/mysql/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
       - ./docker/mysql/conf.d:/etc/mysql/conf.d

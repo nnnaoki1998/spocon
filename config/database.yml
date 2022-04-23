@@ -21,7 +21,7 @@ default: &default
 development:
   <<: *default
   database: spocon_db
-  host: 127.0.0.1
+  host: spocon-mysql
   username: root
   password: mysql
 
