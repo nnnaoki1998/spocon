@@ -26,5 +26,8 @@
 
 /vendor/bundle
 
+# 環境変数
+.env
+
 # Ignore node_modules
 /ui/node_modules
