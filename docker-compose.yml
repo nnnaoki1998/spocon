@@ -8,3 +8,12 @@ services:
       - ".:/root/rails-docker"
     working_dir: /root/rails-docker
     entrypoint: bash -c "rails server -b 0.0.0.0"
+
+  react:
+    build: ./ui
+    ports:
+      - "8080:8080"
+    volumes:
+      - "./ui:/root/react-docker"
+    working_dir: /root/react-docker
+    entrypoint: bash -c "npm run fmt && npm start"
