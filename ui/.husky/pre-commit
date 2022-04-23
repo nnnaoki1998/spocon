@@ -1,6 +1,7 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-echo "runnnig prettier and eslint."
-# TODO: lint-stagedを導入
-cd ui && npm run fmt
+# ui配下のファイルを修正したときのみフロントエンドのコード整形が動作する
+if [ `git status | grep modified | grep -c " ui/"` -gt 0 ]; then
+  npm --prefix ui run fmt
+fi
