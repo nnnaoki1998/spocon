@@ -11,7 +11,7 @@ class SportController < ApplicationController
           render :json => {'status' => 'ng'}
         end
       end
-   
+
       private
         def sport_params
           params.permit(:name)
