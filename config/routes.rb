@@ -5,4 +5,6 @@ Rails.application.routes.draw do
   post '/user', to: 'user#create'
   # curl 127.0.0.1:3000/sport
   get '/sport', to: 'sport#index'
+  # curl -X POST -H "Content-Type: application/json" -d '{"name":"陸上"}' 127.0.0.1:3000/sport -i
+  post '/sport', to: 'sport#create'
 end
