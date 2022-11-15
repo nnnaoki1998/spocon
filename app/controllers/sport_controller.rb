@@ -12,6 +12,13 @@ class SportController < ApplicationController
         end
       end
 
+    def destroy
+        @sport = Sport.find(params[:id]) 
+        @sport.destroy
+        flash[:notice] = 'sportを削除しました。'
+        redirect_to 'sport/index'
+    end
+
       private
         def sport_params
           params.permit(:name)
