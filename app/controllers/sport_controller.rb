@@ -13,10 +13,12 @@ class SportController < ApplicationController
       end
 
     def destroy
-        @sport = Sport.find(params[:id]) 
-        @sport.destroy
-        flash[:notice] = 'sportを削除しました。'
-        redirect_to 'sport/index'
+        @sport = Sport.find(params[:id])
+        if @sport.destroy
+            render :json => {'status' => 'ok'}
+        else
+            render :json => {'status' => 'ng'}
+        end
     end
 
       private
