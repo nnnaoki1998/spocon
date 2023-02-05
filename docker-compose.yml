@@ -16,7 +16,6 @@ services:
     volumes:
       - ".:/root/rails-docker"
     working_dir: /root/rails-docker
-    # command: bash -c "while :; do sleep 10; done"
     entrypoint: bash -c "rspec spec/requests"
 
   react:
