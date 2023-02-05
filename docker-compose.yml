@@ -9,6 +9,16 @@ services:
     working_dir: /root/rails-docker
     entrypoint: bash -c "rm -f tmp/pids/server.pid && rails server -b 0.0.0.0" #tmp/pids/server.pidが残っているとrailsを起動できないため､削除して起動する
 
+  rails-test:
+    build: .
+    ports:
+      - "3001:3001"
+    volumes:
+      - ".:/root/rails-docker"
+    working_dir: /root/rails-docker
+    # command: bash -c "while :; do sleep 10; done"
+    entrypoint: bash -c "rspec spec/requests"
+
   react:
     build: ./ui
     ports:

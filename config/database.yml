@@ -30,7 +30,10 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: spocon_test_db
+  database: spocon_db
+  host: spocon-mysql
+  username: root
+  password: mysql
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is

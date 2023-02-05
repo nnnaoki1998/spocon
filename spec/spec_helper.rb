@@ -64,7 +64,7 @@ RSpec.configure do |config|
   # https://relishapp.com/rspec/rspec-core/docs/configuration/zero-monkey-patching-mode
   config.disable_monkey_patching!
 
-  # Many RSpec users commonly either run the entire suite or an individual
+  # Many RSpec user commonly either run the entire suite or an individual
   # file, and it's useful to allow more verbose output when running an
   # individual spec file.
   if config.files_to_run.one?
@@ -84,11 +84,12 @@ RSpec.configure do |config|
   # the seed, which is printed after each run.
   #     --seed 1234
   config.order = :random
-
+　
   # Seed global randomization in this process using the `--seed` CLI option.
   # Setting this allows you to use `--seed` to deterministically reproduce
   # test failures related to randomization by passing the same `--seed` value
   # as the one that triggered the failure.
   Kernel.srand config.seed
 =end
+require File.expand_path("../../config/environment", __FILE__)
 end
