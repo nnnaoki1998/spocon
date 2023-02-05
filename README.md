@@ -34,6 +34,18 @@ $ docker-compose up rails
 $ docker-compose up react
 ```
 
+## テスト
+
+### テスト用のMySQLコンテナを起動
+```
+$ docker-compose up test-mysql
+```
+
+### railsのテスト実行
+```
+$ docker-compose run --rm rails-test rspec spec/requests
+```
+
 ## コード整形
 
 ### フロントエンド

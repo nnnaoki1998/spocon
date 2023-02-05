@@ -13,24 +13,20 @@ default: &default
   adapter: mysql2
   encoding: utf8
   pool: 5
-  # TODO: mysqlの接続情報を環境変数で管理する
-  # username: <%= ENV['DATABASE_DEV_USER'] %>
-  # password: <%= ENV['DATABASE_DEV_PASSWORD'] %>
-  # host: <%= ENV['DATABASE_DEV_HOST'] %>
+  database: spocon_db
+  host: <%= ENV['DATABASE_HOST'] %>
+  port: <%= ENV['DATABASE_PORT'] %>
+  username: <%= ENV['DATABASE_USERNAME'] %>
+  password: <%= ENV['DATABASE_PASSWORD'] %>
 
 development:
   <<: *default
-  database: spocon_db
-  host: spocon-mysql
-  username: root
-  password: mysql
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: spocon_test_db
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
