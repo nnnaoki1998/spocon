@@ -18,10 +18,6 @@ default: &default
   port: <%= ENV['DATABASE_PORT'] %>
   username: <%= ENV['DATABASE_USERNAME'] %>
   password: <%= ENV['DATABASE_PASSWORD'] %>
-  # TODO: mysqlの接続情報を環境変数で管理する
-  # username: <%= ENV['DATABASE_DEV_USER'] %>
-  # password: <%= ENV['DATABASE_DEV_PASSWORD'] %>
-  # host: <%= ENV['DATABASE_DEV_HOST'] %>
 
 development:
   <<: *default

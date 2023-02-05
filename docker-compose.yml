@@ -47,7 +47,6 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=mysql
 
-
   test-mysql:
     image: mysql:8
     container_name: spocon-test-mysql
