@@ -2,6 +2,7 @@
   "compilerOptions": {
     "target": "esnext",
     "jsx": "react",
+    "lib": ["dom"],
 
     /* ファイル名の大文字小文字を区別 */
     "forceConsistentCasingInFileNames": true,
