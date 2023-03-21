@@ -22,11 +22,11 @@
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.17.8",
-    "@babel/plugin-transform-runtime": "^7.17.0",
+    "@babel/plugin-transform-runtime": "^7.21.0",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
     "@babel/preset-typescript": "^7.16.7",
-    "@babel/runtime": "^7.17.8",
+    "@babel/runtime": "^7.21.0",
     "@types/node": "^18.15.3",
     "@types/react": "^17.0.43",
     "@types/react-dom": "^17.0.14",
@@ -51,7 +51,12 @@
     "webpack-dev-server": "^4.7.4"
   },
   "dependencies": {
+    "@aws-sdk/config-resolver": "^3.295.0",
+    "@aws-sdk/smithy-client": "^3.295.0",
+    "aws-amplify": "^4.3.13",
+    "process": "^0.11.10",
     "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "react-dom": "^18.0.0",
+    "react-router-dom": "^6.9.0"
   }
 }
