@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../hooks/useAuth';
+import { useAuth } from '../../hooks/useAuth';
 
-export const SignIn: React.FC = () => {
+export const SignUp: React.FC = () => {
   const auth = useAuth();
   const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const executeSignIn = async (event: React.FormEvent<HTMLFormElement>) => {
+  const executeSignUp = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const result = await auth.signIn(username, password);
+    const result = await auth.signUp(username, password);
     if (result.success) {
-      navigate({ pathname: '/dashboard' });
+      navigate({ pathname: '/' });
     } else {
       alert(result.message);
     }
@@ -20,7 +20,7 @@ export const SignIn: React.FC = () => {
 
   return (
     // eslint-disable-next-line @typescript-eslint/no-misused-promises
-    <form noValidate onSubmit={executeSignIn}>
+    <form noValidate onSubmit={executeSignUp}>
       <div>
         {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
         <label htmlFor="username">メールアドレス: </label>
