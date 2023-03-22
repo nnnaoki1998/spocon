@@ -14,6 +14,7 @@ export const SignUp: React.FC = () => {
     if (result.success) {
       navigate({ pathname: '/' });
     } else {
+      // TODO メッセージの出力方法改善
       alert(result.message);
     }
   };
@@ -41,7 +42,7 @@ export const SignUp: React.FC = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
       </div>
-      <button type="submit">ログイン</button>
+      <button type="submit">アカウント登録</button>
     </form>
   );
 };

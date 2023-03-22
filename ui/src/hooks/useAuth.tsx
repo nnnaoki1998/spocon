@@ -52,6 +52,7 @@ const useProvideAuth = (): UseAuth => {
       setPassword(_password);
       return { success: true, message: '' };
     } catch (error) {
+      // TODO エラーコードで出力するメッセージを条件分岐させる
       return {
         success: false,
         message: '認証に失敗しました。',
@@ -68,6 +69,7 @@ const useProvideAuth = (): UseAuth => {
       setIsAuthenticated(true);
       return { success: true, message: '' };
     } catch (error) {
+      // TODO エラーコードで出力するメッセージを条件分岐させる
       return {
         success: false,
         message: '認証に失敗しました。',
