@@ -1,7 +1,8 @@
 const Auth = {
-  region: process.env.REACT_APP_AUTH_REGION,
-  userPoolId: process.env.REACT_APP_AUTH_USER_POOL_ID,
-  userPoolWebClientId: process.env.REACT_APP_AUTH_USER_POOL_WEB_CLIENT_ID,
+  // TODO cognito情報は環境変数で管理する
+  region: 'ap-northeast-1',
+  userPoolId: 'ap-northeast-1_H5XpXi1Tr',
+  userPoolWebClientId: '4j6kfe19s3dh6l52371flnmcn1',
   cookieStorage: {
     domain: 'localhost',
     path: '/',
