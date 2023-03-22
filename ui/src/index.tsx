@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
-import Hello from './App';
+import Router from './Router';
 import { ProvideAuth } from './hooks/useAuth';
 
 const container = document.getElementById('root')
@@ -12,7 +12,7 @@ const root = createRoot(container)
 root.render(
   <React.StrictMode>
     <ProvideAuth>
-      <Hello />
+      <Router />
     </ProvideAuth>
   </React.StrictMode>,
 );
