@@ -12,10 +12,10 @@ type Result = {
 type UseAuth = {
   isLoading: boolean;
   isAuthenticated: boolean;
-  email: string;
-  signUp: (email: string, password: string) => Promise<Result>;
+  username: string;
+  signUp: (username: string, password: string) => Promise<Result>;
   confirmSignUp: (verificationCode: string) => Promise<Result>;
-  signIn: (email: string, password: string) => Promise<Result>;
+  signIn: (username: string, password: string) => Promise<Result>;
   signOut: () => void;
 };
 
@@ -26,28 +26,29 @@ export const useAuth = () => useContext(authContext);
 const useProvideAuth = (): UseAuth => {
   const [isLoading, setIsLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   useEffect(() => {
     Auth.currentAuthenticatedUser()
       .then((result) => {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
-        setEmail(result.email);
+        setUsername(result.username);
         setIsAuthenticated(true);
         setIsLoading(false);
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
       })
       .catch(() => {
-        setEmail('');
+        setUsername('');
         setIsAuthenticated(false);
         setIsLoading(false);
       });
   }, []);
 
-  const signUp = async (_email: string, _password: string) => {
+  const signUp = async (_username: string, _password: string) => {
     try {
-      await Auth.signUp(_email, _password);
-      setEmail(_email);
+      await Auth.signUp(_username, _password);
+      setUsername(_username);
       setPassword(_password);
       return { success: true, message: '' };
     } catch (error) {
@@ -58,12 +59,12 @@ const useProvideAuth = (): UseAuth => {
     }
   };
 
-  const signIn = async (_email: string, _password: string) => {
+  const signIn = async (_username: string, _password: string) => {
     try {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-      const result = await Auth.signIn(_email, _password);
+      const result = await Auth.signIn(_username, _password);
       // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
-      setEmail(result.email);
+      setUsername(result.username);
       setIsAuthenticated(true);
       return { success: true, message: '' };
     } catch (error) {
@@ -76,8 +77,8 @@ const useProvideAuth = (): UseAuth => {
 
   const confirmSignUp = async (verificationCode: string) => {
     try {
-      await Auth.confirmSignUp(email, verificationCode);
-      const result = await signIn(email, password);
+      await Auth.confirmSignUp(username, verificationCode);
+      const result = await signIn(username, password);
       setPassword('');
       return result;
     } catch (error) {
@@ -91,7 +92,7 @@ const useProvideAuth = (): UseAuth => {
   const signOut = async () => {
     try {
       await Auth.signOut();
-      setEmail('');
+      setUsername('');
       setIsAuthenticated(false);
       return { success: true, message: '' };
     } catch (error) {
@@ -105,7 +106,7 @@ const useProvideAuth = (): UseAuth => {
   return {
     isLoading,
     isAuthenticated,
-    email,
+    username,
     signUp,
     confirmSignUp,
     signIn,

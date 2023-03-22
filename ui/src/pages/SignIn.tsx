@@ -5,12 +5,12 @@ import { useAuth } from '../hooks/useAuth';
 export const SignIn: React.FC = () => {
   const auth = useAuth();
   const navigate = useNavigate();
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const executeSignIn = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const result = await auth.signIn(email, password);
+    const result = await auth.signIn(username, password);
     if (result.success) {
       navigate({ pathname: '/dashboard' });
     } else {
@@ -23,12 +23,12 @@ export const SignIn: React.FC = () => {
     <form noValidate onSubmit={executeSignIn}>
       <div>
         {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-        <label htmlFor="email">メールアドレス: </label>
+        <label htmlFor="username">メールアドレス: </label>
         <input
-          id="email"
+          id="username"
           type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
         />
       </div>
       <div>

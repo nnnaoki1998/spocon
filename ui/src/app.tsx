@@ -25,10 +25,15 @@ const App: React.FC = () => {
   // eslint-disable-next-line react/no-unstable-nested-components
   const PrivateDashboard = () => (
     <PrivateRoute>
-      <div>ようこそ！ {auth.email} さん！</div>
-      {/* eslint-disable-next-line react/button-has-type */}
-      <button onClick={() => auth.signOut()}>ログアウト</button>
+      <div>userId: {auth.username} </div>
+      <Link to="/">
+        {/* eslint-disable-next-line react/button-has-type */}
+        <button onClick={() => auth.signOut()}>
+          ログアウト
+        </button>
+      </Link>
     </PrivateRoute>
+
   );
 
   return (
