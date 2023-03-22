@@ -22,24 +22,26 @@ export const SignIn: React.FC = () => {
     // eslint-disable-next-line @typescript-eslint/no-misused-promises
     <form noValidate onSubmit={executeSignIn}>
       <div>
-        {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-        <label htmlFor="username">メールアドレス: </label>
-        <input
-          id="username"
-          type="email"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
+        <label htmlFor="username">
+          メールアドレス:
+          <input
+            id="username"
+            type="email"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+        </label>
       </div>
       <div>
-        {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-        <label htmlFor="password">パスワード: </label>
-        <input
-          id="password"
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+        <label htmlFor="password">
+          パスワード:
+          <input
+            id="password"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </label>
       </div>
       <button type="submit">ログイン</button>
     </form>
