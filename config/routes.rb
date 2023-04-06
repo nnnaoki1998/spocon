@@ -12,4 +12,6 @@ Rails.application.routes.draw do
   # curl -X PATCH -H "Content-Type: application/json" -d '{"name":"錦木千束","email":"chisato@lyco.com"}' 127.0.0.1:3000/user/1
   get '/user/:id/edit', to: 'user#edit'
   patch 'user/:id', to: 'user#update'
+  # curl 127.0.0.1:3000/team
+  get '/team', to: 'team#index'
 end
