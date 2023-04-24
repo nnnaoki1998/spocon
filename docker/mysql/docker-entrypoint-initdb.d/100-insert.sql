@@ -14,6 +14,8 @@ values (1, 'バスケットボール'),
        (4, 'テニス'),
        (5, '卓球');
 
-insert into team (id, name)
-values (1, '柏高校OB会'),
-       (2, '中央高校OB会');
+insert into team (id, name, sport_id, icon_path, description, zip_code, address, longitude, latitude)
+values (1, '柏陵高校OB会', 1, 'aaaa', 'abcdefgh', 1, 'aaa@aaa.com', 1, 1),
+       (2, '福岡中央高校OB会', 2, 'bbbb', 'ijklmnop', 2, 'bbb@bbb.com', 2, 2);
+
+

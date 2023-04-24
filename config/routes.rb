@@ -15,3 +15,4 @@ Rails.application.routes.draw do
   # curl 127.0.0.1:3000/team
   get '/team', to: 'team#index'
 end
+
