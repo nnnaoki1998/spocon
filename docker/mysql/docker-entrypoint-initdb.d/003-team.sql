@@ -2,7 +2,8 @@ use spocon_db;
 
 create table team
 (
- id char(36) not null unique,
+ id int unsigned not null auto_increment,
+ uuid char(36) not null unique,
  name varchar(255) not null,
  sport_id int unsigned not null,
  reception_status enum('on','off') default 'on',
