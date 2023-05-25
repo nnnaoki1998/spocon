@@ -7,9 +7,9 @@
 $ docker-compose build
 ```
 
-### フロントエンドで利用するライブラリ
+### フロントエンドで利用するライブラリのインストール
 ```
-$ npm --prefix ui install
+$ npm --prefix ui ci
 ```
 
 ## 起動
