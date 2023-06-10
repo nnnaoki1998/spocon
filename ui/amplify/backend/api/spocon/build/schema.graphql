@@ -1,0 +1,324 @@
+
+type ChatMessage {
+  chatRoomId: ID!
+  writeDateTime: AWSTimestamp!
+  teamId: ID!
+  message: String!
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  owner: String
+}
+
+type ChatRoom {
+  chatRoomId: ID!
+  writeDateTime: AWSTimestamp!
+  teamId: ID!
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  owner: String
+}
+
+input ModelStringInput {
+  ne: String
+  eq: String
+  le: String
+  lt: String
+  ge: String
+  gt: String
+  contains: String
+  notContains: String
+  between: [String]
+  beginsWith: String
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  size: ModelSizeInput
+}
+
+input ModelIntInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelFloatInput {
+  ne: Float
+  eq: Float
+  le: Float
+  lt: Float
+  ge: Float
+  gt: Float
+  between: [Float]
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelBooleanInput {
+  ne: Boolean
+  eq: Boolean
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelIDInput {
+  ne: ID
+  eq: ID
+  le: ID
+  lt: ID
+  ge: ID
+  gt: ID
+  contains: ID
+  notContains: ID
+  between: [ID]
+  beginsWith: ID
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  size: ModelSizeInput
+}
+
+input ModelSubscriptionStringInput {
+  ne: String
+  eq: String
+  le: String
+  lt: String
+  ge: String
+  gt: String
+  contains: String
+  notContains: String
+  between: [String]
+  beginsWith: String
+  in: [String]
+  notIn: [String]
+}
+
+input ModelSubscriptionIntInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+  in: [Int]
+  notIn: [Int]
+}
+
+input ModelSubscriptionFloatInput {
+  ne: Float
+  eq: Float
+  le: Float
+  lt: Float
+  ge: Float
+  gt: Float
+  between: [Float]
+  in: [Float]
+  notIn: [Float]
+}
+
+input ModelSubscriptionBooleanInput {
+  ne: Boolean
+  eq: Boolean
+}
+
+input ModelSubscriptionIDInput {
+  ne: ID
+  eq: ID
+  le: ID
+  lt: ID
+  ge: ID
+  gt: ID
+  contains: ID
+  notContains: ID
+  between: [ID]
+  beginsWith: ID
+  in: [ID]
+  notIn: [ID]
+}
+
+enum ModelAttributeTypes {
+  binary
+  binarySet
+  bool
+  list
+  map
+  number
+  numberSet
+  string
+  stringSet
+  _null
+}
+
+input ModelSizeInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+}
+
+enum ModelSortDirection {
+  ASC
+  DESC
+}
+
+type ModelChatMessageConnection {
+  items: [ChatMessage]!
+  nextToken: String
+}
+
+input ModelChatMessageFilterInput {
+  chatRoomId: ModelIDInput
+  writeDateTime: ModelIntInput
+  teamId: ModelIDInput
+  message: ModelStringInput
+  and: [ModelChatMessageFilterInput]
+  or: [ModelChatMessageFilterInput]
+  not: ModelChatMessageFilterInput
+}
+
+type Query {
+  getChatMessage(chatRoomId: ID!, writeDateTime: AWSTimestamp!, teamId: ID!): ChatMessage
+  listChatMessages(chatRoomId: ID, writeDateTimeTeamId: ModelChatMessagePrimaryCompositeKeyConditionInput, filter: ModelChatMessageFilterInput, limit: Int, nextToken: String, sortDirection: ModelSortDirection): ModelChatMessageConnection
+  getChatRoom(chatRoomId: ID!, writeDateTime: AWSTimestamp!, teamId: ID!): ChatRoom
+  listChatRooms(chatRoomId: ID, writeDateTimeTeamId: ModelChatRoomPrimaryCompositeKeyConditionInput, filter: ModelChatRoomFilterInput, limit: Int, nextToken: String, sortDirection: ModelSortDirection): ModelChatRoomConnection
+  chatMessagesByChatRoomId(chatRoomId: ID!, sortDirection: ModelSortDirection, filter: ModelChatMessageFilterInput, limit: Int, nextToken: String): ModelChatMessageConnection
+  chatRoomsByTeamId(teamId: ID!, sortDirection: ModelSortDirection, filter: ModelChatRoomFilterInput, limit: Int, nextToken: String): ModelChatRoomConnection
+}
+
+input ModelChatMessageConditionInput {
+  message: ModelStringInput
+  and: [ModelChatMessageConditionInput]
+  or: [ModelChatMessageConditionInput]
+  not: ModelChatMessageConditionInput
+}
+
+input CreateChatMessageInput {
+  chatRoomId: ID!
+  writeDateTime: AWSTimestamp!
+  teamId: ID!
+  message: String!
+}
+
+input UpdateChatMessageInput {
+  chatRoomId: ID!
+  writeDateTime: AWSTimestamp!
+  teamId: ID!
+  message: String
+}
+
+input DeleteChatMessageInput {
+  chatRoomId: ID!
+  writeDateTime: AWSTimestamp!
+  teamId: ID!
+}
+
+type Mutation {
+  createChatMessage(input: CreateChatMessageInput!, condition: ModelChatMessageConditionInput): ChatMessage
+  updateChatMessage(input: UpdateChatMessageInput!, condition: ModelChatMessageConditionInput): ChatMessage
+  deleteChatMessage(input: DeleteChatMessageInput!, condition: ModelChatMessageConditionInput): ChatMessage
+  createChatRoom(input: CreateChatRoomInput!, condition: ModelChatRoomConditionInput): ChatRoom
+  updateChatRoom(input: UpdateChatRoomInput!, condition: ModelChatRoomConditionInput): ChatRoom
+  deleteChatRoom(input: DeleteChatRoomInput!, condition: ModelChatRoomConditionInput): ChatRoom
+}
+
+input ModelSubscriptionChatMessageFilterInput {
+  chatRoomId: ModelSubscriptionIDInput
+  writeDateTime: ModelSubscriptionIntInput
+  teamId: ModelSubscriptionIDInput
+  message: ModelSubscriptionStringInput
+  and: [ModelSubscriptionChatMessageFilterInput]
+  or: [ModelSubscriptionChatMessageFilterInput]
+}
+
+type Subscription {
+  onCreateChatMessage(filter: ModelSubscriptionChatMessageFilterInput, owner: String): ChatMessage @aws_subscribe(mutations: ["createChatMessage"])
+  onUpdateChatMessage(filter: ModelSubscriptionChatMessageFilterInput, owner: String): ChatMessage @aws_subscribe(mutations: ["updateChatMessage"])
+  onDeleteChatMessage(filter: ModelSubscriptionChatMessageFilterInput, owner: String): ChatMessage @aws_subscribe(mutations: ["deleteChatMessage"])
+  onCreateChatRoom(filter: ModelSubscriptionChatRoomFilterInput, owner: String): ChatRoom @aws_subscribe(mutations: ["createChatRoom"])
+  onUpdateChatRoom(filter: ModelSubscriptionChatRoomFilterInput, owner: String): ChatRoom @aws_subscribe(mutations: ["updateChatRoom"])
+  onDeleteChatRoom(filter: ModelSubscriptionChatRoomFilterInput, owner: String): ChatRoom @aws_subscribe(mutations: ["deleteChatRoom"])
+}
+
+type ModelChatRoomConnection {
+  items: [ChatRoom]!
+  nextToken: String
+}
+
+input ModelChatRoomFilterInput {
+  chatRoomId: ModelIDInput
+  writeDateTime: ModelIntInput
+  teamId: ModelIDInput
+  and: [ModelChatRoomFilterInput]
+  or: [ModelChatRoomFilterInput]
+  not: ModelChatRoomFilterInput
+}
+
+input ModelChatRoomConditionInput {
+  and: [ModelChatRoomConditionInput]
+  or: [ModelChatRoomConditionInput]
+  not: ModelChatRoomConditionInput
+}
+
+input CreateChatRoomInput {
+  chatRoomId: ID!
+  writeDateTime: AWSTimestamp!
+  teamId: ID!
+}
+
+input UpdateChatRoomInput {
+  chatRoomId: ID!
+  writeDateTime: AWSTimestamp!
+  teamId: ID!
+}
+
+input DeleteChatRoomInput {
+  chatRoomId: ID!
+  writeDateTime: AWSTimestamp!
+  teamId: ID!
+}
+
+input ModelSubscriptionChatRoomFilterInput {
+  chatRoomId: ModelSubscriptionIDInput
+  writeDateTime: ModelSubscriptionIntInput
+  teamId: ModelSubscriptionIDInput
+  and: [ModelSubscriptionChatRoomFilterInput]
+  or: [ModelSubscriptionChatRoomFilterInput]
+}
+
+input ModelChatMessagePrimaryCompositeKeyConditionInput {
+  eq: ModelChatMessagePrimaryCompositeKeyInput
+  le: ModelChatMessagePrimaryCompositeKeyInput
+  lt: ModelChatMessagePrimaryCompositeKeyInput
+  ge: ModelChatMessagePrimaryCompositeKeyInput
+  gt: ModelChatMessagePrimaryCompositeKeyInput
+  between: [ModelChatMessagePrimaryCompositeKeyInput]
+  beginsWith: ModelChatMessagePrimaryCompositeKeyInput
+}
+
+input ModelChatMessagePrimaryCompositeKeyInput {
+  writeDateTime: AWSTimestamp
+  teamId: ID
+}
+
+input ModelChatRoomPrimaryCompositeKeyConditionInput {
+  eq: ModelChatRoomPrimaryCompositeKeyInput
+  le: ModelChatRoomPrimaryCompositeKeyInput
+  lt: ModelChatRoomPrimaryCompositeKeyInput
+  ge: ModelChatRoomPrimaryCompositeKeyInput
+  gt: ModelChatRoomPrimaryCompositeKeyInput
+  between: [ModelChatRoomPrimaryCompositeKeyInput]
+  beginsWith: ModelChatRoomPrimaryCompositeKeyInput
+}
+
+input ModelChatRoomPrimaryCompositeKeyInput {
+  writeDateTime: AWSTimestamp
+  teamId: ID
+}
+
