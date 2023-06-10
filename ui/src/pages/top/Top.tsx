@@ -12,11 +12,16 @@ export const Top: React.FC = () => {
   return (
     <PrivateRoute>
       <div>userId: {auth.username} </div>
-      <Link to="/">
-        <button type="button" onClick={() => auth.signOut()}>
-          ログアウト
-        </button>
-      </Link>
+      <div>
+        <Link to="/chat">チャット画面に遷移</Link>
+      </div>
+      <div>
+        <Link to="/">
+          <button type="button" onClick={() => auth.signOut()}>
+            ログアウト
+          </button>
+        </Link>
+      </div>
     </PrivateRoute>
   );
 };
