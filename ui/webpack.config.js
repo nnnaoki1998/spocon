@@ -64,5 +64,8 @@ module.exports = {
     },
     open: true,
     port: 8080,
+    historyApiFallback: {
+      rewrites: [{ from: /^\/*/, to: '/index.html' }],
+    }
   },
 };
