@@ -13,10 +13,13 @@ type UseAuth = {
   isLoading: boolean;
   isAuthenticated: boolean;
   username: string;
+  attributes: {
+    email: string;
+  };
   signUp: (username: string, password: string) => Promise<Result>;
   confirmSignUp: (verificationCode: string) => Promise<Result>;
   signIn: (username: string, password: string) => Promise<Result>;
-  signOut: () => void;
+  signOut: () => Promise<Result>;
 };
 
 const authContext = createContext({} as UseAuth);
@@ -28,15 +31,15 @@ const useProvideAuth = (): UseAuth => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
 
   useEffect(() => {
     Auth.currentAuthenticatedUser()
-      .then((result) => {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
+      .then((result: UseAuth) => {
         setUsername(result.username);
+        setEmail(result.attributes.email);
         setIsAuthenticated(true);
         setIsLoading(false);
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
       })
       .catch(() => {
         setUsername('');
@@ -62,9 +65,7 @@ const useProvideAuth = (): UseAuth => {
 
   const signIn = async (_username: string, _password: string) => {
     try {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-      const result = await Auth.signIn(_username, _password);
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
+      const result = (await Auth.signIn(_username, _password)) as UseAuth;
       setUsername(result.username);
       setIsAuthenticated(true);
       return { success: true, message: '' };
@@ -109,10 +110,12 @@ const useProvideAuth = (): UseAuth => {
     isLoading,
     isAuthenticated,
     username,
+    attributes: {
+      email,
+    },
     signUp,
     confirmSignUp,
     signIn,
-    // eslint-disable-next-line @typescript-eslint/no-misused-promises
     signOut,
   };
 };

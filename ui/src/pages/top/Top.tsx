@@ -9,15 +9,16 @@ export const Top: React.FC = () => {
   if (auth.isLoading) {
     return <div />;
   }
+
   return (
     <PrivateRoute>
-      <div>userId: {auth.username} </div>
+      <div>email: {auth.attributes.email}</div>
       <div>
         <Link to="/chat">チャット画面に遷移</Link>
       </div>
       <div>
         <Link to="/">
-          <button type="button" onClick={() => auth.signOut()}>
+          <button type="button" onClick={() => auth.signOut}>
             ログアウト
           </button>
         </Link>
