@@ -12,7 +12,7 @@ export const Top: React.FC = () => {
 
   return (
     <PrivateRoute>
-      <div>email: {auth.attributes.email}</div>
+      <div>email: {auth.email}</div>
       <div>
         <Link to="/chat">チャット画面に遷移</Link>
       </div>

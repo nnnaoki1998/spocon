@@ -4,22 +4,27 @@ import { Cognito } from '../aws-config/Cognito';
 
 Amplify.configure({ Auth: Cognito });
 
-type Result = {
+type CertificationResult = {
   success: boolean;
   message: string;
+};
+
+type CurrentAuthenticatedUserResult = {
+  username: string;
+  attributes: {
+    email: string;
+  };
 };
 
 type UseAuth = {
   isLoading: boolean;
   isAuthenticated: boolean;
   username: string;
-  attributes: {
-    email: string;
-  };
-  signUp: (username: string, password: string) => Promise<Result>;
-  confirmSignUp: (verificationCode: string) => Promise<Result>;
-  signIn: (username: string, password: string) => Promise<Result>;
-  signOut: () => Promise<Result>;
+  email: string;
+  signUp: (username: string, password: string) => Promise<CertificationResult>;
+  confirmSignUp: (verificationCode: string) => Promise<CertificationResult>;
+  signIn: (username: string, password: string) => Promise<CertificationResult>;
+  signOut: () => Promise<CertificationResult>;
 };
 
 const authContext = createContext({} as UseAuth);
@@ -35,7 +40,7 @@ const useProvideAuth = (): UseAuth => {
 
   useEffect(() => {
     Auth.currentAuthenticatedUser()
-      .then((result: UseAuth) => {
+      .then((result: CurrentAuthenticatedUserResult) => {
         setUsername(result.username);
         setEmail(result.attributes.email);
         setIsAuthenticated(true);
@@ -110,9 +115,7 @@ const useProvideAuth = (): UseAuth => {
     isLoading,
     isAuthenticated,
     username,
-    attributes: {
-      email,
-    },
+    email,
     signUp,
     confirmSignUp,
     signIn,
