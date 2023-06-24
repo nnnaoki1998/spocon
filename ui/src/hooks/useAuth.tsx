@@ -1,8 +1,5 @@
-import { Amplify, Auth } from 'aws-amplify';
+import { Auth } from 'aws-amplify';
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { Cognito } from '../aws-config/Cognito';
-
-Amplify.configure({ Auth: Cognito });
 
 type CertificationResult = {
   success: boolean;
