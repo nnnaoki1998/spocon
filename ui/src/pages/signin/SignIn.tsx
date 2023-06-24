@@ -5,12 +5,12 @@ import { useAuth } from '../../hooks/useAuth';
 export const SignIn: React.FC = () => {
   const auth = useAuth();
   const navigate = useNavigate();
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const executeSignIn = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const result = await auth.signIn(username, password);
+    const result = await auth.signIn(email, password);
     if (result.success) {
       navigate({ pathname: '/top' });
     } else {
@@ -25,13 +25,13 @@ export const SignIn: React.FC = () => {
       {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
       <form noValidate onSubmit={executeSignIn}>
         <div>
-          <label htmlFor="username">
+          <label htmlFor="email">
             メールアドレス:
             <input
-              id="username"
+              id="email"
               type="email"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </label>
         </div>
