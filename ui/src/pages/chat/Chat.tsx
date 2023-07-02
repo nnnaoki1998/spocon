@@ -10,6 +10,10 @@ import {
 } from '../../feature/api/chat';
 import './Chat.css';
 
+/**
+ * チャットメッセージの配列を書き込み日時で昇順にソートする
+ * @param chatMessageList チャットメッセージの配列
+ */
 const sortByWriteDateTime = (chatMessageList: Array<ChatMessage | null>) => {
   chatMessageList.sort((a, b) => {
     if (a?.writeDateTime === undefined || b?.writeDateTime === undefined)
@@ -20,6 +24,7 @@ const sortByWriteDateTime = (chatMessageList: Array<ChatMessage | null>) => {
   });
 };
 
+/** チャット画面のコンポーネント */
 export const Chat: React.FC = () => {
   const [chatMessages, setChatMessages] = React.useState<
     Array<ChatMessage | null>
@@ -30,6 +35,7 @@ export const Chat: React.FC = () => {
   const [partnerTeamId, setPartnerTeamId] = React.useState<string>('teamId02');
   const [chatRoomId, setChatRoomId] = React.useState<string | undefined>('');
 
+  /** チャットルームの全メッセージを取得する関数 */
   const fetchChatRoomMessage = async () => {
     try {
       await Promise.all([getChatRooms(myTeamId), getChatRooms(partnerTeamId)])
@@ -75,6 +81,7 @@ export const Chat: React.FC = () => {
     }
   };
 
+  /** チャットメッセージを送信する関数 */
   // eslint-disable-next-line no-shadow
   const putMessage = (message: string) => {
     try {
@@ -94,6 +101,7 @@ export const Chat: React.FC = () => {
     }
   };
 
+  /** チャットルームのメッセージの更新があれば、チャットメッセージを取得する関数 */
   const subscribeMessages = () => {
     try {
       // 新しいチャットが作成されたときにトリガーとなるイベントを登録する

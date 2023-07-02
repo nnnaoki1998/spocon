@@ -10,6 +10,7 @@ import {
   chatRoomsByTeamId,
 } from '../../graphql/queries';
 
+/** GraphQLのQueryのレスポンスの型に使用する */
 interface GraphQLQueryResult<T> {
   data: T;
 }
