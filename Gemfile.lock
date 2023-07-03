@@ -123,6 +123,8 @@ GEM
     minitest (5.15.0)
     msgpack (1.5.1)
     mysql2 (0.5.3)
+    net-http (0.3.2)
+      uri
     net-imap (0.2.3)
       digest
       net-protocol
@@ -219,6 +221,7 @@ GEM
       railties (>= 6.0.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
+    uri (0.12.1)
     web-console (4.2.0)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -243,6 +246,7 @@ DEPENDENCIES
   importmap-rails
   jbuilder
   mysql2 (~> 0.5)
+  net-http (~> 0.3.2)
   pry-rails
   puma (~> 5.0)
   rack-cors

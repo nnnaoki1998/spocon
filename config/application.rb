@@ -33,5 +33,7 @@ module Spocon
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    config.autoload_paths += Dir.glob("#{config.root}/app/services")
   end
 end

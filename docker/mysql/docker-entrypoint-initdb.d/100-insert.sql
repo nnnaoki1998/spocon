@@ -15,5 +15,5 @@ values (1, 'バスケットボール'),
        (5, '卓球');
 
 insert into team (id, uuid, name, sport_id, icon_path, description, zip_code, address, longitude, latitude)
-values (1, 'b6d8a45d-ed81-f229-27dc-4a216b239740', '柏陵高校OB会', 1, 'aaaa', 'abcdefgh', "811-1353", '福岡市南区柏原4-47-1', 1, 1),
-       (2, 'c028f2d0-efcc-e377-6e35-45589804212d', '福岡中央高校OB会', 2, 'bbbb', 'ijklmnop', "810-0014", '福岡市中央区平尾3-20-57', 2, 2);
+values (1, 'b6d8a45d-ed81-f229-27dc-4a216b239740', '柏陵高校OB会', 1, 'aaaa', 'abcdefgh', "811-1353", '福岡市南区柏原4-47-1', 1.1, 1.1),
+       (2, 'c028f2d0-efcc-e377-6e35-45589804212d', '福岡中央高校OB会', 2, 'bbbb', 'ijklmnop', "810-0014", '福岡市中央区平尾3-20-57', 2.2, 2.2);
