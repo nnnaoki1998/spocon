@@ -4,7 +4,8 @@ class TeamController < ApplicationController
   end
 
   def create
-    @team = Team.new(team_params)
+    @team_generater = TeamGenerater.new
+    @team = @team_generater.generate(team_params)
     if @team.save
       render :json => {'status' => 'ok'}
     else
@@ -32,6 +33,6 @@ class TeamController < ApplicationController
 
   private
     def team_params
-      params.permit(:uuid, :name, :sport_id, :icon_path, :description, :zip_code, :address, :longitude, :latitude)
+      params.permit(:name, :sport_id, :icon_path, :description, :zip_code, :address, :longitude, :latitude)
     end
   end
