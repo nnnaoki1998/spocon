@@ -18,7 +18,6 @@ class TeamGenerater
     domain = 'msearch.gsi.go.jp'
     path = '/address-search/AddressSearch/'
     parameter = '?q=' + address
-    p path + parameter
     response_text = Net::HTTP.get(domain, path + parameter)
     coordinates = JSON.load(response_text)[0]['geometry']['coordinates']
     return coordinates
