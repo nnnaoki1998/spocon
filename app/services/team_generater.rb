@@ -1,13 +1,14 @@
 # Teamを生成するクラス
 class TeamGenerater
-  def generate(team_params)
-    @team = Team.new(team_params)
-    coordinates = coordinates(@team.address)
-    longitude = coordinates[0]
-    latitude = coordinates[1]
-    @team.longitude = longitude
-    @team.latitude = latitude
-    return @team
+  # Teamを生成する
+  # 戻り値はハッシュ
+  def generate(team_hash)
+    if !team_hash['address'].blank?
+      coordinates = coordinates(team_hash['address'])
+      team_hash['longitude'] = coordinates[0]
+      team_hash['latitude'] = coordinates[1]
+    end
+    return team_hash
   end
 
   # アドレスを元に緯度､軽度を取得する

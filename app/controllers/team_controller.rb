@@ -11,7 +11,7 @@ class TeamController < ApplicationController
   def create
     begin
       @team_generater = TeamGenerater.new
-      @team = @team_generater.generate(team_params)
+      @team = Team.new(@team_generater.generate(team_params))
       if @team.save
         render :json => {'status' => 'ok'}
       end
@@ -22,8 +22,10 @@ class TeamController < ApplicationController
 
   def update
     begin
+      @team_generater = TeamGenerater.new
+      team_hash = @team_generater.generate(team_params)
       @team = Team.find(params[:id])
-      if @team.update(team_params)
+      if @team.update(team_hash)
         render :json => {'status' => 'ok'}
       end
     rescue => e
