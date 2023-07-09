@@ -50,12 +50,12 @@ export const onDeleteChatMessage = /* GraphQL */ `
     }
   }
 `;
-export const onCreateChatRoom = /* GraphQL */ `
-  subscription OnCreateChatRoom(
-    $filter: ModelSubscriptionChatRoomFilterInput
+export const onCreateRelayChatRoomTeam = /* GraphQL */ `
+  subscription OnCreateRelayChatRoomTeam(
+    $filter: ModelSubscriptionRelayChatRoomTeamFilterInput
     $owner: String
   ) {
-    onCreateChatRoom(filter: $filter, owner: $owner) {
+    onCreateRelayChatRoomTeam(filter: $filter, owner: $owner) {
       chatRoomId
       writeDateTime
       teamId
@@ -65,12 +65,12 @@ export const onCreateChatRoom = /* GraphQL */ `
     }
   }
 `;
-export const onUpdateChatRoom = /* GraphQL */ `
-  subscription OnUpdateChatRoom(
-    $filter: ModelSubscriptionChatRoomFilterInput
+export const onUpdateRelayChatRoomTeam = /* GraphQL */ `
+  subscription OnUpdateRelayChatRoomTeam(
+    $filter: ModelSubscriptionRelayChatRoomTeamFilterInput
     $owner: String
   ) {
-    onUpdateChatRoom(filter: $filter, owner: $owner) {
+    onUpdateRelayChatRoomTeam(filter: $filter, owner: $owner) {
       chatRoomId
       writeDateTime
       teamId
@@ -80,12 +80,12 @@ export const onUpdateChatRoom = /* GraphQL */ `
     }
   }
 `;
-export const onDeleteChatRoom = /* GraphQL */ `
-  subscription OnDeleteChatRoom(
-    $filter: ModelSubscriptionChatRoomFilterInput
+export const onDeleteRelayChatRoomTeam = /* GraphQL */ `
+  subscription OnDeleteRelayChatRoomTeam(
+    $filter: ModelSubscriptionRelayChatRoomTeamFilterInput
     $owner: String
   ) {
-    onDeleteChatRoom(filter: $filter, owner: $owner) {
+    onDeleteRelayChatRoomTeam(filter: $filter, owner: $owner) {
       chatRoomId
       writeDateTime
       teamId

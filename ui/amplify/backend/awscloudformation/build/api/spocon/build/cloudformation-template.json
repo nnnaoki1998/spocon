@@ -198,7 +198,7 @@
         "GraphQLAPITransformerSchema3CB2AE18"
       ]
     },
-    "ChatRoom": {
+    "RelayChatRoomTeam": {
       "Type": "AWS::CloudFormation::Stack",
       "Properties": {
         "TemplateURL": {
@@ -221,7 +221,7 @@
               {
                 "Ref": "S3DeploymentRootKey"
               },
-              "/stacks/ChatRoom.json"
+              "/stacks/RelayChatRoomTeam.json"
             ]
           ]
         },
@@ -378,7 +378,7 @@
         "GraphQLAPI",
         "GraphQLAPITransformerSchema3CB2AE18",
         "ChatMessage",
-        "ChatRoom"
+        "RelayChatRoomTeam"
       ]
     }
   },

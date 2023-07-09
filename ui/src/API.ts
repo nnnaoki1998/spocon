@@ -80,20 +80,20 @@ export type DeleteChatMessageInput = {
   teamId: string,
 };
 
-export type CreateChatRoomInput = {
+export type CreateRelayChatRoomTeamInput = {
   chatRoomId: string,
   writeDateTime: number,
   teamId: string,
 };
 
-export type ModelChatRoomConditionInput = {
-  and?: Array< ModelChatRoomConditionInput | null > | null,
-  or?: Array< ModelChatRoomConditionInput | null > | null,
-  not?: ModelChatRoomConditionInput | null,
+export type ModelRelayChatRoomTeamConditionInput = {
+  and?: Array< ModelRelayChatRoomTeamConditionInput | null > | null,
+  or?: Array< ModelRelayChatRoomTeamConditionInput | null > | null,
+  not?: ModelRelayChatRoomTeamConditionInput | null,
 };
 
-export type ChatRoom = {
-  __typename: "ChatRoom",
+export type RelayChatRoomTeam = {
+  __typename: "RelayChatRoomTeam",
   chatRoomId: string,
   writeDateTime: number,
   teamId: string,
@@ -102,13 +102,13 @@ export type ChatRoom = {
   owner?: string | null,
 };
 
-export type UpdateChatRoomInput = {
+export type UpdateRelayChatRoomTeamInput = {
   chatRoomId: string,
   writeDateTime: number,
   teamId: string,
 };
 
-export type DeleteChatRoomInput = {
+export type DeleteRelayChatRoomTeamInput = {
   chatRoomId: string,
   writeDateTime: number,
   teamId: string,
@@ -179,33 +179,33 @@ export type ModelChatMessageConnection = {
   nextToken?: string | null,
 };
 
-export type ModelChatRoomPrimaryCompositeKeyConditionInput = {
-  eq?: ModelChatRoomPrimaryCompositeKeyInput | null,
-  le?: ModelChatRoomPrimaryCompositeKeyInput | null,
-  lt?: ModelChatRoomPrimaryCompositeKeyInput | null,
-  ge?: ModelChatRoomPrimaryCompositeKeyInput | null,
-  gt?: ModelChatRoomPrimaryCompositeKeyInput | null,
-  between?: Array< ModelChatRoomPrimaryCompositeKeyInput | null > | null,
-  beginsWith?: ModelChatRoomPrimaryCompositeKeyInput | null,
+export type ModelRelayChatRoomTeamPrimaryCompositeKeyConditionInput = {
+  eq?: ModelRelayChatRoomTeamPrimaryCompositeKeyInput | null,
+  le?: ModelRelayChatRoomTeamPrimaryCompositeKeyInput | null,
+  lt?: ModelRelayChatRoomTeamPrimaryCompositeKeyInput | null,
+  ge?: ModelRelayChatRoomTeamPrimaryCompositeKeyInput | null,
+  gt?: ModelRelayChatRoomTeamPrimaryCompositeKeyInput | null,
+  between?: Array< ModelRelayChatRoomTeamPrimaryCompositeKeyInput | null > | null,
+  beginsWith?: ModelRelayChatRoomTeamPrimaryCompositeKeyInput | null,
 };
 
-export type ModelChatRoomPrimaryCompositeKeyInput = {
+export type ModelRelayChatRoomTeamPrimaryCompositeKeyInput = {
   writeDateTime?: number | null,
   teamId?: string | null,
 };
 
-export type ModelChatRoomFilterInput = {
+export type ModelRelayChatRoomTeamFilterInput = {
   chatRoomId?: ModelIDInput | null,
   writeDateTime?: ModelIntInput | null,
   teamId?: ModelIDInput | null,
-  and?: Array< ModelChatRoomFilterInput | null > | null,
-  or?: Array< ModelChatRoomFilterInput | null > | null,
-  not?: ModelChatRoomFilterInput | null,
+  and?: Array< ModelRelayChatRoomTeamFilterInput | null > | null,
+  or?: Array< ModelRelayChatRoomTeamFilterInput | null > | null,
+  not?: ModelRelayChatRoomTeamFilterInput | null,
 };
 
-export type ModelChatRoomConnection = {
-  __typename: "ModelChatRoomConnection",
-  items:  Array<ChatRoom | null >,
+export type ModelRelayChatRoomTeamConnection = {
+  __typename: "ModelRelayChatRoomTeamConnection",
+  items:  Array<RelayChatRoomTeam | null >,
   nextToken?: string | null,
 };
 
@@ -260,12 +260,12 @@ export type ModelSubscriptionStringInput = {
   notIn?: Array< string | null > | null,
 };
 
-export type ModelSubscriptionChatRoomFilterInput = {
+export type ModelSubscriptionRelayChatRoomTeamFilterInput = {
   chatRoomId?: ModelSubscriptionIDInput | null,
   writeDateTime?: ModelSubscriptionIntInput | null,
   teamId?: ModelSubscriptionIDInput | null,
-  and?: Array< ModelSubscriptionChatRoomFilterInput | null > | null,
-  or?: Array< ModelSubscriptionChatRoomFilterInput | null > | null,
+  and?: Array< ModelSubscriptionRelayChatRoomTeamFilterInput | null > | null,
+  or?: Array< ModelSubscriptionRelayChatRoomTeamFilterInput | null > | null,
 };
 
 export type CreateChatMessageMutationVariables = {
@@ -322,14 +322,14 @@ export type DeleteChatMessageMutation = {
   } | null,
 };
 
-export type CreateChatRoomMutationVariables = {
-  input: CreateChatRoomInput,
-  condition?: ModelChatRoomConditionInput | null,
+export type CreateRelayChatRoomTeamMutationVariables = {
+  input: CreateRelayChatRoomTeamInput,
+  condition?: ModelRelayChatRoomTeamConditionInput | null,
 };
 
-export type CreateChatRoomMutation = {
-  createChatRoom?:  {
-    __typename: "ChatRoom",
+export type CreateRelayChatRoomTeamMutation = {
+  createRelayChatRoomTeam?:  {
+    __typename: "RelayChatRoomTeam",
     chatRoomId: string,
     writeDateTime: number,
     teamId: string,
@@ -339,14 +339,14 @@ export type CreateChatRoomMutation = {
   } | null,
 };
 
-export type UpdateChatRoomMutationVariables = {
-  input: UpdateChatRoomInput,
-  condition?: ModelChatRoomConditionInput | null,
+export type UpdateRelayChatRoomTeamMutationVariables = {
+  input: UpdateRelayChatRoomTeamInput,
+  condition?: ModelRelayChatRoomTeamConditionInput | null,
 };
 
-export type UpdateChatRoomMutation = {
-  updateChatRoom?:  {
-    __typename: "ChatRoom",
+export type UpdateRelayChatRoomTeamMutation = {
+  updateRelayChatRoomTeam?:  {
+    __typename: "RelayChatRoomTeam",
     chatRoomId: string,
     writeDateTime: number,
     teamId: string,
@@ -356,14 +356,14 @@ export type UpdateChatRoomMutation = {
   } | null,
 };
 
-export type DeleteChatRoomMutationVariables = {
-  input: DeleteChatRoomInput,
-  condition?: ModelChatRoomConditionInput | null,
+export type DeleteRelayChatRoomTeamMutationVariables = {
+  input: DeleteRelayChatRoomTeamInput,
+  condition?: ModelRelayChatRoomTeamConditionInput | null,
 };
 
-export type DeleteChatRoomMutation = {
-  deleteChatRoom?:  {
-    __typename: "ChatRoom",
+export type DeleteRelayChatRoomTeamMutation = {
+  deleteRelayChatRoomTeam?:  {
+    __typename: "RelayChatRoomTeam",
     chatRoomId: string,
     writeDateTime: number,
     teamId: string,
@@ -418,15 +418,15 @@ export type ListChatMessagesQuery = {
   } | null,
 };
 
-export type GetChatRoomQueryVariables = {
+export type GetRelayChatRoomTeamQueryVariables = {
   chatRoomId: string,
   writeDateTime: number,
   teamId: string,
 };
 
-export type GetChatRoomQuery = {
-  getChatRoom?:  {
-    __typename: "ChatRoom",
+export type GetRelayChatRoomTeamQuery = {
+  getRelayChatRoomTeam?:  {
+    __typename: "RelayChatRoomTeam",
     chatRoomId: string,
     writeDateTime: number,
     teamId: string,
@@ -436,20 +436,20 @@ export type GetChatRoomQuery = {
   } | null,
 };
 
-export type ListChatRoomsQueryVariables = {
+export type ListRelayChatRoomTeamsQueryVariables = {
   chatRoomId?: string | null,
-  writeDateTimeTeamId?: ModelChatRoomPrimaryCompositeKeyConditionInput | null,
-  filter?: ModelChatRoomFilterInput | null,
+  writeDateTimeTeamId?: ModelRelayChatRoomTeamPrimaryCompositeKeyConditionInput | null,
+  filter?: ModelRelayChatRoomTeamFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
   sortDirection?: ModelSortDirection | null,
 };
 
-export type ListChatRoomsQuery = {
-  listChatRooms?:  {
-    __typename: "ModelChatRoomConnection",
+export type ListRelayChatRoomTeamsQuery = {
+  listRelayChatRoomTeams?:  {
+    __typename: "ModelRelayChatRoomTeamConnection",
     items:  Array< {
-      __typename: "ChatRoom",
+      __typename: "RelayChatRoomTeam",
       chatRoomId: string,
       writeDateTime: number,
       teamId: string,
@@ -486,19 +486,19 @@ export type ChatMessagesByChatRoomIdQuery = {
   } | null,
 };
 
-export type ChatRoomsByTeamIdQueryVariables = {
+export type RelayChatRoomTeamsByTeamIdQueryVariables = {
   teamId: string,
   sortDirection?: ModelSortDirection | null,
-  filter?: ModelChatRoomFilterInput | null,
+  filter?: ModelRelayChatRoomTeamFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
 };
 
-export type ChatRoomsByTeamIdQuery = {
-  chatRoomsByTeamId?:  {
-    __typename: "ModelChatRoomConnection",
+export type RelayChatRoomTeamsByTeamIdQuery = {
+  relayChatRoomTeamsByTeamId?:  {
+    __typename: "ModelRelayChatRoomTeamConnection",
     items:  Array< {
-      __typename: "ChatRoom",
+      __typename: "RelayChatRoomTeam",
       chatRoomId: string,
       writeDateTime: number,
       teamId: string,
@@ -564,14 +564,14 @@ export type OnDeleteChatMessageSubscription = {
   } | null,
 };
 
-export type OnCreateChatRoomSubscriptionVariables = {
-  filter?: ModelSubscriptionChatRoomFilterInput | null,
+export type OnCreateRelayChatRoomTeamSubscriptionVariables = {
+  filter?: ModelSubscriptionRelayChatRoomTeamFilterInput | null,
   owner?: string | null,
 };
 
-export type OnCreateChatRoomSubscription = {
-  onCreateChatRoom?:  {
-    __typename: "ChatRoom",
+export type OnCreateRelayChatRoomTeamSubscription = {
+  onCreateRelayChatRoomTeam?:  {
+    __typename: "RelayChatRoomTeam",
     chatRoomId: string,
     writeDateTime: number,
     teamId: string,
@@ -581,14 +581,14 @@ export type OnCreateChatRoomSubscription = {
   } | null,
 };
 
-export type OnUpdateChatRoomSubscriptionVariables = {
-  filter?: ModelSubscriptionChatRoomFilterInput | null,
+export type OnUpdateRelayChatRoomTeamSubscriptionVariables = {
+  filter?: ModelSubscriptionRelayChatRoomTeamFilterInput | null,
   owner?: string | null,
 };
 
-export type OnUpdateChatRoomSubscription = {
-  onUpdateChatRoom?:  {
-    __typename: "ChatRoom",
+export type OnUpdateRelayChatRoomTeamSubscription = {
+  onUpdateRelayChatRoomTeam?:  {
+    __typename: "RelayChatRoomTeam",
     chatRoomId: string,
     writeDateTime: number,
     teamId: string,
@@ -598,14 +598,14 @@ export type OnUpdateChatRoomSubscription = {
   } | null,
 };
 
-export type OnDeleteChatRoomSubscriptionVariables = {
-  filter?: ModelSubscriptionChatRoomFilterInput | null,
+export type OnDeleteRelayChatRoomTeamSubscriptionVariables = {
+  filter?: ModelSubscriptionRelayChatRoomTeamFilterInput | null,
   owner?: string | null,
 };
 
-export type OnDeleteChatRoomSubscription = {
-  onDeleteChatRoom?:  {
-    __typename: "ChatRoom",
+export type OnDeleteRelayChatRoomTeamSubscription = {
+  onDeleteRelayChatRoomTeam?:  {
+    __typename: "RelayChatRoomTeam",
     chatRoomId: string,
     writeDateTime: number,
     teamId: string,

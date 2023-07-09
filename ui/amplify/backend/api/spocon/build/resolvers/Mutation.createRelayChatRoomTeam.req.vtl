@@ -5,7 +5,7 @@
 ## copy the values from input **
 $util.qr($mergedValues.putAll($util.defaultIfNull($args.input, {})))
 ## set the typename **
-$util.qr($mergedValues.put("__typename", "ChatRoom"))
+$util.qr($mergedValues.put("__typename", "RelayChatRoomTeam"))
 #set( $nullIndexFields = [] )
 #set( $indexFields = ["teamId"] )
 #foreach( $entry in $util.map.copyAndRetainAllKeys($mergedValues, $indexFields).entrySet() )

@@ -162,7 +162,7 @@
           "DynamoDBEnableServerSideEncryption": false,
           "AuthCognitoUserPoolId": "ap-northeast-1_H5XpXi1Tr",
           "S3DeploymentBucket": "amplify-ui8xg9j-dev-25950-deployment",
-          "S3DeploymentRootKey": "amplify-appsync-files/b81bc7359b525bd11adc39384d6c62c42005ca4d",
+          "S3DeploymentRootKey": "amplify-appsync-files/e142718de80c662ae20c7a8ae9c731816f623380",
           "env": "dev"
         }
       }

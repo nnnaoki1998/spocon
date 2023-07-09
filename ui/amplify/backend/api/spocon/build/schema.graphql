@@ -9,7 +9,7 @@ type ChatMessage {
   owner: String
 }
 
-type ChatRoom {
+type RelayChatRoomTeam {
   chatRoomId: ID!
   writeDateTime: AWSTimestamp!
   teamId: ID!
@@ -186,10 +186,10 @@ input ModelChatMessageFilterInput {
 type Query {
   getChatMessage(chatRoomId: ID!, writeDateTime: AWSTimestamp!, teamId: ID!): ChatMessage
   listChatMessages(chatRoomId: ID, writeDateTimeTeamId: ModelChatMessagePrimaryCompositeKeyConditionInput, filter: ModelChatMessageFilterInput, limit: Int, nextToken: String, sortDirection: ModelSortDirection): ModelChatMessageConnection
-  getChatRoom(chatRoomId: ID!, writeDateTime: AWSTimestamp!, teamId: ID!): ChatRoom
-  listChatRooms(chatRoomId: ID, writeDateTimeTeamId: ModelChatRoomPrimaryCompositeKeyConditionInput, filter: ModelChatRoomFilterInput, limit: Int, nextToken: String, sortDirection: ModelSortDirection): ModelChatRoomConnection
+  getRelayChatRoomTeam(chatRoomId: ID!, writeDateTime: AWSTimestamp!, teamId: ID!): RelayChatRoomTeam
+  listRelayChatRoomTeams(chatRoomId: ID, writeDateTimeTeamId: ModelRelayChatRoomTeamPrimaryCompositeKeyConditionInput, filter: ModelRelayChatRoomTeamFilterInput, limit: Int, nextToken: String, sortDirection: ModelSortDirection): ModelRelayChatRoomTeamConnection
   chatMessagesByChatRoomId(chatRoomId: ID!, sortDirection: ModelSortDirection, filter: ModelChatMessageFilterInput, limit: Int, nextToken: String): ModelChatMessageConnection
-  chatRoomsByTeamId(teamId: ID!, sortDirection: ModelSortDirection, filter: ModelChatRoomFilterInput, limit: Int, nextToken: String): ModelChatRoomConnection
+  relayChatRoomTeamsByTeamId(teamId: ID!, sortDirection: ModelSortDirection, filter: ModelRelayChatRoomTeamFilterInput, limit: Int, nextToken: String): ModelRelayChatRoomTeamConnection
 }
 
 input ModelChatMessageConditionInput {
@@ -223,9 +223,9 @@ type Mutation {
   createChatMessage(input: CreateChatMessageInput!, condition: ModelChatMessageConditionInput): ChatMessage
   updateChatMessage(input: UpdateChatMessageInput!, condition: ModelChatMessageConditionInput): ChatMessage
   deleteChatMessage(input: DeleteChatMessageInput!, condition: ModelChatMessageConditionInput): ChatMessage
-  createChatRoom(input: CreateChatRoomInput!, condition: ModelChatRoomConditionInput): ChatRoom
-  updateChatRoom(input: UpdateChatRoomInput!, condition: ModelChatRoomConditionInput): ChatRoom
-  deleteChatRoom(input: DeleteChatRoomInput!, condition: ModelChatRoomConditionInput): ChatRoom
+  createRelayChatRoomTeam(input: CreateRelayChatRoomTeamInput!, condition: ModelRelayChatRoomTeamConditionInput): RelayChatRoomTeam
+  updateRelayChatRoomTeam(input: UpdateRelayChatRoomTeamInput!, condition: ModelRelayChatRoomTeamConditionInput): RelayChatRoomTeam
+  deleteRelayChatRoomTeam(input: DeleteRelayChatRoomTeamInput!, condition: ModelRelayChatRoomTeamConditionInput): RelayChatRoomTeam
 }
 
 input ModelSubscriptionChatMessageFilterInput {
@@ -241,55 +241,55 @@ type Subscription {
   onCreateChatMessage(filter: ModelSubscriptionChatMessageFilterInput, owner: String): ChatMessage @aws_subscribe(mutations: ["createChatMessage"])
   onUpdateChatMessage(filter: ModelSubscriptionChatMessageFilterInput, owner: String): ChatMessage @aws_subscribe(mutations: ["updateChatMessage"])
   onDeleteChatMessage(filter: ModelSubscriptionChatMessageFilterInput, owner: String): ChatMessage @aws_subscribe(mutations: ["deleteChatMessage"])
-  onCreateChatRoom(filter: ModelSubscriptionChatRoomFilterInput, owner: String): ChatRoom @aws_subscribe(mutations: ["createChatRoom"])
-  onUpdateChatRoom(filter: ModelSubscriptionChatRoomFilterInput, owner: String): ChatRoom @aws_subscribe(mutations: ["updateChatRoom"])
-  onDeleteChatRoom(filter: ModelSubscriptionChatRoomFilterInput, owner: String): ChatRoom @aws_subscribe(mutations: ["deleteChatRoom"])
+  onCreateRelayChatRoomTeam(filter: ModelSubscriptionRelayChatRoomTeamFilterInput, owner: String): RelayChatRoomTeam @aws_subscribe(mutations: ["createRelayChatRoomTeam"])
+  onUpdateRelayChatRoomTeam(filter: ModelSubscriptionRelayChatRoomTeamFilterInput, owner: String): RelayChatRoomTeam @aws_subscribe(mutations: ["updateRelayChatRoomTeam"])
+  onDeleteRelayChatRoomTeam(filter: ModelSubscriptionRelayChatRoomTeamFilterInput, owner: String): RelayChatRoomTeam @aws_subscribe(mutations: ["deleteRelayChatRoomTeam"])
 }
 
-type ModelChatRoomConnection {
-  items: [ChatRoom]!
+type ModelRelayChatRoomTeamConnection {
+  items: [RelayChatRoomTeam]!
   nextToken: String
 }
 
-input ModelChatRoomFilterInput {
+input ModelRelayChatRoomTeamFilterInput {
   chatRoomId: ModelIDInput
   writeDateTime: ModelIntInput
   teamId: ModelIDInput
-  and: [ModelChatRoomFilterInput]
-  or: [ModelChatRoomFilterInput]
-  not: ModelChatRoomFilterInput
+  and: [ModelRelayChatRoomTeamFilterInput]
+  or: [ModelRelayChatRoomTeamFilterInput]
+  not: ModelRelayChatRoomTeamFilterInput
 }
 
-input ModelChatRoomConditionInput {
-  and: [ModelChatRoomConditionInput]
-  or: [ModelChatRoomConditionInput]
-  not: ModelChatRoomConditionInput
+input ModelRelayChatRoomTeamConditionInput {
+  and: [ModelRelayChatRoomTeamConditionInput]
+  or: [ModelRelayChatRoomTeamConditionInput]
+  not: ModelRelayChatRoomTeamConditionInput
 }
 
-input CreateChatRoomInput {
+input CreateRelayChatRoomTeamInput {
   chatRoomId: ID!
   writeDateTime: AWSTimestamp!
   teamId: ID!
 }
 
-input UpdateChatRoomInput {
+input UpdateRelayChatRoomTeamInput {
   chatRoomId: ID!
   writeDateTime: AWSTimestamp!
   teamId: ID!
 }
 
-input DeleteChatRoomInput {
+input DeleteRelayChatRoomTeamInput {
   chatRoomId: ID!
   writeDateTime: AWSTimestamp!
   teamId: ID!
 }
 
-input ModelSubscriptionChatRoomFilterInput {
+input ModelSubscriptionRelayChatRoomTeamFilterInput {
   chatRoomId: ModelSubscriptionIDInput
   writeDateTime: ModelSubscriptionIntInput
   teamId: ModelSubscriptionIDInput
-  and: [ModelSubscriptionChatRoomFilterInput]
-  or: [ModelSubscriptionChatRoomFilterInput]
+  and: [ModelSubscriptionRelayChatRoomTeamFilterInput]
+  or: [ModelSubscriptionRelayChatRoomTeamFilterInput]
 }
 
 input ModelChatMessagePrimaryCompositeKeyConditionInput {
@@ -307,17 +307,17 @@ input ModelChatMessagePrimaryCompositeKeyInput {
   teamId: ID
 }
 
-input ModelChatRoomPrimaryCompositeKeyConditionInput {
-  eq: ModelChatRoomPrimaryCompositeKeyInput
-  le: ModelChatRoomPrimaryCompositeKeyInput
-  lt: ModelChatRoomPrimaryCompositeKeyInput
-  ge: ModelChatRoomPrimaryCompositeKeyInput
-  gt: ModelChatRoomPrimaryCompositeKeyInput
-  between: [ModelChatRoomPrimaryCompositeKeyInput]
-  beginsWith: ModelChatRoomPrimaryCompositeKeyInput
+input ModelRelayChatRoomTeamPrimaryCompositeKeyConditionInput {
+  eq: ModelRelayChatRoomTeamPrimaryCompositeKeyInput
+  le: ModelRelayChatRoomTeamPrimaryCompositeKeyInput
+  lt: ModelRelayChatRoomTeamPrimaryCompositeKeyInput
+  ge: ModelRelayChatRoomTeamPrimaryCompositeKeyInput
+  gt: ModelRelayChatRoomTeamPrimaryCompositeKeyInput
+  between: [ModelRelayChatRoomTeamPrimaryCompositeKeyInput]
+  beginsWith: ModelRelayChatRoomTeamPrimaryCompositeKeyInput
 }
 
-input ModelChatRoomPrimaryCompositeKeyInput {
+input ModelRelayChatRoomTeamPrimaryCompositeKeyInput {
   writeDateTime: AWSTimestamp
   teamId: ID
 }

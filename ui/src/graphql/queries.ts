@@ -53,13 +53,13 @@ export const listChatMessages = /* GraphQL */ `
     }
   }
 `;
-export const getChatRoom = /* GraphQL */ `
-  query GetChatRoom(
+export const getRelayChatRoomTeam = /* GraphQL */ `
+  query GetRelayChatRoomTeam(
     $chatRoomId: ID!
     $writeDateTime: AWSTimestamp!
     $teamId: ID!
   ) {
-    getChatRoom(
+    getRelayChatRoomTeam(
       chatRoomId: $chatRoomId
       writeDateTime: $writeDateTime
       teamId: $teamId
@@ -73,16 +73,16 @@ export const getChatRoom = /* GraphQL */ `
     }
   }
 `;
-export const listChatRooms = /* GraphQL */ `
-  query ListChatRooms(
+export const listRelayChatRoomTeams = /* GraphQL */ `
+  query ListRelayChatRoomTeams(
     $chatRoomId: ID
-    $writeDateTimeTeamId: ModelChatRoomPrimaryCompositeKeyConditionInput
-    $filter: ModelChatRoomFilterInput
+    $writeDateTimeTeamId: ModelRelayChatRoomTeamPrimaryCompositeKeyConditionInput
+    $filter: ModelRelayChatRoomTeamFilterInput
     $limit: Int
     $nextToken: String
     $sortDirection: ModelSortDirection
   ) {
-    listChatRooms(
+    listRelayChatRoomTeams(
       chatRoomId: $chatRoomId
       writeDateTimeTeamId: $writeDateTimeTeamId
       filter: $filter
@@ -130,15 +130,15 @@ export const chatMessagesByChatRoomId = /* GraphQL */ `
     }
   }
 `;
-export const chatRoomsByTeamId = /* GraphQL */ `
-  query ChatRoomsByTeamId(
+export const relayChatRoomTeamsByTeamId = /* GraphQL */ `
+  query RelayChatRoomTeamsByTeamId(
     $teamId: ID!
     $sortDirection: ModelSortDirection
-    $filter: ModelChatRoomFilterInput
+    $filter: ModelRelayChatRoomTeamFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    chatRoomsByTeamId(
+    relayChatRoomTeamsByTeamId(
       teamId: $teamId
       sortDirection: $sortDirection
       filter: $filter

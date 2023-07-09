@@ -50,12 +50,12 @@ export const deleteChatMessage = /* GraphQL */ `
     }
   }
 `;
-export const createChatRoom = /* GraphQL */ `
-  mutation CreateChatRoom(
-    $input: CreateChatRoomInput!
-    $condition: ModelChatRoomConditionInput
+export const createRelayChatRoomTeam = /* GraphQL */ `
+  mutation CreateRelayChatRoomTeam(
+    $input: CreateRelayChatRoomTeamInput!
+    $condition: ModelRelayChatRoomTeamConditionInput
   ) {
-    createChatRoom(input: $input, condition: $condition) {
+    createRelayChatRoomTeam(input: $input, condition: $condition) {
       chatRoomId
       writeDateTime
       teamId
@@ -65,12 +65,12 @@ export const createChatRoom = /* GraphQL */ `
     }
   }
 `;
-export const updateChatRoom = /* GraphQL */ `
-  mutation UpdateChatRoom(
-    $input: UpdateChatRoomInput!
-    $condition: ModelChatRoomConditionInput
+export const updateRelayChatRoomTeam = /* GraphQL */ `
+  mutation UpdateRelayChatRoomTeam(
+    $input: UpdateRelayChatRoomTeamInput!
+    $condition: ModelRelayChatRoomTeamConditionInput
   ) {
-    updateChatRoom(input: $input, condition: $condition) {
+    updateRelayChatRoomTeam(input: $input, condition: $condition) {
       chatRoomId
       writeDateTime
       teamId
@@ -80,12 +80,12 @@ export const updateChatRoom = /* GraphQL */ `
     }
   }
 `;
-export const deleteChatRoom = /* GraphQL */ `
-  mutation DeleteChatRoom(
-    $input: DeleteChatRoomInput!
-    $condition: ModelChatRoomConditionInput
+export const deleteRelayChatRoomTeam = /* GraphQL */ `
+  mutation DeleteRelayChatRoomTeam(
+    $input: DeleteRelayChatRoomTeamInput!
+    $condition: ModelRelayChatRoomTeamConditionInput
   ) {
-    deleteChatRoom(input: $input, condition: $condition) {
+    deleteRelayChatRoomTeam(input: $input, condition: $condition) {
       chatRoomId
       writeDateTime
       teamId

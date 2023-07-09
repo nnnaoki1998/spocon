@@ -125,7 +125,7 @@
     }
   },
   "Resources": {
-    "ChatRoomTable": {
+    "RelayChatRoomTeamTable": {
       "Type": "AWS::DynamoDB::Table",
       "Properties": {
         "KeySchema": [
@@ -234,7 +234,7 @@
           "Fn::Join": [
             "",
             [
-              "ChatRoom-",
+              "RelayChatRoomTeam-",
               {
                 "Ref": "referencetotransformerrootstackGraphQLAPI20497F53ApiId"
               },
@@ -249,7 +249,7 @@
       "UpdateReplacePolicy": "Delete",
       "DeletionPolicy": "Delete"
     },
-    "ChatRoomIAMRole7696F709": {
+    "RelayChatRoomTeamIAMRole2E1A3595": {
       "Type": "AWS::IAM::Role",
       "Properties": {
         "AssumeRolePolicyDocument": {
@@ -268,7 +268,7 @@
           "Fn::Join": [
             "",
             [
-              "ChatRoomIAMRole2cf9d7-",
+              "RelayChatRoomTeamIAM987cbf-",
               {
                 "Ref": "referencetotransformerrootstackGraphQLAPI20497F53ApiId"
               },
@@ -281,7 +281,7 @@
         }
       }
     },
-    "ChatRoomIAMRoleDefaultPolicy5FEB5608": {
+    "RelayChatRoomTeamIAMRoleDefaultPolicy51A4C6A5": {
       "Type": "AWS::IAM::Policy",
       "Properties": {
         "PolicyDocument": {
@@ -305,7 +305,7 @@
               "Resource": [
                 {
                   "Fn::GetAtt": [
-                    "ChatRoomTable",
+                    "RelayChatRoomTeamTable",
                     "Arn"
                   ]
                 },
@@ -315,7 +315,7 @@
                     [
                       {
                         "Fn::GetAtt": [
-                          "ChatRoomTable",
+                          "RelayChatRoomTeamTable",
                           "Arn"
                         ]
                       },
@@ -328,10 +328,10 @@
           ],
           "Version": "2012-10-17"
         },
-        "PolicyName": "ChatRoomIAMRoleDefaultPolicy5FEB5608",
+        "PolicyName": "RelayChatRoomTeamIAMRoleDefaultPolicy51A4C6A5",
         "Roles": [
           {
-            "Ref": "ChatRoomIAMRole7696F709"
+            "Ref": "RelayChatRoomTeamIAMRole2E1A3595"
           }
         ]
       }
@@ -362,7 +362,7 @@
                         "Fn::Join": [
                           "",
                           [
-                            "ChatRoom-",
+                            "RelayChatRoomTeam-",
                             {
                               "Ref": "referencetotransformerrootstackGraphQLAPI20497F53ApiId"
                             },
@@ -384,7 +384,7 @@
                         "Fn::Join": [
                           "",
                           [
-                            "ChatRoom-",
+                            "RelayChatRoomTeam-",
                             {
                               "Ref": "referencetotransformerrootstackGraphQLAPI20497F53ApiId"
                             },
@@ -406,39 +406,39 @@
         "PolicyName": "DynamoDBAccess71ABE5AE",
         "Roles": [
           {
-            "Ref": "ChatRoomIAMRole7696F709"
+            "Ref": "RelayChatRoomTeamIAMRole2E1A3595"
           }
         ]
       }
     },
-    "ChatRoomDataSource": {
+    "RelayChatRoomTeamDataSource": {
       "Type": "AWS::AppSync::DataSource",
       "Properties": {
         "ApiId": {
           "Ref": "referencetotransformerrootstackGraphQLAPI20497F53ApiId"
         },
-        "Name": "ChatRoomTable",
+        "Name": "RelayChatRoomTeamTable",
         "Type": "AMAZON_DYNAMODB",
         "DynamoDBConfig": {
           "AwsRegion": {
             "Ref": "AWS::Region"
           },
           "TableName": {
-            "Ref": "ChatRoomTable"
+            "Ref": "RelayChatRoomTeamTable"
           }
         },
         "ServiceRoleArn": {
           "Fn::GetAtt": [
-            "ChatRoomIAMRole7696F709",
+            "RelayChatRoomTeamIAMRole2E1A3595",
             "Arn"
           ]
         }
       },
       "DependsOn": [
-        "ChatRoomIAMRole7696F709"
+        "RelayChatRoomTeamIAMRole2E1A3595"
       ]
     },
-    "QueryGetChatRoomDataResolverFnQueryGetChatRoomDataResolverFnAppSyncFunctionEE508C49": {
+    "QueryGetRelayChatRoomTeamDataResolverFnQueryGetRelayChatRoomTeamDataResolverFnAppSyncFunction104DBED3": {
       "Type": "AWS::AppSync::FunctionConfiguration",
       "Properties": {
         "ApiId": {
@@ -446,11 +446,11 @@
         },
         "DataSourceName": {
           "Fn::GetAtt": [
-            "ChatRoomDataSource",
+            "RelayChatRoomTeamDataSource",
             "Name"
           ]
         },
-        "Name": "QueryGetChatRoomDataResolverFn",
+        "Name": "QueryGetRelayChatRoomTeamDataResolverFn",
         "FunctionVersion": "2018-05-29",
         "RequestMappingTemplateS3Location": {
           "Fn::Join": [
@@ -464,7 +464,7 @@
               {
                 "Ref": "referencetotransformerrootstackS3DeploymentRootKeyA71EA735Ref"
               },
-              "/resolvers/Query.getChatRoom.req.vtl"
+              "/resolvers/Query.getRelayChatRoomTeam.req.vtl"
             ]
           ]
         },
@@ -480,22 +480,22 @@
               {
                 "Ref": "referencetotransformerrootstackS3DeploymentRootKeyA71EA735Ref"
               },
-              "/resolvers/Query.getChatRoom.res.vtl"
+              "/resolvers/Query.getRelayChatRoomTeam.res.vtl"
             ]
           ]
         }
       },
       "DependsOn": [
-        "ChatRoomDataSource"
+        "RelayChatRoomTeamDataSource"
       ]
     },
-    "GetChatRoomResolver": {
+    "GetRelayChatRoomTeamResolver": {
       "Type": "AWS::AppSync::Resolver",
       "Properties": {
         "ApiId": {
           "Ref": "referencetotransformerrootstackGraphQLAPI20497F53ApiId"
         },
-        "FieldName": "getChatRoom",
+        "FieldName": "getRelayChatRoomTeam",
         "TypeName": "Query",
         "Kind": "PIPELINE",
         "PipelineConfig": {
@@ -511,7 +511,7 @@
             },
             {
               "Fn::GetAtt": [
-                "QueryGetChatRoomDataResolverFnQueryGetChatRoomDataResolverFnAppSyncFunctionEE508C49",
+                "QueryGetRelayChatRoomTeamDataResolverFnQueryGetRelayChatRoomTeamDataResolverFnAppSyncFunction104DBED3",
                 "FunctionId"
               ]
             }
@@ -521,13 +521,13 @@
           "Fn::Join": [
             "",
             [
-              "$util.qr($ctx.stash.put(\"typeName\", \"Query\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"getChatRoom\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"AMAZON_DYNAMODB\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
+              "$util.qr($ctx.stash.put(\"typeName\", \"Query\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"getRelayChatRoomTeam\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"AMAZON_DYNAMODB\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
               {
                 "Ref": "referencetotransformerrootstackGraphQLAPI20497F53ApiId"
               },
               "\"))\n$util.qr($ctx.stash.put(\"tableName\", \"",
               {
-                "Ref": "ChatRoomTable"
+                "Ref": "RelayChatRoomTeamTable"
               },
               "\"))\n$util.toJson({})"
             ]
@@ -536,7 +536,7 @@
         "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)"
       }
     },
-    "QueryListChatRoomsDataResolverFnQueryListChatRoomsDataResolverFnAppSyncFunctionD42C8BD5": {
+    "QueryListRelayChatRoomTeamsDataResolverFnQueryListRelayChatRoomTeamsDataResolverFnAppSyncFunction1FB3863A": {
       "Type": "AWS::AppSync::FunctionConfiguration",
       "Properties": {
         "ApiId": {
@@ -544,11 +544,11 @@
         },
         "DataSourceName": {
           "Fn::GetAtt": [
-            "ChatRoomDataSource",
+            "RelayChatRoomTeamDataSource",
             "Name"
           ]
         },
-        "Name": "QueryListChatRoomsDataResolverFn",
+        "Name": "QueryListRelayChatRoomTeamsDataResolverFn",
         "FunctionVersion": "2018-05-29",
         "RequestMappingTemplateS3Location": {
           "Fn::Join": [
@@ -562,7 +562,7 @@
               {
                 "Ref": "referencetotransformerrootstackS3DeploymentRootKeyA71EA735Ref"
               },
-              "/resolvers/Query.listChatRooms.req.vtl"
+              "/resolvers/Query.listRelayChatRoomTeams.req.vtl"
             ]
           ]
         },
@@ -578,22 +578,22 @@
               {
                 "Ref": "referencetotransformerrootstackS3DeploymentRootKeyA71EA735Ref"
               },
-              "/resolvers/Query.listChatRooms.res.vtl"
+              "/resolvers/Query.listRelayChatRoomTeams.res.vtl"
             ]
           ]
         }
       },
       "DependsOn": [
-        "ChatRoomDataSource"
+        "RelayChatRoomTeamDataSource"
       ]
     },
-    "ListChatRoomResolver": {
+    "ListRelayChatRoomTeamResolver": {
       "Type": "AWS::AppSync::Resolver",
       "Properties": {
         "ApiId": {
           "Ref": "referencetotransformerrootstackGraphQLAPI20497F53ApiId"
         },
-        "FieldName": "listChatRooms",
+        "FieldName": "listRelayChatRoomTeams",
         "TypeName": "Query",
         "Kind": "PIPELINE",
         "PipelineConfig": {
@@ -609,7 +609,7 @@
             },
             {
               "Fn::GetAtt": [
-                "QueryListChatRoomsDataResolverFnQueryListChatRoomsDataResolverFnAppSyncFunctionD42C8BD5",
+                "QueryListRelayChatRoomTeamsDataResolverFnQueryListRelayChatRoomTeamsDataResolverFnAppSyncFunction1FB3863A",
                 "FunctionId"
               ]
             }
@@ -619,13 +619,13 @@
           "Fn::Join": [
             "",
             [
-              "$util.qr($ctx.stash.put(\"typeName\", \"Query\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"listChatRooms\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"AMAZON_DYNAMODB\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
+              "$util.qr($ctx.stash.put(\"typeName\", \"Query\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"listRelayChatRoomTeams\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"AMAZON_DYNAMODB\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
               {
                 "Ref": "referencetotransformerrootstackGraphQLAPI20497F53ApiId"
               },
               "\"))\n$util.qr($ctx.stash.put(\"tableName\", \"",
               {
-                "Ref": "ChatRoomTable"
+                "Ref": "RelayChatRoomTeamTable"
               },
               "\"))\n$util.toJson({})"
             ]
@@ -634,7 +634,7 @@
         "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)"
       }
     },
-    "MutationcreateChatRoomauth0FunctionMutationcreateChatRoomauth0FunctionAppSyncFunction6213392E": {
+    "MutationcreateRelayChatRoomTeamauth0FunctionMutationcreateRelayChatRoomTeamauth0FunctionAppSyncFunctionE6AD3B32": {
       "Type": "AWS::AppSync::FunctionConfiguration",
       "Properties": {
         "ApiId": {
@@ -643,7 +643,7 @@
         "DataSourceName": {
           "Ref": "referencetotransformerrootstackGraphQLAPINONEDS2BA9D1C8Name"
         },
-        "Name": "MutationcreateChatRoomauth0Function",
+        "Name": "MutationcreateRelayChatRoomTeamauth0Function",
         "FunctionVersion": "2018-05-29",
         "RequestMappingTemplateS3Location": {
           "Fn::Join": [
@@ -657,14 +657,14 @@
               {
                 "Ref": "referencetotransformerrootstackS3DeploymentRootKeyA71EA735Ref"
               },
-              "/resolvers/Mutation.createChatRoom.auth.1.req.vtl"
+              "/resolvers/Mutation.createRelayChatRoomTeam.auth.1.req.vtl"
             ]
           ]
         },
         "ResponseMappingTemplate": "$util.toJson({})"
       }
     },
-    "MutationCreateChatRoomDataResolverFnMutationCreateChatRoomDataResolverFnAppSyncFunction2476C09D": {
+    "MutationCreateRelayChatRoomTeamDataResolverFnMutationCreateRelayChatRoomTeamDataResolverFnAppSyncFunctionED017457": {
       "Type": "AWS::AppSync::FunctionConfiguration",
       "Properties": {
         "ApiId": {
@@ -672,11 +672,11 @@
         },
         "DataSourceName": {
           "Fn::GetAtt": [
-            "ChatRoomDataSource",
+            "RelayChatRoomTeamDataSource",
             "Name"
           ]
         },
-        "Name": "MutationCreateChatRoomDataResolverFn",
+        "Name": "MutationCreateRelayChatRoomTeamDataResolverFn",
         "FunctionVersion": "2018-05-29",
         "RequestMappingTemplateS3Location": {
           "Fn::Join": [
@@ -690,7 +690,7 @@
               {
                 "Ref": "referencetotransformerrootstackS3DeploymentRootKeyA71EA735Ref"
               },
-              "/resolvers/Mutation.createChatRoom.req.vtl"
+              "/resolvers/Mutation.createRelayChatRoomTeam.req.vtl"
             ]
           ]
         },
@@ -706,22 +706,22 @@
               {
                 "Ref": "referencetotransformerrootstackS3DeploymentRootKeyA71EA735Ref"
               },
-              "/resolvers/Mutation.createChatRoom.res.vtl"
+              "/resolvers/Mutation.createRelayChatRoomTeam.res.vtl"
             ]
           ]
         }
       },
       "DependsOn": [
-        "ChatRoomDataSource"
+        "RelayChatRoomTeamDataSource"
       ]
     },
-    "CreateChatRoomResolver": {
+    "CreateRelayChatRoomTeamResolver": {
       "Type": "AWS::AppSync::Resolver",
       "Properties": {
         "ApiId": {
           "Ref": "referencetotransformerrootstackGraphQLAPI20497F53ApiId"
         },
-        "FieldName": "createChatRoom",
+        "FieldName": "createRelayChatRoomTeam",
         "TypeName": "Mutation",
         "Kind": "PIPELINE",
         "PipelineConfig": {
@@ -734,7 +734,7 @@
             },
             {
               "Fn::GetAtt": [
-                "MutationcreateChatRoomauth0FunctionMutationcreateChatRoomauth0FunctionAppSyncFunction6213392E",
+                "MutationcreateRelayChatRoomTeamauth0FunctionMutationcreateRelayChatRoomTeamauth0FunctionAppSyncFunctionE6AD3B32",
                 "FunctionId"
               ]
             },
@@ -743,7 +743,7 @@
             },
             {
               "Fn::GetAtt": [
-                "MutationCreateChatRoomDataResolverFnMutationCreateChatRoomDataResolverFnAppSyncFunction2476C09D",
+                "MutationCreateRelayChatRoomTeamDataResolverFnMutationCreateRelayChatRoomTeamDataResolverFnAppSyncFunctionED017457",
                 "FunctionId"
               ]
             }
@@ -753,13 +753,13 @@
           "Fn::Join": [
             "",
             [
-              "$util.qr($ctx.stash.put(\"typeName\", \"Mutation\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"createChatRoom\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"AMAZON_DYNAMODB\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
+              "$util.qr($ctx.stash.put(\"typeName\", \"Mutation\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"createRelayChatRoomTeam\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"AMAZON_DYNAMODB\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
               {
                 "Ref": "referencetotransformerrootstackGraphQLAPI20497F53ApiId"
               },
               "\"))\n$util.qr($ctx.stash.put(\"tableName\", \"",
               {
-                "Ref": "ChatRoomTable"
+                "Ref": "RelayChatRoomTeamTable"
               },
               "\"))\n$util.toJson({})"
             ]
@@ -768,7 +768,7 @@
         "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)"
       }
     },
-    "MutationupdateChatRoomauth0FunctionMutationupdateChatRoomauth0FunctionAppSyncFunction6A0200FF": {
+    "MutationupdateRelayChatRoomTeamauth0FunctionMutationupdateRelayChatRoomTeamauth0FunctionAppSyncFunctionF6AAC42F": {
       "Type": "AWS::AppSync::FunctionConfiguration",
       "Properties": {
         "ApiId": {
@@ -776,11 +776,11 @@
         },
         "DataSourceName": {
           "Fn::GetAtt": [
-            "ChatRoomDataSource",
+            "RelayChatRoomTeamDataSource",
             "Name"
           ]
         },
-        "Name": "MutationupdateChatRoomauth0Function",
+        "Name": "MutationupdateRelayChatRoomTeamauth0Function",
         "FunctionVersion": "2018-05-29",
         "RequestMappingTemplateS3Location": {
           "Fn::Join": [
@@ -794,7 +794,7 @@
               {
                 "Ref": "referencetotransformerrootstackS3DeploymentRootKeyA71EA735Ref"
               },
-              "/resolvers/Mutation.updateChatRoom.auth.1.req.vtl"
+              "/resolvers/Mutation.updateRelayChatRoomTeam.auth.1.req.vtl"
             ]
           ]
         },
@@ -810,16 +810,16 @@
               {
                 "Ref": "referencetotransformerrootstackS3DeploymentRootKeyA71EA735Ref"
               },
-              "/resolvers/Mutation.updateChatRoom.auth.1.res.vtl"
+              "/resolvers/Mutation.updateRelayChatRoomTeam.auth.1.res.vtl"
             ]
           ]
         }
       },
       "DependsOn": [
-        "ChatRoomDataSource"
+        "RelayChatRoomTeamDataSource"
       ]
     },
-    "MutationUpdateChatRoomDataResolverFnMutationUpdateChatRoomDataResolverFnAppSyncFunction8C271AD2": {
+    "MutationUpdateRelayChatRoomTeamDataResolverFnMutationUpdateRelayChatRoomTeamDataResolverFnAppSyncFunctionD6B98497": {
       "Type": "AWS::AppSync::FunctionConfiguration",
       "Properties": {
         "ApiId": {
@@ -827,11 +827,11 @@
         },
         "DataSourceName": {
           "Fn::GetAtt": [
-            "ChatRoomDataSource",
+            "RelayChatRoomTeamDataSource",
             "Name"
           ]
         },
-        "Name": "MutationUpdateChatRoomDataResolverFn",
+        "Name": "MutationUpdateRelayChatRoomTeamDataResolverFn",
         "FunctionVersion": "2018-05-29",
         "RequestMappingTemplateS3Location": {
           "Fn::Join": [
@@ -845,7 +845,7 @@
               {
                 "Ref": "referencetotransformerrootstackS3DeploymentRootKeyA71EA735Ref"
               },
-              "/resolvers/Mutation.updateChatRoom.req.vtl"
+              "/resolvers/Mutation.updateRelayChatRoomTeam.req.vtl"
             ]
           ]
         },
@@ -861,22 +861,22 @@
               {
                 "Ref": "referencetotransformerrootstackS3DeploymentRootKeyA71EA735Ref"
               },
-              "/resolvers/Mutation.updateChatRoom.res.vtl"
+              "/resolvers/Mutation.updateRelayChatRoomTeam.res.vtl"
             ]
           ]
         }
       },
       "DependsOn": [
-        "ChatRoomDataSource"
+        "RelayChatRoomTeamDataSource"
       ]
     },
-    "UpdateChatRoomResolver": {
+    "UpdateRelayChatRoomTeamResolver": {
       "Type": "AWS::AppSync::Resolver",
       "Properties": {
         "ApiId": {
           "Ref": "referencetotransformerrootstackGraphQLAPI20497F53ApiId"
         },
-        "FieldName": "updateChatRoom",
+        "FieldName": "updateRelayChatRoomTeam",
         "TypeName": "Mutation",
         "Kind": "PIPELINE",
         "PipelineConfig": {
@@ -889,7 +889,7 @@
             },
             {
               "Fn::GetAtt": [
-                "MutationupdateChatRoomauth0FunctionMutationupdateChatRoomauth0FunctionAppSyncFunction6A0200FF",
+                "MutationupdateRelayChatRoomTeamauth0FunctionMutationupdateRelayChatRoomTeamauth0FunctionAppSyncFunctionF6AAC42F",
                 "FunctionId"
               ]
             },
@@ -898,7 +898,7 @@
             },
             {
               "Fn::GetAtt": [
-                "MutationUpdateChatRoomDataResolverFnMutationUpdateChatRoomDataResolverFnAppSyncFunction8C271AD2",
+                "MutationUpdateRelayChatRoomTeamDataResolverFnMutationUpdateRelayChatRoomTeamDataResolverFnAppSyncFunctionD6B98497",
                 "FunctionId"
               ]
             }
@@ -908,13 +908,13 @@
           "Fn::Join": [
             "",
             [
-              "$util.qr($ctx.stash.put(\"typeName\", \"Mutation\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"updateChatRoom\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"AMAZON_DYNAMODB\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
+              "$util.qr($ctx.stash.put(\"typeName\", \"Mutation\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"updateRelayChatRoomTeam\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"AMAZON_DYNAMODB\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
               {
                 "Ref": "referencetotransformerrootstackGraphQLAPI20497F53ApiId"
               },
               "\"))\n$util.qr($ctx.stash.put(\"tableName\", \"",
               {
-                "Ref": "ChatRoomTable"
+                "Ref": "RelayChatRoomTeamTable"
               },
               "\"))\n$util.toJson({})"
             ]
@@ -923,7 +923,7 @@
         "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)"
       }
     },
-    "MutationdeleteChatRoomauth0FunctionMutationdeleteChatRoomauth0FunctionAppSyncFunction82946CB8": {
+    "MutationdeleteRelayChatRoomTeamauth0FunctionMutationdeleteRelayChatRoomTeamauth0FunctionAppSyncFunction1BFBBCD4": {
       "Type": "AWS::AppSync::FunctionConfiguration",
       "Properties": {
         "ApiId": {
@@ -931,11 +931,11 @@
         },
         "DataSourceName": {
           "Fn::GetAtt": [
-            "ChatRoomDataSource",
+            "RelayChatRoomTeamDataSource",
             "Name"
           ]
         },
-        "Name": "MutationdeleteChatRoomauth0Function",
+        "Name": "MutationdeleteRelayChatRoomTeamauth0Function",
         "FunctionVersion": "2018-05-29",
         "RequestMappingTemplateS3Location": {
           "Fn::Join": [
@@ -949,7 +949,7 @@
               {
                 "Ref": "referencetotransformerrootstackS3DeploymentRootKeyA71EA735Ref"
               },
-              "/resolvers/Mutation.deleteChatRoom.auth.1.req.vtl"
+              "/resolvers/Mutation.deleteRelayChatRoomTeam.auth.1.req.vtl"
             ]
           ]
         },
@@ -965,16 +965,16 @@
               {
                 "Ref": "referencetotransformerrootstackS3DeploymentRootKeyA71EA735Ref"
               },
-              "/resolvers/Mutation.deleteChatRoom.auth.1.res.vtl"
+              "/resolvers/Mutation.deleteRelayChatRoomTeam.auth.1.res.vtl"
             ]
           ]
         }
       },
       "DependsOn": [
-        "ChatRoomDataSource"
+        "RelayChatRoomTeamDataSource"
       ]
     },
-    "MutationDeleteChatRoomDataResolverFnMutationDeleteChatRoomDataResolverFnAppSyncFunctionE0D69973": {
+    "MutationDeleteRelayChatRoomTeamDataResolverFnMutationDeleteRelayChatRoomTeamDataResolverFnAppSyncFunction5DE21A18": {
       "Type": "AWS::AppSync::FunctionConfiguration",
       "Properties": {
         "ApiId": {
@@ -982,11 +982,11 @@
         },
         "DataSourceName": {
           "Fn::GetAtt": [
-            "ChatRoomDataSource",
+            "RelayChatRoomTeamDataSource",
             "Name"
           ]
         },
-        "Name": "MutationDeleteChatRoomDataResolverFn",
+        "Name": "MutationDeleteRelayChatRoomTeamDataResolverFn",
         "FunctionVersion": "2018-05-29",
         "RequestMappingTemplateS3Location": {
           "Fn::Join": [
@@ -1000,7 +1000,7 @@
               {
                 "Ref": "referencetotransformerrootstackS3DeploymentRootKeyA71EA735Ref"
               },
-              "/resolvers/Mutation.deleteChatRoom.req.vtl"
+              "/resolvers/Mutation.deleteRelayChatRoomTeam.req.vtl"
             ]
           ]
         },
@@ -1016,22 +1016,22 @@
               {
                 "Ref": "referencetotransformerrootstackS3DeploymentRootKeyA71EA735Ref"
               },
-              "/resolvers/Mutation.deleteChatRoom.res.vtl"
+              "/resolvers/Mutation.deleteRelayChatRoomTeam.res.vtl"
             ]
           ]
         }
       },
       "DependsOn": [
-        "ChatRoomDataSource"
+        "RelayChatRoomTeamDataSource"
       ]
     },
-    "DeleteChatRoomResolver": {
+    "DeleteRelayChatRoomTeamResolver": {
       "Type": "AWS::AppSync::Resolver",
       "Properties": {
         "ApiId": {
           "Ref": "referencetotransformerrootstackGraphQLAPI20497F53ApiId"
         },
-        "FieldName": "deleteChatRoom",
+        "FieldName": "deleteRelayChatRoomTeam",
         "TypeName": "Mutation",
         "Kind": "PIPELINE",
         "PipelineConfig": {
@@ -1041,7 +1041,7 @@
             },
             {
               "Fn::GetAtt": [
-                "MutationdeleteChatRoomauth0FunctionMutationdeleteChatRoomauth0FunctionAppSyncFunction82946CB8",
+                "MutationdeleteRelayChatRoomTeamauth0FunctionMutationdeleteRelayChatRoomTeamauth0FunctionAppSyncFunction1BFBBCD4",
                 "FunctionId"
               ]
             },
@@ -1050,7 +1050,7 @@
             },
             {
               "Fn::GetAtt": [
-                "MutationDeleteChatRoomDataResolverFnMutationDeleteChatRoomDataResolverFnAppSyncFunctionE0D69973",
+                "MutationDeleteRelayChatRoomTeamDataResolverFnMutationDeleteRelayChatRoomTeamDataResolverFnAppSyncFunction5DE21A18",
                 "FunctionId"
               ]
             }
@@ -1060,13 +1060,13 @@
           "Fn::Join": [
             "",
             [
-              "$util.qr($ctx.stash.put(\"typeName\", \"Mutation\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"deleteChatRoom\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"AMAZON_DYNAMODB\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
+              "$util.qr($ctx.stash.put(\"typeName\", \"Mutation\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"deleteRelayChatRoomTeam\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"AMAZON_DYNAMODB\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
               {
                 "Ref": "referencetotransformerrootstackGraphQLAPI20497F53ApiId"
               },
               "\"))\n$util.qr($ctx.stash.put(\"tableName\", \"",
               {
-                "Ref": "ChatRoomTable"
+                "Ref": "RelayChatRoomTeamTable"
               },
               "\"))\n$util.toJson({})"
             ]
@@ -1075,13 +1075,13 @@
         "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)"
       }
     },
-    "SubscriptiononCreateChatRoomResolver": {
+    "SubscriptiononCreateRelayChatRoomTeamResolver": {
       "Type": "AWS::AppSync::Resolver",
       "Properties": {
         "ApiId": {
           "Ref": "referencetotransformerrootstackGraphQLAPI20497F53ApiId"
         },
-        "FieldName": "onCreateChatRoom",
+        "FieldName": "onCreateRelayChatRoomTeam",
         "TypeName": "Subscription",
         "Kind": "PIPELINE",
         "PipelineConfig": {
@@ -1101,7 +1101,7 @@
           "Fn::Join": [
             "",
             [
-              "$util.qr($ctx.stash.put(\"typeName\", \"Subscription\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"onCreateChatRoom\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"NONE\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
+              "$util.qr($ctx.stash.put(\"typeName\", \"Subscription\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"onCreateRelayChatRoomTeam\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"NONE\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
               {
                 "Ref": "referencetotransformerrootstackGraphQLAPI20497F53ApiId"
               },
@@ -1112,13 +1112,13 @@
         "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)"
       }
     },
-    "SubscriptiononUpdateChatRoomResolver": {
+    "SubscriptiononUpdateRelayChatRoomTeamResolver": {
       "Type": "AWS::AppSync::Resolver",
       "Properties": {
         "ApiId": {
           "Ref": "referencetotransformerrootstackGraphQLAPI20497F53ApiId"
         },
-        "FieldName": "onUpdateChatRoom",
+        "FieldName": "onUpdateRelayChatRoomTeam",
         "TypeName": "Subscription",
         "Kind": "PIPELINE",
         "PipelineConfig": {
@@ -1138,7 +1138,7 @@
           "Fn::Join": [
             "",
             [
-              "$util.qr($ctx.stash.put(\"typeName\", \"Subscription\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"onUpdateChatRoom\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"NONE\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
+              "$util.qr($ctx.stash.put(\"typeName\", \"Subscription\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"onUpdateRelayChatRoomTeam\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"NONE\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
               {
                 "Ref": "referencetotransformerrootstackGraphQLAPI20497F53ApiId"
               },
@@ -1149,13 +1149,13 @@
         "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)"
       }
     },
-    "SubscriptiononDeleteChatRoomResolver": {
+    "SubscriptiononDeleteRelayChatRoomTeamResolver": {
       "Type": "AWS::AppSync::Resolver",
       "Properties": {
         "ApiId": {
           "Ref": "referencetotransformerrootstackGraphQLAPI20497F53ApiId"
         },
-        "FieldName": "onDeleteChatRoom",
+        "FieldName": "onDeleteRelayChatRoomTeam",
         "TypeName": "Subscription",
         "Kind": "PIPELINE",
         "PipelineConfig": {
@@ -1175,7 +1175,7 @@
           "Fn::Join": [
             "",
             [
-              "$util.qr($ctx.stash.put(\"typeName\", \"Subscription\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"onDeleteChatRoom\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"NONE\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
+              "$util.qr($ctx.stash.put(\"typeName\", \"Subscription\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"onDeleteRelayChatRoomTeam\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"NONE\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
               {
                 "Ref": "referencetotransformerrootstackGraphQLAPI20497F53ApiId"
               },
@@ -1186,7 +1186,7 @@
         "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)"
       }
     },
-    "QueryChatRoomsByTeamIdDataResolverFnQueryChatRoomsByTeamIdDataResolverFnAppSyncFunction00F504E7": {
+    "QueryRelayChatRoomTeamsByTeamIdDataResolverFnQueryRelayChatRoomTeamsByTeamIdDataResolverFnAppSyncFunctionE5D10F38": {
       "Type": "AWS::AppSync::FunctionConfiguration",
       "Properties": {
         "ApiId": {
@@ -1194,11 +1194,11 @@
         },
         "DataSourceName": {
           "Fn::GetAtt": [
-            "ChatRoomDataSource",
+            "RelayChatRoomTeamDataSource",
             "Name"
           ]
         },
-        "Name": "QueryChatRoomsByTeamIdDataResolverFn",
+        "Name": "QueryRelayChatRoomTeamsByTeamIdDataResolverFn",
         "FunctionVersion": "2018-05-29",
         "RequestMappingTemplateS3Location": {
           "Fn::Join": [
@@ -1212,7 +1212,7 @@
               {
                 "Ref": "referencetotransformerrootstackS3DeploymentRootKeyA71EA735Ref"
               },
-              "/resolvers/Query.chatRoomsByTeamId.req.vtl"
+              "/resolvers/Query.relayChatRoomTeamsByTeamId.req.vtl"
             ]
           ]
         },
@@ -1228,22 +1228,22 @@
               {
                 "Ref": "referencetotransformerrootstackS3DeploymentRootKeyA71EA735Ref"
               },
-              "/resolvers/Query.chatRoomsByTeamId.res.vtl"
+              "/resolvers/Query.relayChatRoomTeamsByTeamId.res.vtl"
             ]
           ]
         }
       },
       "DependsOn": [
-        "ChatRoomDataSource"
+        "RelayChatRoomTeamDataSource"
       ]
     },
-    "QuerychatRoomsByTeamIdResolver": {
+    "QueryrelayChatRoomTeamsByTeamIdResolver": {
       "Type": "AWS::AppSync::Resolver",
       "Properties": {
         "ApiId": {
           "Ref": "referencetotransformerrootstackGraphQLAPI20497F53ApiId"
         },
-        "FieldName": "chatRoomsByTeamId",
+        "FieldName": "relayChatRoomTeamsByTeamId",
         "TypeName": "Query",
         "Kind": "PIPELINE",
         "PipelineConfig": {
@@ -1256,7 +1256,7 @@
             },
             {
               "Fn::GetAtt": [
-                "QueryChatRoomsByTeamIdDataResolverFnQueryChatRoomsByTeamIdDataResolverFnAppSyncFunction00F504E7",
+                "QueryRelayChatRoomTeamsByTeamIdDataResolverFnQueryRelayChatRoomTeamsByTeamIdDataResolverFnAppSyncFunctionE5D10F38",
                 "FunctionId"
               ]
             }
@@ -1266,13 +1266,13 @@
           "Fn::Join": [
             "",
             [
-              "$util.qr($ctx.stash.put(\"typeName\", \"Query\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"chatRoomsByTeamId\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"AMAZON_DYNAMODB\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
+              "$util.qr($ctx.stash.put(\"typeName\", \"Query\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"relayChatRoomTeamsByTeamId\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"AMAZON_DYNAMODB\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
               {
                 "Ref": "referencetotransformerrootstackGraphQLAPI20497F53ApiId"
               },
               "\"))\n$util.qr($ctx.stash.put(\"tableName\", \"",
               {
-                "Ref": "ChatRoomTable"
+                "Ref": "RelayChatRoomTeamTable"
               },
               "\"))\n$util.toJson({})"
             ]
@@ -1281,14 +1281,14 @@
         "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)"
       }
     },
-    "ChatRoomownerResolver": {
+    "RelayChatRoomTeamownerResolver": {
       "Type": "AWS::AppSync::Resolver",
       "Properties": {
         "ApiId": {
           "Ref": "referencetotransformerrootstackGraphQLAPI20497F53ApiId"
         },
         "FieldName": "owner",
-        "TypeName": "ChatRoom",
+        "TypeName": "RelayChatRoomTeam",
         "Kind": "PIPELINE",
         "PipelineConfig": {
           "Functions": [
@@ -1301,7 +1301,7 @@
           "Fn::Join": [
             "",
             [
-              "$util.qr($ctx.stash.put(\"typeName\", \"ChatRoom\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"owner\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"NONE\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
+              "$util.qr($ctx.stash.put(\"typeName\", \"RelayChatRoomTeam\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"owner\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"NONE\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
               {
                 "Ref": "referencetotransformerrootstackGraphQLAPI20497F53ApiId"
               },
@@ -1314,11 +1314,11 @@
     }
   },
   "Outputs": {
-    "GetAttChatRoomTableStreamArn": {
+    "GetAttRelayChatRoomTeamTableStreamArn": {
       "Description": "Your DynamoDB table StreamArn.",
       "Value": {
         "Fn::GetAtt": [
-          "ChatRoomTable",
+          "RelayChatRoomTeamTable",
           "StreamArn"
         ]
       },
@@ -1330,16 +1330,16 @@
               {
                 "Ref": "referencetotransformerrootstackGraphQLAPI20497F53ApiId"
               },
-              "GetAtt:ChatRoomTable:StreamArn"
+              "GetAtt:RelayChatRoomTeamTable:StreamArn"
             ]
           ]
         }
       }
     },
-    "GetAttChatRoomTableName": {
+    "GetAttRelayChatRoomTeamTableName": {
       "Description": "Your DynamoDB table name.",
       "Value": {
-        "Ref": "ChatRoomTable"
+        "Ref": "RelayChatRoomTeamTable"
       },
       "Export": {
         "Name": {
@@ -1349,17 +1349,17 @@
               {
                 "Ref": "referencetotransformerrootstackGraphQLAPI20497F53ApiId"
               },
-              "GetAtt:ChatRoomTable:Name"
+              "GetAtt:RelayChatRoomTeamTable:Name"
             ]
           ]
         }
       }
     },
-    "GetAttChatRoomDataSourceName": {
+    "GetAttRelayChatRoomTeamDataSourceName": {
       "Description": "Your model DataSource name.",
       "Value": {
         "Fn::GetAtt": [
-          "ChatRoomDataSource",
+          "RelayChatRoomTeamDataSource",
           "Name"
         ]
       },
@@ -1371,7 +1371,7 @@
               {
                 "Ref": "referencetotransformerrootstackGraphQLAPI20497F53ApiId"
               },
-              "GetAtt:ChatRoomDataSource:Name"
+              "GetAtt:RelayChatRoomTeamDataSource:Name"
             ]
           ]
         }
