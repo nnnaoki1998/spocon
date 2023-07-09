@@ -48,6 +48,7 @@ export const Chat: React.FC = () => {
             partnerChatRoomList.data.relayChatRoomTeamsByTeamId?.items?.map(
               (item) => item?.chatRoomId
             );
+          // 他のチャットルームに同じチームの組み合わせがないことが前提
           const currentChatRoomId = myChatRoomIdList?.find((item) =>
             partnerChatRoomIdList?.includes(item)
           );
