@@ -5,7 +5,7 @@ type ChatMessage @model @auth(rules: [{ allow: owner }, { allow: private, operat
   message: String!
 }
 
-type ChatRoom @model @auth(rules: [{ allow: owner }, { allow: private, operations: [read] }]) {
+type RelayChatRoomTeam @model @auth(rules: [{ allow: owner }, { allow: private, operations: [read] }]) {
   chatRoomId: ID! @primaryKey(sortKeyFields: ["writeDateTime", "teamId"])
   writeDateTime: AWSTimestamp!
   teamId: ID! @index(name: "byTeamId")

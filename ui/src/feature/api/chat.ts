@@ -1,13 +1,13 @@
 import { API } from 'aws-amplify';
 import {
   ChatMessagesByChatRoomIdQuery,
-  ChatRoomsByTeamIdQuery,
+  RelayChatRoomTeamsByTeamIdQuery,
   CreateChatMessageMutation,
 } from '../../API';
 import { createChatMessage } from '../../graphql/mutations';
 import {
   chatMessagesByChatRoomId,
-  chatRoomsByTeamId,
+  relayChatRoomTeamsByTeamId,
 } from '../../graphql/queries';
 
 /** GraphQLのQueryのレスポンスの型に使用する */
@@ -18,11 +18,11 @@ interface GraphQLQueryResult<T> {
 /** チームIDを指定して、参加しているチャットルームを取得する */
 export const getChatRooms = async (
   teamId: string
-): Promise<GraphQLQueryResult<ChatRoomsByTeamIdQuery>> =>
+): Promise<GraphQLQueryResult<RelayChatRoomTeamsByTeamIdQuery>> =>
   (await API.graphql({
-    query: chatRoomsByTeamId,
+    query: relayChatRoomTeamsByTeamId,
     variables: { teamId },
-  })) as GraphQLQueryResult<ChatRoomsByTeamIdQuery>;
+  })) as GraphQLQueryResult<RelayChatRoomTeamsByTeamIdQuery>;
 
 /** チャットルームIDを指定して、チャットルーム内のメッセージをすべて取得する */
 export const getChatMessages = async (

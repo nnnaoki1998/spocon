@@ -41,27 +41,24 @@ export const Chat: React.FC = () => {
       await Promise.all([getChatRooms(myTeamId), getChatRooms(partnerTeamId)])
         .then(async ([myChatRoomList, partnerChatRoomList]) => {
           const myChatRoomIdList =
-            myChatRoomList.data.chatRoomsByTeamId?.items?.map(
+            myChatRoomList.data.relayChatRoomTeamsByTeamId?.items?.map(
               (item) => item?.chatRoomId
             );
           const partnerChatRoomIdList =
-            partnerChatRoomList.data.chatRoomsByTeamId?.items?.map(
+            partnerChatRoomList.data.relayChatRoomTeamsByTeamId?.items?.map(
               (item) => item?.chatRoomId
             );
-          const currentChatRoomId = myChatRoomIdList?.filter((item) =>
+          const currentChatRoomId = myChatRoomIdList?.find((item) =>
             partnerChatRoomIdList?.includes(item)
           );
 
-          if (
-            currentChatRoomId === undefined ||
-            currentChatRoomId[0] === undefined
-          ) {
+          if (currentChatRoomId === undefined) {
             throw new Error('Failed to find the chatRoomId.');
           }
-          setChatRoomId(() => currentChatRoomId[0]);
+          setChatRoomId(() => currentChatRoomId);
 
           // TODO DynamoDBからソートして取得したい
-          const chatMessageList = await getChatMessages(currentChatRoomId[0]);
+          const chatMessageList = await getChatMessages(currentChatRoomId);
           const items = chatMessageList.data.chatMessagesByChatRoomId?.items;
           if (items === undefined) {
             throw new Error('Failed to get the items.');
