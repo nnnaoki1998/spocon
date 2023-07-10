@@ -35,6 +35,18 @@ module.exports = {
           },
         ],
       },
+      {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              url: false,
+            }
+          }
+        ]
+      }
     ],
   },
   plugins: [
@@ -52,5 +64,8 @@ module.exports = {
     },
     open: true,
     port: 8080,
+    historyApiFallback: {
+      rewrites: [{ from: /^\/*/, to: '/index.html' }],
+    }
   },
 };

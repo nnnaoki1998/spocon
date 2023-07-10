@@ -31,3 +31,25 @@
 
 # Ignore node_modules
 /ui/node_modules
+
+#amplify-do-not-edit-begin
+/ui/amplify/team-provider-info.json
+/ui/amplify/\#current-cloud-backend
+/ui/amplify/.config/local-*
+/ui/amplify/logs
+/ui/amplify/mock-data
+/ui/amplify/mock-api-resources
+/ui/amplify/backend/amplify-meta.json
+/ui/amplify/backend/.temp
+/ui/build/
+/ui/dist/
+/ui/src/aws-exports.ts
+/ui/awsconfiguration.json
+/ui/amplifyconfiguration.json
+/ui/amplifyconfiguration.dart
+/ui/amplify-build-config.json
+/ui/amplify-gradle-config.json
+/ui/amplifytools.xcconfig
+.secret-*
+**.sample
+#amplify-do-not-edit-end

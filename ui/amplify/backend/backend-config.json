@@ -1,0 +1,71 @@
+{
+  "api": {
+    "spocon": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "UserPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "spoconf576fc41"
+        }
+      ],
+      "output": {
+        "authConfig": {
+          "additionalAuthenticationProviders": [],
+          "defaultAuthentication": {
+            "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+            "userPoolConfig": {
+              "userPoolId": "authspoconf576fc41"
+            }
+          }
+        }
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "AppSync"
+    }
+  },
+  "auth": {
+    "spoconf576fc41": {
+      "customAuth": false,
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "Cognito",
+      "serviceType": "imported"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_auth_spoconf576fc41_nativeClientId": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "spoconf576fc41"
+        }
+      ]
+    },
+    "AMPLIFY_auth_spoconf576fc41_userPoolId": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "spoconf576fc41"
+        }
+      ]
+    },
+    "AMPLIFY_auth_spoconf576fc41_userPoolName": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "spoconf576fc41"
+        }
+      ]
+    },
+    "AMPLIFY_auth_spoconf576fc41_webClientId": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "spoconf576fc41"
+        }
+      ]
+    }
+  }
+}

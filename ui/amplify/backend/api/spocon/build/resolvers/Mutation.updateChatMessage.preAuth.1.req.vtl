@@ -1,0 +1,17 @@
+## [Start] Merge default values and inputs. **
+#set( $mergedValues = $util.defaultIfNull($ctx.stash.defaultValues, {}) )
+$util.qr($mergedValues.putAll($util.defaultIfNull($ctx.args.input, {})))
+## [End] Merge default values and inputs. **
+## [Start] Set the primary key. **
+$util.qr($ctx.stash.metadata.put("modelObjectKey", {
+  "chatRoomId": $util.dynamodb.toDynamoDB($mergedValues.chatRoomId),
+  "writeDateTime#teamId": $util.dynamodb.toDynamoDB("${mergedValues.writeDateTime}#${mergedValues.teamId}")
+}))
+## [End] Set the primary key. **
+#if( $util.isNull($ctx.stash.metadata.dynamodbNameOverrideMap) )
+  $util.qr($ctx.stash.metadata.put("dynamodbNameOverrideMap", { 'writeDateTime#teamId': "writeDateTimeTeamId" }))
+#else
+  $util.qr($ctx.stash.metadata.dynamodbNameOverrideMap.put('writeDateTime#teamId', "writeDateTimeTeamId"))
+#end
+$util.qr($ctx.args.input.put('writeDateTime#teamId',"${mergedValues.writeDateTime}#${mergedValues.teamId}"))
+{}
