@@ -1,22 +1,24 @@
-import { Amplify, Auth } from 'aws-amplify';
+import { Auth } from 'aws-amplify';
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { Cognito } from '../aws-config/Cognito';
 
-Amplify.configure({ Auth: Cognito });
-
-type Result = {
+type CertificationResult = {
   success: boolean;
   message: string;
+};
+
+type CurrentAuthenticatedUserResult = {
+  attributes: {
+    email: string;
+  };
 };
 
 type UseAuth = {
   isLoading: boolean;
   isAuthenticated: boolean;
-  username: string;
-  signUp: (username: string, password: string) => Promise<Result>;
-  confirmSignUp: (verificationCode: string) => Promise<Result>;
-  signIn: (username: string, password: string) => Promise<Result>;
-  signOut: () => void;
+  email: string;
+  signUp: (email: string, password: string) => Promise<CertificationResult>;
+  signIn: (email: string, password: string) => Promise<CertificationResult>;
+  signOut: () => Promise<CertificationResult>;
 };
 
 const authContext = createContext({} as UseAuth);
@@ -26,30 +28,26 @@ export const useAuth = () => useContext(authContext);
 const useProvideAuth = (): UseAuth => {
   const [isLoading, setIsLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
 
   useEffect(() => {
     Auth.currentAuthenticatedUser()
-      .then((result) => {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
-        setUsername(result.username);
+      .then((result: CurrentAuthenticatedUserResult) => {
+        setEmail(result.attributes.email);
         setIsAuthenticated(true);
         setIsLoading(false);
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
       })
       .catch(() => {
-        setUsername('');
+        setEmail('');
         setIsAuthenticated(false);
         setIsLoading(false);
       });
   }, []);
 
-  const signUp = async (_username: string, _password: string) => {
+  const signUp = async (_email: string, _password: string) => {
     try {
-      await Auth.signUp(_username, _password);
-      setUsername(_username);
-      setPassword(_password);
+      await Auth.signUp(_email, _password);
+      setEmail(_email);
       return { success: true, message: '' };
     } catch (error) {
       // TODO エラーコードで出力するメッセージを条件分岐させる
@@ -60,12 +58,10 @@ const useProvideAuth = (): UseAuth => {
     }
   };
 
-  const signIn = async (_username: string, _password: string) => {
+  const signIn = async (_email: string, _password: string) => {
     try {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-      const result = await Auth.signIn(_username, _password);
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
-      setUsername(result.username);
+      await Auth.signIn(_email, _password);
+      setEmail(_email);
       setIsAuthenticated(true);
       return { success: true, message: '' };
     } catch (error) {
@@ -77,24 +73,10 @@ const useProvideAuth = (): UseAuth => {
     }
   };
 
-  const confirmSignUp = async (verificationCode: string) => {
-    try {
-      await Auth.confirmSignUp(username, verificationCode);
-      const result = await signIn(username, password);
-      setPassword('');
-      return result;
-    } catch (error) {
-      return {
-        success: false,
-        message: '認証に失敗しました。',
-      };
-    }
-  };
-
   const signOut = async () => {
     try {
       await Auth.signOut();
-      setUsername('');
+      setEmail('');
       setIsAuthenticated(false);
       return { success: true, message: '' };
     } catch (error) {
@@ -108,11 +90,9 @@ const useProvideAuth = (): UseAuth => {
   return {
     isLoading,
     isAuthenticated,
-    username,
+    email,
     signUp,
-    confirmSignUp,
     signIn,
-    // eslint-disable-next-line @typescript-eslint/no-misused-promises
     signOut,
   };
 };
