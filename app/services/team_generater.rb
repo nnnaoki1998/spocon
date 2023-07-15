@@ -1,8 +1,21 @@
 # Teamを生成するクラス
 class TeamGenerater
   # Teamを生成する
+  # 戻り値はTeam
+  def generate_new_team(team_hash)
+    @team = Team.new(team_hash)
+    @team.uuid = SecureRandom.uuid
+    if !@team.address.blank?
+      coordinates = coordinates(team_hash['address'])
+      @team.longitude = coordinates[0]
+      @team.latitude = coordinates[1]
+    end
+    return @team
+  end
+
+  # 更新用のTeamを生成する
   # 戻り値はハッシュ
-  def generate(team_hash)
+  def generate_update_team(team_hash)
     if !team_hash['address'].blank?
       coordinates = coordinates(team_hash['address'])
       team_hash['longitude'] = coordinates[0]
