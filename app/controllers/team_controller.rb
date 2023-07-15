@@ -9,9 +9,8 @@ class TeamController < ApplicationController
 
   def create
     begin
-      @team_generater = TeamGenerater.new
-      @team = @team_generater.generate_new_team(team_params)
-      if @team.save
+      @team_service = TeamService.new
+      if @team_service.save(team_params)
         render :json => {'status' => 'ok'}
       end
     rescue => e
@@ -21,10 +20,8 @@ class TeamController < ApplicationController
 
   def update
     begin
-      @team_generater = TeamGenerater.new
-      team_hash = @team_generater.generate_update_team(team_params)
-      @team = Team.find(params[:id])
-      if @team.update(team_hash)
+      @team_service = TeamService.new
+      if @team_service.update(params[:id], team_params)
         render :json => {'status' => 'ok'}
       end
     rescue => e
