@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import { PrivateRoute } from '../../components/PrivateRoute';
 import { useAuth } from '../../hooks/useAuth';
+
+const backendUrl = process.env.REACT_APP_BACKEND_URL as string;
 
 export const Top: React.FC = () => {
   const auth = useAuth();
@@ -9,6 +12,17 @@ export const Top: React.FC = () => {
   if (auth.isLoading) {
     return <div />;
   }
+
+  useEffect(() => {
+    axios
+      .get(`${backendUrl}/team`)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   return (
     <PrivateRoute>
