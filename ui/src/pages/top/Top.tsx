@@ -3,8 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { PrivateRoute } from '../../components/PrivateRoute';
 import { useAuth } from '../../hooks/useAuth';
-
-const backendUrl = process.env.REACT_APP_BACKEND_URL as string;
+import { backendUrl } from '../../config';
 
 export const Top: React.FC = () => {
   const auth = useAuth();
