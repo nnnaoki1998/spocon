@@ -1,7 +1,7 @@
 import { Auth } from 'aws-amplify';
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
-type CertificationResult = {
+export type CertificationResult = {
   success: boolean;
   message: string;
 };
@@ -19,6 +19,7 @@ type UseAuth = {
   signUp: (email: string, password: string) => Promise<CertificationResult>;
   signIn: (email: string, password: string) => Promise<CertificationResult>;
   signOut: () => Promise<CertificationResult>;
+  confirmSignUp: (verificationCode: string) => Promise<CertificationResult>;
 };
 
 const authContext = createContext({} as UseAuth);
@@ -87,6 +88,18 @@ const useProvideAuth = (): UseAuth => {
     }
   };
 
+  const confirmSignUp = async (verificationCode: string) => {
+    try {
+      await Auth.confirmSignUp(email, verificationCode);
+      return { success: true, message: '' };
+    } catch (error) {
+      return {
+        success: false,
+        message: '認証に失敗しました。',
+      };
+    }
+  };
+
   return {
     isLoading,
     isAuthenticated,
@@ -94,6 +107,7 @@ const useProvideAuth = (): UseAuth => {
     signUp,
     signIn,
     signOut,
+    confirmSignUp,
   };
 };
 
