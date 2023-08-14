@@ -12,7 +12,7 @@ export const SignUp: React.FC = () => {
     event.preventDefault();
     const result = await auth.signUp(email, password);
     if (result.success) {
-      navigate({ pathname: '/' });
+      navigate({ pathname: '/confirmSignUp' });
     } else {
       // TODO メッセージの出力方法改善
       alert(result.message);
