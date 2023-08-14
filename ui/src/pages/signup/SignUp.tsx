@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../hooks/useAuth';
+import { CertificationResult, useAuth } from '../../hooks/useAuth';
 
 export const SignUp: React.FC = () => {
   const auth = useAuth();
@@ -8,19 +8,20 @@ export const SignUp: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const executeSignUp = async (event: React.FormEvent<HTMLFormElement>) => {
+  const executeSignUp = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const result = await auth.signUp(email, password);
-    if (result.success) {
-      navigate({ pathname: '/confirmSignUp' });
-    } else {
-      // TODO メッセージの出力方法改善
-      alert(result.message);
-    }
+    auth
+      .signUp(email, password)
+      .then(() => {
+        navigate({ pathname: '/confirmSignUp' });
+      })
+      .catch((error: CertificationResult) => {
+        // 適切にエラーハンドリングして画面に表示する
+        throw new Error(error.message);
+      });
   };
 
   return (
-    // eslint-disable-next-line @typescript-eslint/no-misused-promises
     <form noValidate onSubmit={executeSignUp}>
       <div>
         <label htmlFor="email">
