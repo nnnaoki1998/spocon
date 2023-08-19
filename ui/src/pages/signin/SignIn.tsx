@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSignIn } from '../../hooks/signIn/useSignIn';
-import './SignIn.css';
+import './signIn.css';
 
 export const SignIn: React.FC = () => {
   const {
