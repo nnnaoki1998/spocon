@@ -1,11 +1,6 @@
 import { Auth } from 'aws-amplify';
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
-export type CertificationResult = {
-  success: boolean;
-  message: string;
-};
-
 type CurrentAuthenticatedUserResult = {
   attributes: {
     email: string;
@@ -16,10 +11,10 @@ type UseAuth = {
   isLoading: boolean;
   isAuthenticated: boolean;
   email: string;
-  signUp: (email: string, password: string) => Promise<CertificationResult>;
-  signIn: (email: string, password: string) => Promise<CertificationResult>;
-  signOut: () => Promise<CertificationResult>;
-  confirmSignUp: (verificationCode: string) => Promise<CertificationResult>;
+  signUp: (email: string, password: string) => Promise<void>;
+  signIn: (email: string, password: string) => Promise<void>;
+  signOut: () => Promise<void>;
+  confirmSignUp: (verificationCode: string) => Promise<void>;
 };
 
 const authContext = createContext({} as UseAuth);
@@ -46,58 +41,32 @@ const useProvideAuth = (): UseAuth => {
   }, []);
 
   const signUp = async (_email: string, _password: string) => {
-    try {
-      await Auth.signUp(_email, _password);
-      setEmail(_email);
-      return { success: true, message: '' };
-    } catch (error) {
-      // TODO エラーコードで出力するメッセージを条件分岐させる
-      return {
-        success: false,
-        message: '認証に失敗しました。',
-      };
-    }
+    await Auth.signUp(_email, _password).catch((error) => {
+      throw error;
+    });
+    setEmail(_email);
   };
 
   const signIn = async (_email: string, _password: string) => {
-    try {
-      await Auth.signIn(_email, _password);
-      setEmail(_email);
-      setIsAuthenticated(true);
-      return { success: true, message: '' };
-    } catch (error) {
-      // TODO エラーコードで出力するメッセージを条件分岐させる
-      return {
-        success: false,
-        message: '認証に失敗しました。',
-      };
-    }
+    await Auth.signIn(_email, _password).catch((error) => {
+      throw error;
+    });
+    setEmail(_email);
+    setIsAuthenticated(true);
   };
 
   const signOut = async () => {
-    try {
-      await Auth.signOut();
-      setEmail('');
-      setIsAuthenticated(false);
-      return { success: true, message: '' };
-    } catch (error) {
-      return {
-        success: false,
-        message: 'ログアウトに失敗しました。',
-      };
-    }
+    await Auth.signOut().catch((error) => {
+      throw error;
+    });
+    setEmail('');
+    setIsAuthenticated(false);
   };
 
   const confirmSignUp = async (verificationCode: string) => {
-    try {
-      await Auth.confirmSignUp(email, verificationCode);
-      return { success: true, message: '' };
-    } catch (error) {
-      return {
-        success: false,
-        message: '認証に失敗しました。',
-      };
-    }
+    await Auth.confirmSignUp(email, verificationCode).catch((error) => {
+      throw error;
+    });
   };
 
   return {
