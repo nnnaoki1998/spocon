@@ -17,9 +17,7 @@ export const useSignIn = () => {
         setErrorMessage('メールアドレスまたはパスワードが間違っています。');
         break;
       default:
-        setErrorMessage(
-          'エラーが発生しました。しばらくしてからもう一度お試しください。'
-        );
+        setErrorMessage('エラーが発生しました。入力内容を確認してください。');
         break;
     }
   };
