@@ -9,6 +9,7 @@ export const ConfirmSignUp: React.FC = () => {
     setVerificationCode,
     errorMessage,
     executeConfirmSignUp,
+    executeResendConfirmationCode,
   } = useConfirmSignUp();
 
   return (
@@ -28,6 +29,10 @@ export const ConfirmSignUp: React.FC = () => {
           </label>
         </div>
         <button type="submit">送信</button>
+      </form>
+
+      <form onSubmit={executeResendConfirmationCode}>
+        確認コード再送信：<button type="submit">送信</button>
       </form>
     </div>
   );

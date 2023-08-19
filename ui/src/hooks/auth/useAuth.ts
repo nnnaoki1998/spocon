@@ -15,6 +15,7 @@ type UseAuth = {
   signIn: (email: string, password: string) => Promise<void>;
   signOut: () => Promise<void>;
   confirmSignUp: (verificationCode: string) => Promise<void>;
+  resendConfirmationCode: () => Promise<void>;
 };
 
 export const authContext = createContext({} as UseAuth);
@@ -69,6 +70,12 @@ export const useProvideAuth = (): UseAuth => {
     });
   };
 
+  const resendConfirmationCode = async () => {
+    await Auth.resendSignUp(email).catch((error) => {
+      throw error;
+    });
+  };
+
   return {
     isLoading,
     isAuthenticated,
@@ -77,5 +84,6 @@ export const useProvideAuth = (): UseAuth => {
     signIn,
     signOut,
     confirmSignUp,
+    resendConfirmationCode,
   };
 };
