@@ -1,28 +1,22 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../../hooks/useAuth';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { useSignIn } from '../../hooks/signIn/useSignIn';
+import './SignIn.css';
 
 export const SignIn: React.FC = () => {
-  const auth = useAuth();
-  const navigate = useNavigate();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-  const executeSignIn = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    auth
-      .signIn(email, password)
-      .then(() => {
-        navigate({ pathname: '/top' });
-      })
-      .catch((error: Error) => {
-        console.log(error);
-      });
-  };
+  const {
+    email,
+    setEmail,
+    password,
+    setPassword,
+    errorMessage,
+    executeSignIn,
+  } = useSignIn();
 
   return (
     <div>
       <h1>ログイン画面</h1>
+      <div className="errorMessage">{errorMessage}</div>
       <form noValidate onSubmit={executeSignIn}>
         <div>
           <label htmlFor="email">
