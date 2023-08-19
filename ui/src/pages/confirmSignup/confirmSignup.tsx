@@ -1,28 +1,20 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { CertificationResult, useAuth } from '../../hooks/useAuth';
+import React from 'react';
+import { useConfirmSignUp } from '../../hooks/confirmSignUp/useComfirmSignUp';
+import './ComfirmSignUp.css';
 
+/** 確認コード入力画面コンポーネント */
 export const ConfirmSignUp: React.FC = () => {
-  const auth = useAuth();
-  const navigate = useNavigate();
-  const [verificationCode, setVerificationCode] = useState('');
-
-  const executeConfirmSignUp = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    auth
-      .confirmSignUp(verificationCode)
-      .then(() => {
-        navigate({ pathname: '/' });
-      })
-      .catch((error: CertificationResult) => {
-        // 適切にエラーハンドリングして画面に表示する
-        throw new Error(error.message);
-      });
-  };
+  const {
+    verificationCode,
+    setVerificationCode,
+    errorMessage,
+    executeConfirmSignUp,
+  } = useConfirmSignUp();
 
   return (
     <div>
       <h1>確認コード入力画面</h1>
+      <div className="errorMessage">{errorMessage}</div>
       <form onSubmit={executeConfirmSignUp}>
         <div>
           <label htmlFor="verificationCode">

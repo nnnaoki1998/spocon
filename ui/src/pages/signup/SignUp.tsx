@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { CertificationResult, useAuth } from '../../hooks/useAuth';
+import { useAuth } from '../../hooks/useAuth';
 
 export const SignUp: React.FC = () => {
   const auth = useAuth();
@@ -15,9 +15,8 @@ export const SignUp: React.FC = () => {
       .then(() => {
         navigate({ pathname: '/confirmSignUp' });
       })
-      .catch((error: CertificationResult) => {
-        // 適切にエラーハンドリングして画面に表示する
-        throw new Error(error.message);
+      .catch((error: Error) => {
+        console.log(error);
       });
   };
 
