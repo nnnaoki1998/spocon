@@ -10,7 +10,7 @@ export const useConfirmSignUp = () => {
   const [errorMessage, setErrorMessage] = useState('');
 
   /** エラー種別に応じて、適切なメッセージを設定する */
-  const handleComfirmSignUpError = (error: Error) => {
+  const handleConfirmSignUpError = (error: Error) => {
     switch (error.name) {
       case 'CodeMismatchException':
         setErrorMessage('確認コードが正しくありません。');
@@ -25,7 +25,7 @@ export const useConfirmSignUp = () => {
     }
   };
 
-  /** 確認コードを送信処理を呼び出す */
+  /** 確認コード送信処理を呼び出す */
   const executeConfirmSignUp = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     auth
@@ -34,7 +34,7 @@ export const useConfirmSignUp = () => {
         navigate({ pathname: '/' });
       })
       .catch((error: Error) => {
-        handleComfirmSignUpError(error);
+        handleConfirmSignUpError(error);
       });
   };
 
