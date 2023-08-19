@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Chat } from './pages/chat/Chat';
-import { SignIn } from './pages/signin/SignIn';
-import { SignUp } from './pages/signup/SignUp'
+import { SignIn } from './pages/signIn/SignIn';
+import { SignUp } from './pages/signUp/SignUp'
 import { ConfirmSignUp } from './pages/confirmSignup/ConfirmSignUp'
 import { Top } from './pages/top/Top';
 
