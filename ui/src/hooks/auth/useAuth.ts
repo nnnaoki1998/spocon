@@ -1,5 +1,5 @@
 import { Auth } from 'aws-amplify';
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 
 type CurrentAuthenticatedUserResult = {
   attributes: {
@@ -17,11 +17,11 @@ type UseAuth = {
   confirmSignUp: (verificationCode: string) => Promise<void>;
 };
 
-const authContext = createContext({} as UseAuth);
+export const authContext = createContext({} as UseAuth);
 
 export const useAuth = () => useContext(authContext);
 
-const useProvideAuth = (): UseAuth => {
+export const useProvideAuth = (): UseAuth => {
   const [isLoading, setIsLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [email, setEmail] = useState('');
@@ -78,9 +78,4 @@ const useProvideAuth = (): UseAuth => {
     signOut,
     confirmSignUp,
   };
-};
-
-export const ProvideAuth: React.FC = ({ children }) => {
-  const auth = useProvideAuth();
-  return <authContext.Provider value={auth}>{children}</authContext.Provider>;
 };

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../useAuth';
+import { useAuth } from '../auth/useAuth';
 
 /** 確認コード画面で使用するカスタムフック */
 export const useConfirmSignUp = () => {

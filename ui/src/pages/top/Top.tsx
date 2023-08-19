@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { PrivateRoute } from '../../components/PrivateRoute';
-import { useAuth } from '../../hooks/useAuth';
 import { backendUrl } from '../../config';
+import { useAuth } from '../../hooks/auth/useAuth';
 
 export const Top: React.FC = () => {
   const auth = useAuth();
