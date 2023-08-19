@@ -9,13 +9,15 @@ export const useConfirmSignUp = () => {
   const [verificationCode, setVerificationCode] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
-  /** エラー種別に応じて、適切なメッセージを設定する */
+  /**
+   * 確認コード認証時のエラーハンドリング
+   * エラー種別に応じて、適切なメッセージを設定する
+   */
   const handleConfirmSignUpError = (error: Error) => {
     switch (error.name) {
       case 'CodeMismatchException':
         setErrorMessage('確認コードが正しくありません。');
         break;
-      // TODO: 確認コードの再送信の導線を作ったほうがよさそう
       case 'ExpiredCodeException':
         setErrorMessage('確認コードの有効期限が切れています。');
         break;
@@ -25,7 +27,26 @@ export const useConfirmSignUp = () => {
     }
   };
 
-  /** 確認コード送信処理を呼び出す */
+  /**
+   * 確認コード再送時のエラーハンドリング
+   * エラー種別に応じて、適切なメッセージを設定する
+   */
+  const handleResendConfirmationCodeError = (error: Error) => {
+    switch (error.name) {
+      case 'CodeDeliveryFailureException':
+        setErrorMessage(
+          '確認コードの配信に失敗しました。再度送信してください。'
+        );
+        break;
+      default:
+        setErrorMessage(
+          'エラーが発生しました。しばらくしてからもう一度お試しください。'
+        );
+        break;
+    }
+  };
+
+  /** 確認コード認証処理を呼び出す */
   const executeConfirmSignUp = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     auth
@@ -38,10 +59,21 @@ export const useConfirmSignUp = () => {
       });
   };
 
+  /** 確認コード再送処理を呼び出す */
+  const executeResendConfirmationCode = (
+    event: React.FormEvent<HTMLFormElement>
+  ) => {
+    event.preventDefault();
+    auth.resendConfirmationCode().catch((error: Error) => {
+      handleResendConfirmationCodeError(error);
+    });
+  };
+
   return {
     verificationCode,
     setVerificationCode,
     errorMessage,
     executeConfirmSignUp,
+    executeResendConfirmationCode,
   };
 };
