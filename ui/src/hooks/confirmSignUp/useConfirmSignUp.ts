@@ -15,6 +15,9 @@ export const useConfirmSignUp = () => {
    */
   const handleConfirmSignUpError = (error: Error) => {
     switch (error.name) {
+      case 'NotAuthorizedException':
+        setErrorMessage('ユーザーが承認されていません。');
+        break;
       case 'CodeMismatchException':
         setErrorMessage('確認コードが正しくありません。');
         break;
@@ -33,6 +36,9 @@ export const useConfirmSignUp = () => {
    */
   const handleResendConfirmationCodeError = (error: Error) => {
     switch (error.name) {
+      case 'NotAuthorizedException':
+        setErrorMessage('ユーザーが承認されていません。');
+        break;
       case 'CodeDeliveryFailureException':
         setErrorMessage(
           '確認コードの配信に失敗しました。再度送信してください。'
