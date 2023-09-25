@@ -4,12 +4,14 @@ import { Chat } from './pages/chat/Chat';
 import { SignIn } from './pages/signin/SignIn';
 import { SignUp } from './pages/signup/SignUp'
 import { Top } from './pages/top/Top';
+import { Top2 } from './components/5_pages/Top2'
 
 export const Router: React.FC = () => (
   <BrowserRouter>
     <Routes>
       <Route index element={<SignIn />} />
       <Route path="signup" element={<SignUp />} />
+      <Route path="top2" element={<Top2 />} />
       <Route path="top" element={<Top />} />
       <Route path="chat" element={<Chat/>} />
       <Route path="*" element={<p>Page Not Found</p>} />

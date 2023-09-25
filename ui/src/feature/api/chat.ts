@@ -1,10 +1,14 @@
 import { API } from 'aws-amplify';
 import {
+  CreateRelayChatRoomTeamMutation,
   ChatMessagesByChatRoomIdQuery,
   RelayChatRoomTeamsByTeamIdQuery,
   CreateChatMessageMutation,
 } from '../../API';
-import { createChatMessage } from '../../graphql/mutations';
+import {
+  createRelayChatRoomTeam,
+  createChatMessage,
+} from '../../graphql/mutations';
 import {
   chatMessagesByChatRoomId,
   relayChatRoomTeamsByTeamId,
@@ -47,6 +51,22 @@ export const pushChatMessage = async (
         writeDateTime: new Date().getTime(),
         teamId,
         message,
+      },
+    },
+  });
+};
+
+export const createRelayChatRoom = async (
+  chatRoomId: string,
+  teamId: string
+) => {
+  await API.graphql<CreateRelayChatRoomTeamMutation>({
+    query: createRelayChatRoomTeam,
+    variables: {
+      input: {
+        chatRoomId,
+        writeDateTime: new Date().getTime(),
+        teamId,
       },
     },
   });
