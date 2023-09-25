@@ -1,5 +1,5 @@
 import React from 'react';
-import './signUpTest.css';
+import './signUp.css';
 import { useSignUp } from '../../hooks/signUp/useSingUp';
 
 export const SignUp: React.FC = () => {
