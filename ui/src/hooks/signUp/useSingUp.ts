@@ -13,6 +13,9 @@ export const useSignUp = () => {
   /** エラー種別に応じて、エラーメッセージを設定する */
   const handleSignUpError = (error: Error) => {
     switch (error.name) {
+      case 'UsernameExistsException':
+        setErrorMessage('既に登録されているメールアドレスです。');
+        break;
       // メールアドレスの形式以外にこの例外が発生するケースがあるかもしれない
       // その場合Error.messageも含んだ条件分岐にする
       case 'InvalidParameterException':
