@@ -9,7 +9,8 @@
       "main": {
           "title":"タイトルです",
           "text": "テキストです。テキストです。テキストですったらテキストです。",
-          "invite-to-match": "試合に誘う"
+          "invite-to-match": "試合に誘う",
+          "send-message": "送信"
       },
       "inner": [
           {
