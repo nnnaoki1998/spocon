@@ -2,7 +2,7 @@ import React from 'react';
 import TextData from '../../data.json';
 
 export interface Props {
-  message: string;
+  newMessage: string;
 }
 
 const onClickSendButton = (message: string) => {
@@ -10,10 +10,10 @@ const onClickSendButton = (message: string) => {
 };
 
 const SendButton: React.FC<Props> = (props: Props) => {
-  const { message } = props;
+  const { newMessage } = props;
 
   return (
-    <button type="button" onClick={() => onClickSendButton(message)}>
+    <button type="button" onClick={() => onClickSendButton(newMessage)}>
       {TextData.data.main['send-message']}
     </button>
   );

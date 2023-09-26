@@ -1,0 +1,5 @@
+.chat-view-container {
+  display: grid;
+  grid-template-columns: minmax(245px, 245px) minmax(735px, 735px);
+  gap: 20px;
+}

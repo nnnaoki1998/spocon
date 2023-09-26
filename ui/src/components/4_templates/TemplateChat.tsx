@@ -1,33 +1,32 @@
 import React from 'react';
-import { ChatMessage, OnCreateChatMessageSubscription } from '../../API';
-import { MessageField } from '../1_atoms/MessageField';
-import { MessagesField } from '../1_atoms/MessagesField';
-import { SendButton } from '../1_atoms/SendButton';
+import { TypeTest } from '../utils/TypeDefinitions';
+import { SideView } from '../3_organisms/SideView';
+import { ChatView } from '../3_organisms/ChatView';
+import { ChatMessage } from '../../API';
 
-import './TemplateTop.css';
+import './TemplateChat.css';
 
 export interface Props {
-  messages: (ChatMessage | null)[];
-  message: string;
-  testHook: React.Dispatch<React.SetStateAction<string>>;
+  chatRooms: TypeTest;
+  pastMessages: (ChatMessage | null)[];
+  newMessage: string;
+  setNewMessage: React.Dispatch<React.SetStateAction<string>>;
+  setChatRoomId: React.Dispatch<React.SetStateAction<string | undefined>>;
 }
 
 const TemplateChat: React.FC<Props> = (props: Props) => {
-  const { messages, message, testHook } = props;
+  const { chatRooms, pastMessages, newMessage, setNewMessage, setChatRoomId } =
+    props;
 
   return (
-    <>
-      <MessagesField
-        messages={messages}
+    <div className="chat-view-container">
+      <SideView chatRooms={chatRooms} setChatRoomId={setChatRoomId} />
+      <ChatView
+        pastMessages={pastMessages}
+        newMessage={newMessage}
+        setNewMessage={setNewMessage}
       />
-      <MessageField
-        message={message}
-        testHook={testHook}
-      />
-      <SendButton
-        message={message}
-      />
-    </>
+    </div>
   );
 };
 

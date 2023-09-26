@@ -1,17 +1,17 @@
 import React from 'react';
-import { ChatMessage, OnCreateChatMessageSubscription } from '../../API';
+import { ChatMessage } from '../../API';
 
 export interface Props {
-  messages: (ChatMessage | null)[];
+  pastMessages: (ChatMessage | null)[];
 }
 
 const MessagesField: React.FC<Props> = (props: Props) => {
-  const { messages } = props;
+  const { pastMessages } = props;
 
   return (
     <>
-      {messages.map((message) => (
-        <div>
+      {pastMessages.map((message) => (
+        <div key={message?.writeDateTime}>
           <p>{message?.message}</p>
         </div>
       ))}
