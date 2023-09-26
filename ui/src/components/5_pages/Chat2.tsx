@@ -8,13 +8,6 @@ import {
   pushChatMessage,
 } from '../../feature/api/chat';
 
-// chatRoomId : "testChatRoomId01"
-// createdAt : "2023-07-12T17:25:11.843Z"
-// owner : "e576e8ce-7c45-48c5-9d38-27780f871619"
-// teamId : "teamId01"
-// updatedAt : "2023-07-12T17:25:11.843Z"
-// writeDateTime : 1689182711605
-
 const Chat2: React.FC = () => {
   const myTeamId = 'teamId01';
   const [pastMessages, setPastMessages] = React.useState<
