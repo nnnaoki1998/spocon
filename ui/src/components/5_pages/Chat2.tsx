@@ -2,7 +2,11 @@ import React, { useEffect } from 'react';
 import { TypeTest } from '../utils/TypeDefinitions';
 import { TemplateChat } from '../4_templates/TemplateChat';
 import { ChatMessage } from '../../API';
-import { getChatMessages, getChatRooms } from '../../feature/api/chat';
+import {
+  getChatMessages,
+  getChatRooms,
+  pushChatMessage,
+} from '../../feature/api/chat';
 
 // chatRoomId : "testChatRoomId01"
 // createdAt : "2023-07-12T17:25:11.843Z"
@@ -19,6 +23,7 @@ const Chat2: React.FC = () => {
   const [newMessage, setNewMessage] = React.useState<string>('');
   const [chatRooms, setChatRooms] = React.useState<TypeTest>([]);
   const [chatRoomId, setChatRoomId] = React.useState<string | undefined>('');
+  const [sendFlag, setSendFlag] = React.useState<boolean>(false);
 
   const fetchChatRooms = () => {
     getChatRooms(myTeamId)
@@ -43,8 +48,19 @@ const Chat2: React.FC = () => {
     if (items === undefined) {
       throw new Error('Failed to get the items.');
     }
-    console.log(items);
     setPastMessages(items);
+  };
+
+  const sendNewMessage = () => {
+    console.log('Invoked sendNewMessage().');
+    if (!chatRoomId) return;
+    pushChatMessage(chatRoomId, myTeamId, newMessage)
+      .then(() => {
+        setNewMessage('');
+      })
+      .catch(() => {
+        throw new Error('Failed to send message.');
+      });
   };
 
   useEffect(() => {
@@ -57,6 +73,15 @@ const Chat2: React.FC = () => {
     fetchChatRooms();
   }, []);
 
+  // TODO: 依存条件の見直しと二重発火の回避
+  useEffect(() => {
+    if (newMessage !== '') {
+      sendNewMessage();
+      setNewMessage('');
+    }
+    setSendFlag(false);
+  }, [sendFlag === true]);
+
   return (
     <TemplateChat
       chatRooms={chatRooms}
@@ -64,6 +89,7 @@ const Chat2: React.FC = () => {
       newMessage={newMessage}
       setNewMessage={setNewMessage}
       setChatRoomId={setChatRoomId}
+      setSendFlag={setSendFlag}
     />
   );
 };

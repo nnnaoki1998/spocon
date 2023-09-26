@@ -12,11 +12,18 @@ export interface Props {
   newMessage: string;
   setNewMessage: React.Dispatch<React.SetStateAction<string>>;
   setChatRoomId: React.Dispatch<React.SetStateAction<string | undefined>>;
+  setSendFlag: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const TemplateChat: React.FC<Props> = (props: Props) => {
-  const { chatRooms, pastMessages, newMessage, setNewMessage, setChatRoomId } =
-    props;
+  const {
+    chatRooms,
+    pastMessages,
+    newMessage,
+    setNewMessage,
+    setChatRoomId,
+    setSendFlag,
+  } = props;
 
   return (
     <div className="chat-view-container">
@@ -25,6 +32,7 @@ const TemplateChat: React.FC<Props> = (props: Props) => {
         pastMessages={pastMessages}
         newMessage={newMessage}
         setNewMessage={setNewMessage}
+        setSendFlag={setSendFlag}
       />
     </div>
   );

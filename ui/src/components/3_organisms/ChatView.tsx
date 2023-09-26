@@ -10,16 +10,17 @@ export interface Props {
   pastMessages: (ChatMessage | null)[];
   newMessage: string;
   setNewMessage: React.Dispatch<React.SetStateAction<string>>;
+  setSendFlag: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const ChatView: React.FC<Props> = (props: Props) => {
-  const { pastMessages, newMessage, setNewMessage } = props;
+  const { pastMessages, newMessage, setNewMessage, setSendFlag } = props;
 
   return (
     <div className="chat-view-container2">
       <MessagesField pastMessages={pastMessages} />
       <MessageField newMessage={newMessage} setNewMessage={setNewMessage} />
-      <SendButton newMessage={newMessage} />
+      <SendButton newMessage={newMessage} setSendFlag={setSendFlag} />
     </div>
   );
 };

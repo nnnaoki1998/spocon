@@ -3,6 +3,7 @@ import TextData from '../../data.json';
 
 export interface Props {
   newMessage: string;
+  setSendFlag: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const onClickSendButton = (message: string) => {
@@ -10,10 +11,10 @@ const onClickSendButton = (message: string) => {
 };
 
 const SendButton: React.FC<Props> = (props: Props) => {
-  const { newMessage } = props;
+  const { newMessage, setSendFlag } = props;
 
   return (
-    <button type="button" onClick={() => onClickSendButton(newMessage)}>
+    <button type="button" onClick={() => setSendFlag(true)}>
       {TextData.data.main['send-message']}
     </button>
   );
