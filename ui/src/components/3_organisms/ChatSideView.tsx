@@ -1,7 +1,7 @@
 import React from 'react';
 import { TypeTest } from '../utils/TypeDefinitions';
 
-import './SideView.css';
+import './ChatSideView.css';
 
 export interface Props {
   chatRooms: TypeTest;
@@ -17,7 +17,7 @@ const onClickChatRoom = (
   func(id);
 };
 
-const SideView: React.FC<Props> = (props: Props) => {
+const ChatSideView: React.FC<Props> = (props: Props) => {
   const { chatRooms, setChatRoomId } = props;
 
   return (
@@ -38,4 +38,4 @@ const SideView: React.FC<Props> = (props: Props) => {
   );
 };
 
-export { SideView };
+export { ChatSideView };

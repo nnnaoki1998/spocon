@@ -15,7 +15,7 @@ const sortByWriteDateTime = (chatMessageList: Array<ChatMessage | null>) => {
   });
 };
 
-const MessagesField: React.FC<Props> = (props: Props) => {
+const PastMessagesField: React.FC<Props> = (props: Props) => {
   const { pastMessages } = props;
 
   sortByWriteDateTime(pastMessages);
@@ -31,4 +31,4 @@ const MessagesField: React.FC<Props> = (props: Props) => {
   );
 };
 
-export { MessagesField };
+export { PastMessagesField };

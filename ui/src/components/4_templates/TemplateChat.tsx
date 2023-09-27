@@ -1,7 +1,7 @@
 import React from 'react';
 import { TypeTest } from '../utils/TypeDefinitions';
-import { SideView } from '../3_organisms/SideView';
-import { ChatView } from '../3_organisms/ChatView';
+import { ChatSideView } from '../3_organisms/ChatSideView';
+import { ChatMainView } from '../3_organisms/ChatMainView';
 import { ChatMessage } from '../../API';
 
 import './TemplateChat.css';
@@ -27,8 +27,8 @@ const TemplateChat: React.FC<Props> = (props: Props) => {
 
   return (
     <div className="chat-view-container">
-      <SideView chatRooms={chatRooms} setChatRoomId={setChatRoomId} />
-      <ChatView
+      <ChatSideView chatRooms={chatRooms} setChatRoomId={setChatRoomId} />
+      <ChatMainView
         pastMessages={pastMessages}
         newMessage={newMessage}
         setNewMessage={setNewMessage}

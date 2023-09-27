@@ -10,12 +10,12 @@ import {
 
 const Chat2: React.FC = () => {
   const myTeamId = 'teamId01';
+  const [chatRooms, setChatRooms] = React.useState<TypeTest>([]);
+  const [chatRoomId, setChatRoomId] = React.useState<string | undefined>('');
   const [pastMessages, setPastMessages] = React.useState<
     Array<ChatMessage | null>
   >([]);
   const [newMessage, setNewMessage] = React.useState<string>('');
-  const [chatRooms, setChatRooms] = React.useState<TypeTest>([]);
-  const [chatRoomId, setChatRoomId] = React.useState<string | undefined>('');
   const [sendFlag, setSendFlag] = React.useState<boolean>(false);
 
   const fetchChatRooms = () => {
@@ -26,17 +26,12 @@ const Chat2: React.FC = () => {
       })
       .catch((e) => {
         console.log(e);
-      })
-      .finally(() => {
-        console.log('Finished to invoke getChatRoom().');
       });
   };
 
   const fetchPastMessages = async () => {
-    const currentChatRoomId = chatRoomId || 'chatRoomId01';
-    console.log(currentChatRoomId);
-
-    const chatMessageList = await getChatMessages(currentChatRoomId);
+    if (!chatRoomId) return;
+    const chatMessageList = await getChatMessages(chatRoomId);
     const items = chatMessageList.data.chatMessagesByChatRoomId?.items;
     if (items === undefined) {
       throw new Error('Failed to get the items.');
@@ -57,14 +52,14 @@ const Chat2: React.FC = () => {
   };
 
   useEffect(() => {
+    fetchChatRooms();
+  }, []);
+
+  useEffect(() => {
     fetchPastMessages().catch((e) => {
       console.log(e);
     });
   }, [chatRoomId]);
-
-  useEffect(() => {
-    fetchChatRooms();
-  }, []);
 
   // TODO: 依存条件の見直しと二重発火の回避
   useEffect(() => {

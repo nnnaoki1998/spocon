@@ -5,7 +5,7 @@ interface Props {
   setNewMessage: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const MessageField: React.FC<Props> = (props: Props) => {
+const NewMessageField: React.FC<Props> = (props: Props) => {
   const { newMessage, setNewMessage } = props;
 
   return (
@@ -17,4 +17,4 @@ const MessageField: React.FC<Props> = (props: Props) => {
   );
 };
 
-export { MessageField };
+export { NewMessageField };
