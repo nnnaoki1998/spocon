@@ -26,14 +26,16 @@ const TemplateChat: React.FC<Props> = (props: Props) => {
   } = props;
 
   return (
-    <div className="chat-view-container">
-      <ChatSideView chatRooms={chatRooms} setChatRoomId={setChatRoomId} />
-      <ChatMainView
-        pastMessages={pastMessages}
-        newMessage={newMessage}
-        setNewMessage={setNewMessage}
-        setSendFlag={setSendFlag}
-      />
+    <div className="template-chat-container">
+      <div className="template-chat-sub-container">
+        <ChatSideView chatRooms={chatRooms} setChatRoomId={setChatRoomId} />
+        <ChatMainView
+          pastMessages={pastMessages}
+          newMessage={newMessage}
+          setNewMessage={setNewMessage}
+          setSendFlag={setSendFlag}
+        />
+      </div>
     </div>
   );
 };

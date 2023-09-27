@@ -21,14 +21,14 @@ const ChatSideView: React.FC<Props> = (props: Props) => {
   const { chatRooms, setChatRoomId } = props;
 
   return (
-    <div className="side-view-container">
+    <div className="chat-side-view-container">
       {chatRooms?.map((room) => (
         <div
           role="button"
           tabIndex={0}
           onClick={() => onClickChatRoom(room?.chatRoomId, setChatRoomId)}
           onKeyDown={() => onClickChatRoom(room?.chatRoomId, setChatRoomId)}
-          className="side-view-item"
+          className="chat-side-view-item"
           key={room?.writeDateTime}
         >
           <p>{room?.chatRoomId}</p>

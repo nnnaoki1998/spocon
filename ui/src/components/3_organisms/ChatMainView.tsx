@@ -17,7 +17,7 @@ const ChatMainView: React.FC<Props> = (props: Props) => {
   const { pastMessages, newMessage, setNewMessage, setSendFlag } = props;
 
   return (
-    <div className="chat-view-container2">
+    <div className="chat-main-view-container">
       <PastMessagesField pastMessages={pastMessages} />
       <NewMessageField newMessage={newMessage} setNewMessage={setNewMessage} />
       <SendMessageButton setSendFlag={setSendFlag} />

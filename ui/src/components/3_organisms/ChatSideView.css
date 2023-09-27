@@ -1,8 +1,9 @@
-.side-view-container {
+.chat-side-view-container {
   border: 1px solid #000000;
+  width: 100%;
 }
 
-.side-view-item {
+.chat-side-view-item {
   border: 1px solid #000000;
   margin: 1px;
   padding: 5px;

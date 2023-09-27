@@ -1,4 +1,5 @@
-.chat-view-container2 {
+.chat-main-view-container {
   border: 1px solid #000000;
   padding: 10px;
+  width: 100%;
 }
