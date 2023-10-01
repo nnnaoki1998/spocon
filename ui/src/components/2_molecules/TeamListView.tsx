@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { TypeTeam } from '../utils/TypeDefinitions';
 import { InviteButton } from '../1_atoms/InviteButton';
 
@@ -10,12 +11,14 @@ export interface Props {
 
 const TeamListView: React.FC<Props> = (props: Props) => {
   const { teamList } = props;
+  const navigate = useNavigate();
+  const basePath = "/profile";
 
   return (
     <div className="team-list-container">
       {teamList.map((team) => (
         <div className="team-list-item" key={team.id}>
-          <img alt="" src={team.image_url} />
+          <img alt="" src={team.image_url} onClick={() => {navigate({ pathname: basePath + "/" + team.id})}} />
           <p>TeamID: {team.id}</p>
           <p>TeamName: {team.name}</p>
           <p>Area: {team.area}</p>
