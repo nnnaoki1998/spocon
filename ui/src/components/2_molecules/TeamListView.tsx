@@ -22,10 +22,10 @@ const TeamListView: React.FC<Props> = (props: Props) => {
             role="button"
             tabIndex={0}
             onClick={() => {
-              navigate({ pathname: `/${basePath}/${team.id}` });
+              navigate({ pathname: `${basePath}/${team.id}` });
             }}
             onKeyDown={() => {
-              navigate({ pathname: `/${basePath}/${team.id}` });
+              navigate({ pathname: `${basePath}/${team.id}` });
             }}
           >
             <img src={team.image_url} alt="" />
