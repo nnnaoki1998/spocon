@@ -7,7 +7,7 @@ const Profile: React.FC = () => {
   const params = useParams();
   const [profile, setProfile] = React.useState<TypeTeam>();
 
-  const fetchTeamInfo = async () => {
+  const fetchTeamInfo = () => {
     if (!params.teamId) return;
     const teamInfo = getTeamInfo(params.teamId);
     setProfile(teamInfo);

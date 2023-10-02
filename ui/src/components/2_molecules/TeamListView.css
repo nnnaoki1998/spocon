@@ -10,11 +10,11 @@
   border: 1px solid #000000;
 }
 
-.team-list-item:hover {
-  opacity: 0.8;
-}
-
 .team-list-item img {
   width: 468px;
   height: auto;
+}
+
+.team-list-item img:hover {
+  opacity: 0.8;
 }

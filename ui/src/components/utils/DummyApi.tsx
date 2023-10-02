@@ -1,8 +1,8 @@
-import { TypeTeam } from '../utils/TypeDefinitions';
-import * as dummy from '../utils/DummyData';
+import { TypeTeam } from './TypeDefinitions';
+import * as dummy from './DummyData';
 
 export const getTeamInfo = (teamId: string) => {
-  let res: (TypeTeam | undefined);
+  let res: TypeTeam | undefined;
   dummy.teamList1.forEach((team) => {
     if (team.id === teamId) {
       res = team;
@@ -10,4 +10,4 @@ export const getTeamInfo = (teamId: string) => {
   });
 
   return res;
-}
+};

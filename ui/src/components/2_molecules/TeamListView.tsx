@@ -12,13 +12,24 @@ export interface Props {
 const TeamListView: React.FC<Props> = (props: Props) => {
   const { teamList } = props;
   const navigate = useNavigate();
-  const basePath = "/profile";
+  const basePath = '/profile';
 
   return (
     <div className="team-list-container">
       {teamList.map((team) => (
         <div className="team-list-item" key={team.id}>
-          <img alt="" src={team.image_url} onClick={() => {navigate({ pathname: basePath + "/" + team.id})}} />
+          <div
+            role="button"
+            tabIndex={0}
+            onClick={() => {
+              navigate({ pathname: `/${basePath}/${team.id}` });
+            }}
+            onKeyDown={() => {
+              navigate({ pathname: `/${basePath}/${team.id}` });
+            }}
+          >
+            <img src={team.image_url} alt="" />
+          </div>
           <p>TeamID: {team.id}</p>
           <p>TeamName: {team.name}</p>
           <p>Area: {team.area}</p>
