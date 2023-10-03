@@ -1,7 +1,10 @@
 import React, { useEffect } from 'react';
+import { API } from 'aws-amplify';
+import { GraphQLSubscription } from '@aws-amplify/api';
 import { TypeTest } from '../utils/TypeDefinitions';
 import { TemplateChat } from '../4_templates/TemplateChat';
-import { ChatMessage } from '../../API';
+import { ChatMessage, OnCreateChatMessageSubscription } from '../../API';
+import { onCreateChatMessage } from '../../graphql/subscriptions';
 import {
   getChatMessages,
   getChatRooms,
@@ -34,7 +37,7 @@ const Chat2: React.FC = () => {
     const chatMessageList = await getChatMessages(chatRoomId);
     const items = chatMessageList.data.chatMessagesByChatRoomId?.items;
     if (items === undefined) {
-      throw new Error('Failed to get the items.');
+      throw new Error('Failed to fetch past messages.');
     }
     setPastMessages(items);
   };
@@ -49,6 +52,23 @@ const Chat2: React.FC = () => {
       .catch(() => {
         throw new Error('Failed to send message.');
       });
+  };
+
+  const subscribePastMessages = () => {
+    const pushedOnCreateMessageEvent = API.graphql<
+      GraphQLSubscription<OnCreateChatMessageSubscription>
+    >({
+      query: onCreateChatMessage,
+    });
+    pushedOnCreateMessageEvent.subscribe({
+      next: (res) => {
+        if (res.value.data?.onCreateChatMessage?.chatRoomId === chatRoomId) {
+          fetchPastMessages().catch(() => {
+            throw new Error('Failed to fetch past messages.');
+          });
+        }
+      },
+    });
   };
 
   useEffect(() => {
@@ -69,6 +89,10 @@ const Chat2: React.FC = () => {
     }
     setSendFlag(false);
   }, [sendFlag === true]);
+
+  useEffect(() => {
+    subscribePastMessages();
+  }, [chatRoomId]);
 
   return (
     <TemplateChat
