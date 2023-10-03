@@ -1,7 +1,10 @@
 import React from 'react';
 import { ChatMessage } from '../../API';
 
+import './PastMessagesField.css';
+
 export interface Props {
+  myTeamId: string;
   pastMessages: (ChatMessage | null)[];
 }
 
@@ -16,15 +19,20 @@ const sortByWriteDateTime = (chatMessageList: Array<ChatMessage | null>) => {
 };
 
 const PastMessagesField: React.FC<Props> = (props: Props) => {
-  const { pastMessages } = props;
+  const { myTeamId, pastMessages } = props;
 
   sortByWriteDateTime(pastMessages);
 
   return (
     <>
       {pastMessages.map((message) => (
-        <div key={message?.writeDateTime}>
-          <p>{message?.message}</p>
+        <div
+          key={message?.writeDateTime}
+          className={`past-messages-container ${
+            message?.teamId === myTeamId ? 'mine' : ''
+          }`}
+        >
+          <p className="past-message">{message?.message}</p>
         </div>
       ))}
     </>

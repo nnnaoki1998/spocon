@@ -1,12 +1,12 @@
 import React from 'react';
 import { ChatMessage } from '../../API';
-import { NewMessageField } from '../1_atoms/NewMessageField';
 import { PastMessagesField } from '../1_atoms/PastMessagesField';
-import { SendMessageButton } from '../1_atoms/SendMessageButton';
+import { SendNewMessageField } from '../2_molecules/SendNewMessageField';
 
 import './ChatMainView.css';
 
 export interface Props {
+  myTeamId: string;
   pastMessages: (ChatMessage | null)[];
   newMessage: string;
   setNewMessage: React.Dispatch<React.SetStateAction<string>>;
@@ -14,13 +14,21 @@ export interface Props {
 }
 
 const ChatMainView: React.FC<Props> = (props: Props) => {
-  const { pastMessages, newMessage, setNewMessage, setSendFlag } = props;
+  const { myTeamId, pastMessages, newMessage, setNewMessage, setSendFlag } =
+    props;
 
   return (
     <div className="chat-main-view-container">
-      <PastMessagesField pastMessages={pastMessages} />
-      <NewMessageField newMessage={newMessage} setNewMessage={setNewMessage} />
-      <SendMessageButton setSendFlag={setSendFlag} />
+      <div className="chat-main-view-past-messages-field">
+        <PastMessagesField myTeamId={myTeamId} pastMessages={pastMessages} />
+      </div>
+      <div className="chat-main-view-send-new-message-field">
+        <SendNewMessageField
+          newMessage={newMessage}
+          setNewMessage={setNewMessage}
+          setSendFlag={setSendFlag}
+        />
+      </div>
     </div>
   );
 };
