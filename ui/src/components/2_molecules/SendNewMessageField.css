@@ -1,0 +1,27 @@
+.send-new-message-container {
+  position: absolute;
+  bottom: 10px;
+  width: calc(100% - 20px);
+  height: 36px;
+}
+
+.send-new-message-container input[type='text'] {
+  position: absolute;
+  left: 0px;
+  height: 20px;
+  width: 90%;
+  padding: 0.5em;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.send-new-message-container button {
+  position: absolute;
+  right: 0px;
+  padding: 0.5em 1em;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}

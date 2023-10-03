@@ -72,6 +72,7 @@ const Chat2: React.FC = () => {
 
   return (
     <TemplateChat
+      myTeamId={myTeamId}
       chatRooms={chatRooms}
       pastMessages={pastMessages}
       newMessage={newMessage}

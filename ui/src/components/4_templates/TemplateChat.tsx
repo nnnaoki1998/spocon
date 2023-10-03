@@ -7,6 +7,7 @@ import { ChatMessage } from '../../API';
 import './TemplateChat.css';
 
 export interface Props {
+  myTeamId: string;
   chatRooms: TypeTest;
   pastMessages: (ChatMessage | null)[];
   newMessage: string;
@@ -17,6 +18,7 @@ export interface Props {
 
 const TemplateChat: React.FC<Props> = (props: Props) => {
   const {
+    myTeamId,
     chatRooms,
     pastMessages,
     newMessage,
@@ -30,6 +32,7 @@ const TemplateChat: React.FC<Props> = (props: Props) => {
       <div className="template-chat-sub-container">
         <ChatSideView chatRooms={chatRooms} setChatRoomId={setChatRoomId} />
         <ChatMainView
+          myTeamId={myTeamId}
           pastMessages={pastMessages}
           newMessage={newMessage}
           setNewMessage={setNewMessage}
