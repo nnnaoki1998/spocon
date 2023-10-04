@@ -17,19 +17,10 @@ const ChatMainView: React.FC<Props> = (props: Props) => {
   const { myTeamId, pastMessages, newMessage, setNewMessage, setSendFlag } =
     props;
 
-  const refToBottom = React.useRef<HTMLDivElement>(null);
-  const scrollToBottom = () =>
-    refToBottom.current?.scrollIntoView({ behavior: 'smooth' });
-
-  React.useEffect(() => {
-    scrollToBottom();
-  }, [pastMessages]);
-
   return (
     <div className="chat-main-view-container">
       <div className="chat-main-view-past-messages-field">
         <PastMessagesField myTeamId={myTeamId} pastMessages={pastMessages} />
-        <div ref={refToBottom} />
       </div>
       <div className="chat-main-view-send-new-message-field">
         <SendNewMessageField
