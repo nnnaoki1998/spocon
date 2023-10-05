@@ -31,8 +31,8 @@ export const Chat: React.FC = () => {
   >([]);
   const [message, setMessage] = React.useState<string>('');
   // TODO 自分と相手のチームIDをバックエンドのAPIを呼び出して取得する
-  const [myTeamId, ] = React.useState<string>('teamId01');
-  const [partnerTeamId, ] = React.useState<string>('teamId02');
+  const [myTeamId] = React.useState<string>('teamId01');
+  const [partnerTeamId] = React.useState<string>('teamId02');
   const [chatRoomId, setChatRoomId] = React.useState<string | undefined>('');
 
   /** チャットルームの全メッセージを取得する関数 */
