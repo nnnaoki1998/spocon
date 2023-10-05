@@ -3,12 +3,15 @@
   <head>
     <meta charset="utf-8" />
     <title>exampleApp</title>
-    <script defer src="app.js"></script>
-  </head>
+    <!-- TODO: ページ更新及びURL直接アクセス時のリソース不足対策 -->
+    <!--       ここじゃなくてサーバー設定で対策するのが望ましい? -->
+    <base href="/">
+    <!----------------------------------------------------->
+  <script defer src="app.js"></script></head>
   <body>
     <noscript>
       <strong>javascriptを有効にしてください</strong>
     </noscript>
-    <div id="app" />
+    <div id="root">
   </body>
 </html>
