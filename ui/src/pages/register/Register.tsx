@@ -1,50 +1,64 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 export const Register: React.FC = () => {
+  const [sport, setSport] = useState('')
+  const [introduction, setIntroduction] = useState('')
+
   return (
     <React.Fragment>
+    
       <form action="">
         <div>
+          <h3>チーム名</h3>
           <label htmlFor="team_name">
-            チーム名：
             <input 
               type="text"
-              value="sample team"
+              placeholder="スポコン　太郎"
             />
           </label>
         </div>
         <div>
-          <label htmlFor="sports_type">
-            スポーツ種別：
-            <input type="text" />
+          <h3>スポーツ種別</h3>
+          <label>
+            <select value={sport} onChange={(s) => setSport(s.target.value)}>
+              <option value="baseball">野球</option>
+              <option value="basketball">バスケ</option>
+              <option value="soccer">サッカー</option>
+              <option value="handball">ハンドボール</option>
+            </select>
           </label>
         </div>
         <div>
-          <label htmlFor="active_time">
-            主な活動日時：
-            <input type="week" />
+          <h3>主な活動場所</h3>
+            <div className="placeList">
+              <label htmlFor="place">
+                都道府県：
+                <input type="text" />
+              </label>
+              <label htmlFor="place">
+                市区町村：
+                <input type="text" />
+              </label>
+            </div>
+        </div>
+        <div>
+          <h3>チーム紹介文</h3>
+          <label htmlFor="text">
+            <textarea 
+              value={introduction}
+              name="introduction"
+              onChange={(i) => setIntroduction(i.target.value)}
+              ></textarea>
           </label>
         </div>
         <div>
-          <label htmlFor="place">
-            主な活動場所：
-            <input type="text" />
-          </label>
-        </div>
-        <div>
-          <label htmlFor="description">
-            チーム紹介文：
-            <input type="textbox" />
-          </label>
-        </div>
-        <div>
+          <h3>チーム画像</h3>
           <label htmlFor="team_image">
-            チーム画像：
             <input type="file" />
           </label>
         </div>
         <div>
-          <button type="submit">登録</button>
+          <input type="submit" name="登録" />
         </div>
       </form>
     </React.Fragment>
