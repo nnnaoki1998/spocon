@@ -17,7 +17,7 @@ export const teamList1: TypeTeam[] = [
     name: 'Team00001',
     area: 'Tokyo',
     sport: 'BaseBall',
-    status: 'Univercity',
+    status: 'University',
     image_url:
       'https://thumb.photo-ac.com/40/4040c804e637099768e92d2c58904191_w.jpeg',
     lastLoginDate: date1,
@@ -27,7 +27,7 @@ export const teamList1: TypeTeam[] = [
     name: 'Team00002',
     area: 'Tokyo',
     sport: 'BaseBall',
-    status: 'Univercity',
+    status: 'University',
     image_url:
       'https://thumb.photo-ac.com/84/8400612fc07303640bcbf7ce2e39e4c8_w.jpeg',
     lastLoginDate: date2,
@@ -37,7 +37,7 @@ export const teamList1: TypeTeam[] = [
     name: 'Team00003',
     area: 'Tokyo',
     sport: 'FootBall',
-    status: 'Univercity',
+    status: 'University',
     image_url:
       'https://thumb.photo-ac.com/eb/eb8d7266424f5e7c397467b42c1fc70c_w.jpeg',
     lastLoginDate: date3,
@@ -47,7 +47,7 @@ export const teamList1: TypeTeam[] = [
     name: 'Team00004',
     area: 'Osaka',
     sport: 'FootBall',
-    status: 'Univercity',
+    status: 'University',
     image_url:
       'https://thumb.photo-ac.com/fc/fc7cf522d149905bc958f8ebac2e7f5c_w.jpeg',
     lastLoginDate: date4,
@@ -120,7 +120,7 @@ export const teamList2: TypeTeam[] = [
     name: 'Team00011',
     area: 'Tokyo',
     sport: 'BaseBall',
-    status: 'Univercity',
+    status: 'University',
     image_url:
       'https://thumb.photo-ac.com/84/8400612fc07303640bcbf7ce2e39e4c8_w.jpeg',
     lastLoginDate: date2,
@@ -130,7 +130,7 @@ export const teamList2: TypeTeam[] = [
     name: 'Team00012',
     area: 'Tokyo',
     sport: 'FootBall',
-    status: 'Univercity',
+    status: 'University',
     image_url:
       'https://thumb.photo-ac.com/eb/eb8d7266424f5e7c397467b42c1fc70c_w.jpeg',
     lastLoginDate: date3,
@@ -140,7 +140,7 @@ export const teamList2: TypeTeam[] = [
     name: 'Team00013',
     area: 'Osaka',
     sport: 'FootBall',
-    status: 'Univercity',
+    status: 'University',
     image_url:
       'https://thumb.photo-ac.com/fc/fc7cf522d149905bc958f8ebac2e7f5c_w.jpeg',
     lastLoginDate: date4,
@@ -210,7 +210,7 @@ export const teamList2: TypeTeam[] = [
     name: 'Team00020',
     area: 'Tokyo',
     sport: 'BaseBall',
-    status: 'Univercity',
+    status: 'University',
     image_url:
       'https://thumb.photo-ac.com/40/4040c804e637099768e92d2c58904191_w.jpeg',
     lastLoginDate: date1,
@@ -317,4 +317,4 @@ export const sports: string[] = [
   'Karate Kumite',
 ];
 
-export const status: string[] = ['Highschool', 'Univercity', 'Society'];
+export const status: string[] = ['Highschool', 'University', 'Society'];
