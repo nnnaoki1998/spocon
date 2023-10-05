@@ -15,7 +15,7 @@ import TeamBasicInfoRegister from './TeamBasicInfoRegister';
 import TeamIntroRegister from './TeamIntroRegister';
 import TeamImageRegister from './TeamImageRegister';
 
-const Copyright = () => 
+const Copyright = () => (
   <Typography variant="body2" color="text.secondary" align="center">
     {'Copyright © '}
     <Link color="inherit" href="https://github.com/nnnaoki1998/spocon">
@@ -23,6 +23,7 @@ const Copyright = () =>
     </Link>{' '}
     {new Date().getFullYear()}.
   </Typography>
+);
 
 const steps = ['基本情報', 'チームの紹介', '写真を設定'];
 
