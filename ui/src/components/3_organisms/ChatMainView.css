@@ -9,7 +9,7 @@
 
 .chat-main-view-past-messages-field {
   overflow: scroll;
-  height: 940px;
+  height: 640px;
 }
 
 .chat-main-view-send-new-message-field {
