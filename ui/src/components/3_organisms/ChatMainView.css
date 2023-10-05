@@ -1,0 +1,17 @@
+.chat-main-view-container {
+  position: relative;
+  border: 1px solid #000000;
+  padding-left: 10px;
+  padding-right: 10px;
+  height: 100%;
+  width: 100%;
+}
+
+.chat-main-view-past-messages-field {
+  overflow: scroll;
+  height: 640px;
+}
+
+.chat-main-view-send-new-message-field {
+  height: 60px;
+}

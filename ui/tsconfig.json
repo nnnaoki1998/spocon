@@ -22,7 +22,10 @@
     "allowSyntheticDefaultImports": true,
 
     /* 型チェックだけさせたいので出力なし */
-    "noEmit": true
+    "noEmit": true,
+
+    /* JSONの読み込み用 */
+    "resolveJsonModule": true,
   },
   /* tscコマンドで読み込むファイルを指定 */
   "include": ["src/**/*.ts", "src/**/*.tsx"],

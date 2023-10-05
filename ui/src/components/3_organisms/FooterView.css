@@ -1,0 +1,17 @@
+.footer-view-container {
+  position: relative;
+  top: 200px;
+  width: 100%;
+  height: 170px;
+  background: rgb(240, 240, 240);
+}
+
+.footer-view-copyright {
+  position: absolute;
+  width: 1000px;
+  left: 50%;
+  bottom: 10%;
+  text-align: center;
+
+  translate: calc(-50%);
+}
