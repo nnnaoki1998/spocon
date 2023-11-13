@@ -13,9 +13,9 @@ Rails.application.routes.draw do
   patch "/user/:id", to: "user#update"
   # curl 127.0.0.1:3000/team
   get "/team", to: "team#index"
-  # curl -X POST -H "Content-Type: application/json" -d '{"name":"東京バスケサークル","sport_id":3,"icon_path":"cccc","description":"ABCDEFGH","zip_code":"812-0017","address":"福岡市博多区美野島3-22-7"}' 127.0.0.1:3000/team
+  # curl -X POST -H "Content-Type: application/json" -d '{"name":"東京バスケサークル","sport_id":3,"grade_id":3,"icon_path":"cccc","description":"ABCDEFGH","address_state":"福岡県","address_city":"福岡市"}' 127.0.0.1:3000/team
   post "/team", to: "team#create"
-  # curl -X PATCH -H "Content-Type: application/json" -d '{"name":"FUKUOKAバスケサークル","sport_id":4,"icon_path":"dddd","description":"ABCDEFGH","zip_code":"814-0014","address":"福岡市中央区平尾3-20-57"}' 127.0.0.1:3000/team/3
+  # curl -X PATCH -H "Content-Type: application/json" -d '{"name":"FUKUOKAバスケサークル","sport_id":4,"grade_id":4,"icon_path":"dddd","description":"ABCDEFGH","address_state":"福岡県","address_city":"福岡市"}' 127.0.0.1:3000/team/3
   patch "/team/:id", to: "team#update"
   # curl -X DELETE 127.0.0.1:3000/team/3
   delete "/team/:id", to: "team#destroy"

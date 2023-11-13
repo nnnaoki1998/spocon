@@ -9,8 +9,10 @@ class TeamController < ApplicationController
 
   def create
     begin
-      @team_service = TeamService.new
-      if @team_service.save(team_params)
+      team_hash = team_params
+      team_hash["uuid"] = SecureRandom.uuid
+      @team = Team.new(team_hash)
+      if @team.save
         render :json => { "status" => "ok" }
       end
     rescue => e
@@ -20,8 +22,8 @@ class TeamController < ApplicationController
 
   def update
     begin
-      @team_service = TeamService.new
-      if @team_service.update(params[:id], team_params)
+      @team = Team.find(params[:id])
+      if @team.update(team_params)
         render :json => { "status" => "ok" }
       end
     rescue => e
@@ -43,6 +45,6 @@ class TeamController < ApplicationController
   private
 
   def team_params
-    params.permit(:name, :sport_id, :icon_path, :description, :zip_code, :address)
+    params.permit(:name, :sport_id, :grade_id, :icon_path, :description, :address_state, :address_city)
   end
 end
