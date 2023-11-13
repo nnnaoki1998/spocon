@@ -48,6 +48,22 @@ $ docker-compose run --rm rails-test rspec spec/requests
 
 ## コード整形
 
+### ruby
+rufoというgemをインストール
+```
+$ gem install rufo
+```
+
+全てのrubyファイルを整形
+```
+$ rufo .
+```
+
+特定のファイルのみ整形
+```
+$ $ rufo {ファイル名 or ディレクトリ名}
+```
+
 ### フロントエンド
 ```
 $ npm --prefix ui run fmt
