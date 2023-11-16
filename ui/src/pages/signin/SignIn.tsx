@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSignIn } from '../../hooks/signIn/useSignIn';
-import './signIn.css';
+import '../../base.css';
 
 export const SignIn: React.FC = () => {
   const {
@@ -17,7 +17,7 @@ export const SignIn: React.FC = () => {
     <div>
       <h1>ログイン画面</h1>
       <div className="errorMessage">{errorMessage}</div>
-      <form noValidate onSubmit={executeSignIn}>
+      <form onSubmit={executeSignIn}>
         <div>
           <label htmlFor="email">
             メールアドレス:
