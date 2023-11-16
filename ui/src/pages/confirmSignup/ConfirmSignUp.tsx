@@ -1,6 +1,6 @@
 import React from 'react';
 import { useConfirmSignUp } from '../../hooks/confirmSignUp/useConfirmSignUp';
-import './confirmSignUp.css';
+import '../../base.css';
 
 /** 確認コード入力画面コンポーネント */
 export const ConfirmSignUp: React.FC = () => {
