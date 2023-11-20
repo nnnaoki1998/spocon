@@ -9,9 +9,7 @@ class TeamController < ApplicationController
 
   def create
     begin
-      team_hash = team_params
-      team_hash["uuid"] = SecureRandom.uuid
-      @team = Team.new(team_hash)
+      @team = Team.new(team_params)
       if @team.save
         render :json => { "status" => "ok" }
       end
