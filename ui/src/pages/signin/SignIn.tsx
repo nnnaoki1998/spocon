@@ -1,29 +1,23 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../../hooks/useAuth';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { useSignIn } from '../../hooks/signIn/useSignIn';
+import '../../base.css';
 
 export const SignIn: React.FC = () => {
-  const auth = useAuth();
-  const navigate = useNavigate();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-  const executeSignIn = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const result = await auth.signIn(email, password);
-    if (result.success) {
-      navigate({ pathname: '/top' });
-    } else {
-      // TODO メッセージの出力方法改善
-      alert(result.message);
-    }
-  };
+  const {
+    email,
+    setEmail,
+    password,
+    setPassword,
+    errorMessage,
+    executeSignIn,
+  } = useSignIn();
 
   return (
     <div>
       <h1>ログイン画面</h1>
-      {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
-      <form noValidate onSubmit={executeSignIn}>
+      <div className="errorMessage">{errorMessage}</div>
+      <form onSubmit={executeSignIn}>
         <div>
           <label htmlFor="email">
             メールアドレス:
