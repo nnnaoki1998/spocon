@@ -5,6 +5,7 @@ import { SignIn } from './pages/signIn/SignIn';
 import { SignUp } from './pages/signUp/SignUp'
 import { ConfirmSignUp } from './pages/confirmSignup/ConfirmSignUp'
 import { Top } from './pages/top/Top';
+import { Register } from './pages/register/Register';
 
 export const Router: React.FC = () => (
   <BrowserRouter>
@@ -14,6 +15,7 @@ export const Router: React.FC = () => (
       <Route path="confirmSignUp" element={<ConfirmSignUp />} />
       <Route path="top" element={<Top />} />
       <Route path="chat" element={<Chat/>} />
+      <Route path="register" element={<Register/>}/>
       <Route path="*" element={<p>Page Not Found</p>} />
     </Routes>
   </BrowserRouter>

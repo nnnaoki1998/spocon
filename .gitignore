@@ -53,3 +53,6 @@
 .secret-*
 **.sample
 #amplify-do-not-edit-end
+
+#amplify access-key
+amplify*_accessKeys.csv
