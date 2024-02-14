@@ -3,7 +3,7 @@ class TeamInfoController < ApplicationController
   TEAM_INFOS_LIMIT = 20
 
   def index
-    prefecture = params[:prefecture]
+    address_state = params[:address_state]
     sport_id = to_int(params[:sport_id])
     grade_id = to_int(params[:grade_id])
     page = to_int(params[:page])
@@ -16,18 +16,20 @@ class TeamInfoController < ApplicationController
         team.id,
         team.uuid,
         team.name as team_name,
-        team.reception_status,
         team.icon_path,
         team.description,
-        team.address,
+        team.address_state,
+        team.address_city,
         sport.name as sport_name,
         grade.name as grade_name
       ")
-      extracted_by_prefecture = extract_by_prefecture(team_infos, prefecture)
-      extracted_by_sport_id = extract_by_sport_id(extracted_by_prefecture, sport_id)
+      extracted_by_address_state = extract_by_address_state(team_infos, address_state)
+      extracted_by_sport_id = extract_by_sport_id(extracted_by_address_state, sport_id)
       extracted_by_grade_id = extract_by_grade_id(extracted_by_sport_id, grade_id)
       paged = extracted_by_grade_id.limit(TEAM_INFOS_LIMIT).offset(offset)
-      render :json => paged
+      team_infos_count = extracted_by_grade_id.length
+      page_count = team_infos_count.quo(TEAM_INFOS_LIMIT).ceil
+      render :json => { "team-infos" => paged, "page_count" => page_count }
     rescue => e
       render :json => { "error class" => e.class, "error message" => e.message }, status: 500
     end
@@ -35,9 +37,9 @@ class TeamInfoController < ApplicationController
 
   private
 
-  def extract_by_prefecture(team_infos, prefecture)
-    if !prefecture.blank?
-      team_infos.where("team.address LIKE ?", "%#{prefecture}%")
+  def extract_by_address_state(team_infos, address_state)
+    if !address_state.blank?
+      team_infos.where(team: { address_state: address_state })
     else
       team_infos
     end
