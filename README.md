@@ -9,7 +9,7 @@ $ docker-compose build
 
 ### フロントエンドで利用するライブラリのインストール
 ```
-$ npm --prefix ui ci
+$ npm --prefix frontend ci
 ```
 
 ## 起動
@@ -66,5 +66,5 @@ $ $ rufo {ファイル名 or ディレクトリ名}
 
 ### フロントエンド
 ```
-$ npm --prefix ui run fmt
+$ npm --prefix frontend run fmt
 ```
