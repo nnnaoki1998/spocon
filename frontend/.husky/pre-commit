@@ -1,0 +1,7 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+# frontend配下のファイルを修正したときのみフロントエンドのコード整形が動作する
+if [ `git status | grep modified | grep -c " frontend/"` -gt 0 ]; then
+  npm --prefix frontend run fmt
+fi
