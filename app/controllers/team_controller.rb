@@ -1,7 +1,22 @@
 class TeamController < ApplicationController
-  def index
+  def show
     begin
-      render :json => Team.all
+      team_info = Team.joins(:sport, :grade).select("
+        team.id,
+        team.uuid,
+        team.name as team_name,
+        team.icon_path,
+        team.description,
+        team.address_state,
+        team.address_city,
+        sport.name as sport_name,
+        grade.name as grade_name
+      ").where(team: { id: params[:id] }).first
+
+      # レスポンスするデータが存在存在しない場合､204 No Contentを返す
+      if !team_info.blank?
+        render :json => team_info
+      end
     rescue => e
       render :json => { "error class" => e.class, "error message" => e.message }, status: 500
     end
@@ -22,17 +37,6 @@ class TeamController < ApplicationController
     begin
       @team = Team.find(params[:id])
       if @team.update(team_params)
-        render :json => { "status" => "ok" }
-      end
-    rescue => e
-      render :json => { "error class" => e.class, "error message" => e.message }, status: 500
-    end
-  end
-
-  def destroy
-    begin
-      @team = Team.find(params[:id])
-      if @team.destroy
         render :json => { "status" => "ok" }
       end
     rescue => e

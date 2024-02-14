@@ -16,7 +16,6 @@ class TeamInfoController < ApplicationController
         team.id,
         team.uuid,
         team.name as team_name,
-        team.reception_status,
         team.icon_path,
         team.description,
         team.address_state,
@@ -28,7 +27,9 @@ class TeamInfoController < ApplicationController
       extracted_by_sport_id = extract_by_sport_id(extracted_by_address_state, sport_id)
       extracted_by_grade_id = extract_by_grade_id(extracted_by_sport_id, grade_id)
       paged = extracted_by_grade_id.limit(TEAM_INFOS_LIMIT).offset(offset)
-      render :json => paged
+      team_infos_count = extracted_by_grade_id.length
+      page_count = team_infos_count.quo(TEAM_INFOS_LIMIT).ceil
+      render :json => { "team-infos" => paged, "page_count" => page_count }
     rescue => e
       render :json => { "error class" => e.class, "error message" => e.message }, status: 500
     end
