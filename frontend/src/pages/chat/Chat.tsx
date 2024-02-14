@@ -8,7 +8,7 @@ import {
   getChatRooms,
   pushChatMessage,
 } from '../../feature/api/chat';
-import './chat.css';
+import './Chat.css';
 
 /**
  * チャットメッセージの配列を書き込み日時で昇順にソートする

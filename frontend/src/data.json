@@ -1,0 +1,29 @@
+{
+  "data": {
+      "header": {
+          "title":"Reactとメタ言語の比較",
+          "text": "以前作ったメタ言語スターターキットの内容をReact環境で再現してみる",
+          "new-register": "新規登録",
+          "log-in": "ログイン"
+      },
+      "main": {
+          "title":"タイトルです",
+          "text": "テキストです。テキストです。テキストですったらテキストです。",
+          "invite-to-match": "試合に誘う",
+          "send-message": "送信"
+      },
+      "inner": [
+          {
+          "title": "CSS（文字色）",
+          "text": "CSSでタイトルの文字色変更。"
+          },
+          {
+          "title":"JS（文字列）",
+          "text": "JSでテキストの文字列追加「<span class='inner__text--hello'></span>」"
+          }
+      ],
+      "footer": {
+          "text":"©️ react-from-meta-lang"
+      }
+  }
+}
