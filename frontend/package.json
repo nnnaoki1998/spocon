@@ -15,7 +15,7 @@
     "lint": "eslint --ext .jsx,.js,.tsx,.ts src/",
     "prettier": "prettier --write src/**/*",
     "fmt": "run-s prettier lint",
-    "prepare": "cd .. && husky install ui/.husky"
+    "prepare": "cd .. && husky install frontend/.husky"
   },
   "keywords": [],
   "author": "",
