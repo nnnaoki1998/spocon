@@ -1,11 +1,11 @@
 version: '3'
 services:
   rails:
-    build: .
+    build: ./backend
     ports:
       - "3000:3000"
     volumes:
-      - ".:/root/rails-docker"
+      - "./backend:/root/rails-docker"
     working_dir: /root/rails-docker
     environment:
       - DATABASE_HOST=spocon-mysql
@@ -15,11 +15,11 @@ services:
     entrypoint: bash -c "rm -f tmp/pids/server.pid && rails server -b 0.0.0.0" #tmp/pids/server.pidが残っているとrailsを起動できないため､削除して起動する
 
   rails-test:
-    build: .
+    build: ./backend
     ports:
       - "3001:3001"
     volumes:
-      - ".:/root/rails-docker"
+      - "./backend:/root/rails-docker"
     working_dir: /root/rails-docker
     environment:
       - DATABASE_HOST=spocon-test-mysql
@@ -28,11 +28,11 @@ services:
       - DATABASE_PASSWORD=mysql
 
   react:
-    build: ./ui
+    build: ./frontend
     ports:
       - "8080:8080"
     volumes:
-      - "./ui:/root/react-docker"
+      - "./frontend:/root/react-docker"
     working_dir: /root/react-docker
     entrypoint: bash -c "npm run fmt && npm start"
 
@@ -40,8 +40,8 @@ services:
     image: mysql:8
     container_name: spocon-mysql
     volumes:
-      - ./docker/mysql/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
-      - ./docker/mysql/conf.d:/etc/mysql/conf.d
+      - ./mysql/docker/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+      - ./mysql/docker/conf.d:/etc/mysql/conf.d
     ports:
       - "3306:3306"
     environment:
@@ -51,8 +51,8 @@ services:
     image: mysql:8
     container_name: spocon-test-mysql
     volumes:
-      - ./docker/mysql/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
-      - ./docker/mysql/conf.d:/etc/mysql/conf.d
+      - ./mysql/docker/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+      - ./mysql/docker/conf.d:/etc/mysql/conf.d
     ports:
       - "3307:3306"
     expose:
