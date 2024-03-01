@@ -1,11 +1,13 @@
 export type TypeTeam = {
-  id: string;
-  name: string;
-  area: string;
-  sport: string;
-  status: string;
-  image_url: string;
-  lastLoginDate: Date;
+  id: number;
+  uuid: string;
+  team_name: string;
+  reception_status: string;
+  icon_path: string;
+  description: string;
+  address: string;
+  sport_name: string;
+  grade_name: string;
 };
 
 export type TypeChatRoom = {

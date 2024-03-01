@@ -38,7 +38,7 @@ const ImgMediaCard: React.FC<Props> = (props: Props) => {
         <Button
           color="info"
           onClick={() => {
-            console.log(teamInfo);
+            console.log(teamInfo); // eslint-disable-line no-console
           }}
         >
           Invite
