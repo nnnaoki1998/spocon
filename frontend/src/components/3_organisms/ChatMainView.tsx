@@ -1,5 +1,8 @@
 import React from 'react';
 import Box from '@mui/material/Box';
+import CardHeader from '@mui/material/CardHeader';
+import Avatar from '@mui/material/Avatar';
+import { blue, red } from '@mui/material/colors';
 
 import { ChatMessage } from '../../API';
 import { PastMessagesField } from '../1_atoms/PastMessagesField';
@@ -27,6 +30,16 @@ const ChatMainView: React.FC<Props> = (props: Props) => {
 
   return (
     <Box sx={{ height: '100vh' }}>
+      <CardHeader
+        sx={{ px: 0, bgcolor: blue[50] }}
+        avatar={
+          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+            SO
+          </Avatar>
+        }
+        title="大谷翔平"
+        subheader="野球"
+      />
       <PastMessagesField myTeamId={myTeamId} pastMessages={pastMessages} />
       <SendMessageField
         newMessage={newMessage}
