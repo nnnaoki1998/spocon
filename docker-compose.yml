@@ -34,7 +34,12 @@ services:
     volumes:
       - "./frontend:/root/react-docker"
     working_dir: /root/react-docker
-    entrypoint: bash -c "npm run fmt && npm start"
+    # entrypoint: sh -c "npm run fmt && npm start"
+    command: >
+      /bin/sh -c '
+      npm run fmt &&
+      npm start
+      '
 
   mysql:
     image: mysql:8
