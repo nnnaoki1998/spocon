@@ -1,7 +1,22 @@
 class TeamController < ApplicationController
-  def index
+  def show
     begin
-      render :json => Team.all
+      team_info = Team.joins(:sport, :grade).select("
+        team.id,
+        team.uuid,
+        team.name as team_name,
+        team.icon_path,
+        team.description,
+        team.address_state,
+        team.address_city,
+        sport.name as sport_name,
+        grade.name as grade_name
+      ").where(team: { id: params[:id] }).first
+
+      # レスポンスするデータが存在存在しない場合､204 No Contentを返す
+      if !team_info.blank?
+        render :json => team_info
+      end
     rescue => e
       render :json => { "error class" => e.class, "error message" => e.message }, status: 500
     end
@@ -9,8 +24,8 @@ class TeamController < ApplicationController
 
   def create
     begin
-      @team_service = TeamService.new
-      if @team_service.save(team_params)
+      @team = Team.new(team_params)
+      if @team.save
         render :json => { "status" => "ok" }
       end
     rescue => e
@@ -20,19 +35,8 @@ class TeamController < ApplicationController
 
   def update
     begin
-      @team_service = TeamService.new
-      if @team_service.update(params[:id], team_params)
-        render :json => { "status" => "ok" }
-      end
-    rescue => e
-      render :json => { "error class" => e.class, "error message" => e.message }, status: 500
-    end
-  end
-
-  def destroy
-    begin
       @team = Team.find(params[:id])
-      if @team.destroy
+      if @team.update(team_params)
         render :json => { "status" => "ok" }
       end
     rescue => e
@@ -43,6 +47,6 @@ class TeamController < ApplicationController
   private
 
   def team_params
-    params.permit(:name, :sport_id, :icon_path, :description, :zip_code, :address)
+    params.permit(:name, :sport_id, :grade_id, :icon_path, :description, :address_state, :address_city)
   end
 end
