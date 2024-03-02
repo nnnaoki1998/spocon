@@ -16,12 +16,7 @@
   "emailVerificationMessage": "Your verification code is {####}",
   "defaultPasswordPolicy": true,
   "passwordPolicyMinLength": 8,
-  "passwordPolicyCharacters": [
-    "Requires Lowercase",
-    "Requires Uppercase",
-    "Requires Numbers",
-    "Requires Symbols"
-  ],
+  "passwordPolicyCharacters": [],
   "requiredAttributes": [
     "email"
   ],
@@ -39,7 +34,7 @@
   "sharedId": "7d3e027d",
   "resourceName": "spocon7d3e027d",
   "authSelections": "identityPoolAndUserPool",
-  "useDefault": "manual",
+  "useDefault": "default",
   "usernameAttributes": [
     "email"
   ],
@@ -61,14 +56,13 @@
   },
   "breakCircularDependency": true,
   "dependsOn": [],
-  "thirdPartyAuth": false,
   "userPoolGroups": false,
   "adminQueries": false,
   "triggers": "{}",
   "hostedUI": false,
-  "authProviders": [],
   "parentStack": {
     "Ref": "AWS::StackId"
   },
-  "permissions": []
+  "permissions": [],
+  "authProviders": []
 }
