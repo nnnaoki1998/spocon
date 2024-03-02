@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { SignIn } from './pages/signin/SignIn';
 import { SignUp } from './pages/signup/SignUp'
 import { ConfirmSignUp } from './pages/confirmSignup/ConfirmSignUp'
-import { Top } from './components/5_pages/Top3';
+import { Top } from './components/5_pages/Top';
 import { Profile } from './components/5_pages/Profile';
 import { Chat } from './components/5_pages/Chat';
 import { Test } from './components/5_pages/Test';
