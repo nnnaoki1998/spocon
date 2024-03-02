@@ -16,11 +16,15 @@ import {
 } from '@mui/material';
 import InboxIcon from '@mui/icons-material/Inbox'; // Import the 'InboxIcon' component
 import MailIcon from '@mui/icons-material/Mail'; // Import the 'MailIcon' component
+import { useNavigate } from 'react-router-dom';
 
 type Anchor = 'left';
 
+const basePathToTop = '/top3';
+
 const SpoconAppBar: React.FC = () => {
   const [state, setState] = React.useState({ left: false });
+  const navigateToTop = useNavigate();
 
   const toggleDrawer =
     (anchor: Anchor, open: boolean) =>
@@ -93,7 +97,15 @@ const SpoconAppBar: React.FC = () => {
               </Drawer>
             </React.Fragment>
           ))}
-          <Typography variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
+          <Typography
+            variant="h6"
+            color="inherit"
+            noWrap
+            sx={{ flexGrow: 1 }}
+            onClick={() => {
+              navigateToTop({ pathname: `${basePathToTop}` });
+            }}
+          >
             SpoCon
           </Typography>
           <Button
