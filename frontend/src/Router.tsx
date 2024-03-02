@@ -5,6 +5,7 @@ import { SignUp } from './pages/signup/SignUp'
 import { ConfirmSignUp } from './pages/confirmSignup/ConfirmSignUp'
 import { Top } from './components/5_pages/Top';
 import { Profile } from './components/5_pages/Profile';
+import { ProfileEdit } from './components/5_pages/ProfileEdit';
 import { Chat } from './components/5_pages/Chat';
 import { Test } from './components/5_pages/Test';
 
@@ -20,6 +21,7 @@ export const Router: React.FC = () => (
       <Route path="/top" element={<Top />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="/profile/:teamId" element={<Profile />} />
+      <Route path="/profile-edit" element={<ProfileEdit />} />
       <Route path="/chat" element={<Chat />} />
       <Route path="/test/:id" element={<Test />} />
       <Route path="/top-backup" element={<TopBackup />} />
