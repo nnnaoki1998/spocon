@@ -16,7 +16,7 @@ const Profile: React.FC = () => {
   const { teamId } = useParams<{ teamId: string }>();
   const [team, setTeam] = React.useState<TypeTeam>();
 
-  console.log(teamId);
+  console.log(teamId); // eslint-disable-line no-console
 
   const fetchTeamInfo = () => {
     let id;

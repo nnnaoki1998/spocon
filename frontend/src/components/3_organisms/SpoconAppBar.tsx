@@ -99,14 +99,14 @@ const SpoconAppBar: React.FC = () => {
           <Button
             color="primary"
             sx={{ color: 'white' }}
-            onClick={() => console.log('Button is clicked.')}
+            onClick={() => console.log('Button is clicked.')} // eslint-disable-line no-console
           >
             Register
           </Button>
           <Button
             color="primary"
             sx={{ color: 'white' }}
-            onClick={() => console.log('Button is clicked.')}
+            onClick={() => console.log('Button is clicked.')} // eslint-disable-line no-console
           >
             Login
           </Button>

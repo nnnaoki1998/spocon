@@ -16,10 +16,10 @@ export const Top: React.FC = () => {
     axios
       .get(`${backendUrl}/team`)
       .then((res) => {
-        console.log(res.data);
+        console.log(res.data); // eslint-disable-line no-console
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err); // eslint-disable-line no-console
       });
   }, []);
 

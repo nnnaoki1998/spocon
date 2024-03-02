@@ -40,11 +40,11 @@ const Chat2: React.FC = () => {
   const fetchChatRooms = () => {
     getChatRooms(myTeamId)
       .then((rooms) => {
-        console.log(rooms.data.relayChatRoomTeamsByTeamId?.items);
-        setChatRooms(rooms.data.relayChatRoomTeamsByTeamId?.items);
+        console.log(rooms.data.relayChatRoomTeamsByTeamId?.items); // eslint-disable-line no-console
+        setChatRooms(rooms.data.relayChatRoomTeamsByTeamId?.items); // eslint-disable-line no-console
       })
       .catch((e) => {
-        console.log(e);
+        console.log(e); // eslint-disable-line no-console
       });
   };
 
@@ -59,7 +59,7 @@ const Chat2: React.FC = () => {
   };
 
   const sendNewMessage = () => {
-    console.log('Invoked sendNewMessage().');
+    console.log('Invoked sendNewMessage().'); // eslint-disable-line no-console
     if (!chatRoomId) return;
     pushChatMessage(chatRoomId, myTeamId, newMessage)
       .then(() => {
@@ -93,7 +93,7 @@ const Chat2: React.FC = () => {
 
   useEffect(() => {
     fetchPastMessages().catch((e) => {
-      console.log(e);
+      console.log(e); // eslint-disable-line no-console
     });
   }, [chatRoomId]);
 

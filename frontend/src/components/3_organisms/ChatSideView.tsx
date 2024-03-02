@@ -18,7 +18,7 @@ const onClickChatRoom = (
   func: React.Dispatch<React.SetStateAction<string | undefined>>
 ) => {
   const id = chatRoomId || 'chatRoomId01';
-  console.log(`Invoked onClickChatRoom(${id}).`);
+  console.log(`Invoked onClickChatRoom(${id}).`); // eslint-disable-line no-console
   func(id);
 };
 
@@ -28,9 +28,10 @@ const ChatSideView: React.FC<Props> = (props: Props) => {
   return (
     <List
       sx={{
-        height: '100vh',
         width: '100%',
         maxWidth: 360,
+        maxHeight: 'calc(100vh - 64px)',
+        overflowY: 'scroll',
         bgcolor: 'background.paper',
       }}
     >
@@ -54,7 +55,7 @@ const ChatSideView: React.FC<Props> = (props: Props) => {
                 >
                   {room?.chatRoomId}
                 </Typography>
-                {' — Some messages from chat room comes here.'}
+                {' — Headline comes here.'}
               </>
             }
           />

@@ -8,7 +8,7 @@ export interface Props {
 }
 
 const openRelayChatRoom = (partnerTeamId: string) => {
-  console.log(`You invite team(id: ${partnerTeamId}) to a match.`);
+  console.log(`You invite team(id: ${partnerTeamId}) to a match.`); // eslint-disable-line no-console
 };
 
 export const MyButton: React.FC<Props> = (props: Props) => {

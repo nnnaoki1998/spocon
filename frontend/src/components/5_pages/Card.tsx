@@ -10,20 +10,26 @@ import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import { TeamInfo } from '../utils/TypeDefinitions';
 
+const basePathToProfile = '/profile';
+const basePathToChat = '/chat2';
+
 export interface Props {
   teamInfo: TeamInfo;
+  createChatRoom: (team_uuid: string) => void;
 }
 
 const ImgMediaCard: React.FC<Props> = (props: Props) => {
-  const { teamInfo } = props;
-  const navigate = useNavigate();
-  const basePath = '/profile';
+  const { teamInfo, createChatRoom } = props;
+  const navigateToProfile = useNavigate();
+  const navigateToChat = useNavigate();
 
   return (
     <Card>
       <CardActionArea
         onClick={() => {
-          navigate({ pathname: `${basePath}/${teamInfo.id}` });
+          navigateToProfile({
+            pathname: `${basePathToProfile}/${teamInfo.id}`,
+          });
         }}
       >
         <CardMedia
@@ -48,7 +54,9 @@ const ImgMediaCard: React.FC<Props> = (props: Props) => {
         <Button
           color="info"
           onClick={() => {
-            console.log(teamInfo);
+            console.log(teamInfo.uuid); // eslint-disable-line no-console
+            createChatRoom(teamInfo.uuid);
+            navigateToChat({ pathname: `${basePathToChat}` });
           }}
         >
           Invite

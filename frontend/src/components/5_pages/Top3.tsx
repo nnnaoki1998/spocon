@@ -13,10 +13,12 @@ import { prefectures, sports, grades } from '../utils/DummyData';
 import { ImgMediaCard } from './Card';
 import { Selector } from './Selector';
 import { SpoconAppBar } from '../3_organisms/SpoconAppBar';
+import { createRelayChatRoom } from '../../feature/api/chat';
 
 const defaultTheme = createTheme();
 
 const Top3: React.FC = () => {
+  const myTeamId = 'teamId01';
   const [page, setPage] = React.useState(1);
   const [teamInfos, setTeamInfos] = React.useState<TeamInfo[]>([]);
 
@@ -28,9 +30,19 @@ const Top3: React.FC = () => {
         setTeamInfos(response.data);
       })
       .catch(() => {
-        console.log('Failed to call /team-info');
+        console.log('Failed to call /team-info'); // eslint-disable-line no-console
       });
   }, [page]);
+
+  const createChatRoom = (teamUuid: string) => {
+    createRelayChatRoom(`testChatRoomId${teamUuid}`, myTeamId)
+      .then(() => {
+        console.log('Chat room created.'); // eslint-disable-line no-console
+      })
+      .catch((e) => {
+        console.log(e); // eslint-disable-line no-console
+      });
+  };
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -72,7 +84,10 @@ const Top3: React.FC = () => {
           <Grid container spacing={4}>
             {teamInfos.map((teamInfo) => (
               <Grid item key={teamInfo.id} xs={12} sm={6} md={6}>
-                <ImgMediaCard teamInfo={teamInfo} />
+                <ImgMediaCard
+                  teamInfo={teamInfo}
+                  createChatRoom={createChatRoom}
+                />
               </Grid>
             ))}
           </Grid>
