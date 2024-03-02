@@ -9,7 +9,13 @@ $ docker-compose build
 
 ### フロントエンドで利用するライブラリのインストール
 ```
-$ npm --prefix frontend ci
+$ npm --prefix frontend ci --legacy-peer-deps
+```
+
+### AWS amplify のソース取得 
+```
+$ amplify pull // 一回目
+$ amplify pull // 二回目: 一回目が成功して「Run 'amplify pull' to sync future upstream changes.」と表示されたら二回目を実行する
 ```
 
 ## 起動
