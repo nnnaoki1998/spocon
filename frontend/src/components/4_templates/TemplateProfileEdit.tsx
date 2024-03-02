@@ -3,6 +3,8 @@ import Card from '@mui/material/Card';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
 
 import { TypeTeam } from '../utils/TypeDefinitions';
 
@@ -67,12 +69,18 @@ const TemplateProfileEdit: React.FC<Props> = (props: Props) => {
         value={team?.description}
       />
       <p>チーム画像 *必須</p>
-      <TextField
-        fullWidth
-        id="fullWidth"
-        rows={4}
-        maxRows={4}
-      />
+      <TextField fullWidth id="fullWidth" rows={4} maxRows={4} />
+      <p />
+      <Box textAlign="center">
+        <Button
+          id="fullWidth"
+          onClick={() => {
+            console.log('Button pushed!'); // eslint-disable-line no-console
+          }}
+        >
+          登録
+        </Button>
+      </Box>
     </Card>
   );
 };
