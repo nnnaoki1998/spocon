@@ -25,7 +25,7 @@ const sortByWriteDateTime = (chatMessageList: Array<ChatMessage | null>) => {
 };
 
 /** チャット画面のコンポーネント */
-export const Chat: React.FC = () => {
+export const ChatBackup: React.FC = () => {
   const [chatMessages, setChatMessages] = React.useState<
     Array<ChatMessage | null>
   >([]);

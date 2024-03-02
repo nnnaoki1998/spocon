@@ -17,7 +17,7 @@ import { createRelayChatRoom } from '../../feature/api/chat';
 
 const defaultTheme = createTheme();
 
-const Top3: React.FC = () => {
+const Top: React.FC = () => {
   const myTeamId = 'teamId01';
   const [page, setPage] = React.useState(1);
   const [teamInfos, setTeamInfos] = React.useState<TeamInfo[]>([]);
@@ -113,4 +113,4 @@ const Top3: React.FC = () => {
   );
 };
 
-export { Top3 };
+export { Top };

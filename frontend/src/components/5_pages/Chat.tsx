@@ -27,7 +27,7 @@ const defaultTheme = createTheme({
   },
 });
 
-const Chat2: React.FC = () => {
+const Chat: React.FC = () => {
   const myTeamId = 'teamId01';
   const [chatRooms, setChatRooms] = React.useState<TypeTest>([]);
   const [chatRoomId, setChatRoomId] = React.useState<string | undefined>('');
@@ -128,4 +128,4 @@ const Chat2: React.FC = () => {
   );
 };
 
-export { Chat2 };
+export { Chat };

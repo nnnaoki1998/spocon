@@ -5,7 +5,7 @@ import { PrivateRoute } from '../../components/PrivateRoute';
 import { backendUrl } from '../../config';
 import { useAuth } from '../../hooks/auth/useAuth';
 
-export const Top: React.FC = () => {
+export const TopBackup: React.FC = () => {
   const auth = useAuth();
 
   if (auth.isLoading) {
