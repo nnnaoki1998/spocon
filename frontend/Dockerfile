@@ -15,7 +15,7 @@ FROM node:20-alpine
 WORKDIR /root/react-docker
 
 COPY package.json package-lock.json ./
-RUN npm install --legacy-peer-deps
+RUN npm ci
 
 COPY . .
 
