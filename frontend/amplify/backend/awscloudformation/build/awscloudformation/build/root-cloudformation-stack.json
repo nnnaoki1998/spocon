@@ -222,16 +222,16 @@
           },
           "breakCircularDependency": true,
           "dependsOn": "",
-          "thirdPartyAuth": false,
           "userPoolGroups": false,
           "adminQueries": false,
           "triggers": "{}",
           "hostedUI": false,
-          "authProviders": "",
           "parentStack": {
             "Ref": "AWS::StackId"
           },
           "permissions": "",
+          "authProviders": "",
+          "thirdPartyAuth": false,
           "env": "dev"
         }
       }

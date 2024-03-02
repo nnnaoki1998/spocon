@@ -130,6 +130,9 @@
     },
     "authProviders": {
       "Type": "CommaDelimitedList"
+    },
+    "thirdPartyAuth": {
+      "Type": "String"
     }
   },
   "Conditions": {
@@ -171,10 +174,10 @@
             "MinimumLength": {
               "Ref": "passwordPolicyMinLength"
             },
-            "RequireLowercase": false,
-            "RequireNumbers": false,
-            "RequireSymbols": false,
-            "RequireUppercase": false
+            "RequireLowercase": true,
+            "RequireNumbers": true,
+            "RequireSymbols": true,
+            "RequireUppercase": true
           }
         },
         "Schema": [
