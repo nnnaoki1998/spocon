@@ -41,7 +41,6 @@ const ImageSample: React.FC = () => {
       });
   };
 
-  console.log('ImageSample'); // eslint-disable-line no-console
   return (
     <PrivateRoute>
       <div>ImageSample</div>
