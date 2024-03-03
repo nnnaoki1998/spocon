@@ -9,9 +9,7 @@ const ImageSample: React.FC = () => {
 
   const getImages = () => {
     // TODO: testxはDBから取得したパスを指定する
-    Storage.get('testx', {
-      level: 'private',
-    })
+    Storage.get('testx')
       .then((result) => {
         setCurrentImage(result);
       })
@@ -31,7 +29,6 @@ const ImageSample: React.FC = () => {
     if (file === undefined) return;
     // TODO: ファイル名はuuid等の一意なものを使用する
     Storage.put('testx', file, {
-      level: 'private',
       contentType: 'image/png',
     })
       .then((result) => {
