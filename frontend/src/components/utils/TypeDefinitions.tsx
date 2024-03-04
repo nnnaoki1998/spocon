@@ -56,3 +56,14 @@ export type TeamInfos =
       uuid: string;
     } | null)[]
   | undefined;
+
+export interface Prefecture {
+  prefCode: number;
+  prefName: string;
+}
+
+export interface City {
+  cityCode: number;
+  cityName: string;
+  bigCityFlag: number;
+}
