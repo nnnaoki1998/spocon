@@ -7,7 +7,7 @@ import awsExports from './aws-exports';
 
 Amplify.configure({ ...awsExports });
 
-// S3へのアクセスを「読み取りは全ユーザ許容、書き込みは認証ユーザのみ許容」の設定にする
+// S3へのアクセスを「読み取りは全ユーザ許容、書き込みはS3のオブジェクト作成者のみ許容」の設定にする
 Storage.configure({
   level: 'protected',
 });
