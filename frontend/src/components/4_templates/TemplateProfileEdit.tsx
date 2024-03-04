@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import Card from '@mui/material/Card';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
@@ -9,6 +9,9 @@ import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import CardMedia from '@mui/material/CardMedia';
+import { styled } from '@mui/material/styles';
 import axios from 'axios';
 
 import { TypeTeam, Prefecture, City } from '../utils/TypeDefinitions';
@@ -27,6 +30,46 @@ const RESAS_API_URL = (process.env as NodeEnv)
 const RESAS_API_KEY = (process.env as NodeEnv)
   .REACT_APP_RESAS_API_KEY as string;
 
+const VisuallyHiddenInput = styled('input')({
+  clip: 'rect(0 0 0 0)',
+  clipPath: 'inset(50%)',
+  height: 1,
+  overflow: 'hidden',
+  position: 'absolute',
+  bottom: 0,
+  left: 0,
+  whiteSpace: 'nowrap',
+  width: 1,
+});
+
+type Args = {
+  file: File | null;
+};
+
+export const useGetImageUrl = ({ file }: Args) => {
+  const [imageUrl, setImageUrl] = React.useState('');
+
+  useEffect(() => {
+    if (!file) {
+      return;
+    }
+
+    const reader: FileReader | null = new FileReader();
+    reader.onloadend = () => {
+      // base64のimageUrlを生成する。
+      const base64 = reader && reader.result;
+      if (base64 && typeof base64 === 'string') {
+        setImageUrl(base64);
+      }
+    };
+    reader.readAsDataURL(file);
+  }, [file]);
+
+  return {
+    imageUrl,
+  };
+};
+
 const TemplateProfileEdit: React.FC<Props> = (props: Props) => {
   const { team } = props;
   const [prefectures, setPrefectures] = React.useState<
@@ -35,6 +78,8 @@ const TemplateProfileEdit: React.FC<Props> = (props: Props) => {
   const [prefecture, setPrefecture] = React.useState('');
   const [cities, setCities] = React.useState<City[] | undefined>();
   const [city, setCity] = React.useState('');
+  const [imgageFile, setImageFile] = React.useState<File | null>(null);
+  const uploadImageRef = useRef(null);
 
   const handlePrefectureChange = (event: SelectChangeEvent) => {
     console.log(event.target); // eslint-disable-line no-console
@@ -45,6 +90,17 @@ const TemplateProfileEdit: React.FC<Props> = (props: Props) => {
     console.log(event.target); // eslint-disable-line no-console
     setCity(event.target.value);
   };
+
+  const handleUploadImageChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    if (event.currentTarget?.files && event.currentTarget.files[0]) {
+      const targetFile = event.currentTarget.files[0];
+      setImageFile(targetFile);
+    }
+  };
+
+  const { imageUrl } = useGetImageUrl({ file: imgageFile });
 
   useEffect(() => {
     axios
@@ -154,7 +210,21 @@ const TemplateProfileEdit: React.FC<Props> = (props: Props) => {
         value={team?.description}
       />
       <p>チーム画像 *必須</p>
-      <TextField fullWidth id="fullWidth" rows={4} maxRows={4} />
+      <Button
+        component="label"
+        role={undefined}
+        variant="contained"
+        tabIndex={-1}
+        startIcon={<CloudUploadIcon />}
+      >
+        UPLOAD IMAGE
+        <VisuallyHiddenInput
+          ref={uploadImageRef}
+          type="file"
+          onChange={handleUploadImageChange}
+        />
+      </Button>
+      <CardMedia component="img" alt="" image={imageUrl} />
       <p />
       <Box textAlign="center">
         <Button
