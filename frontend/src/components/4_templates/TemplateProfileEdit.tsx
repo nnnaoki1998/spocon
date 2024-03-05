@@ -72,12 +72,21 @@ export const useGetImageUrl = ({ file }: Args) => {
 
 const TemplateProfileEdit: React.FC<Props> = (props: Props) => {
   const { team } = props;
+  const [teamName, setTeamName] = React.useState<string>(
+    team ? team.team_name : ''
+  );
+  const [sportName, setSportName] = React.useState<string>(
+    team ? team.sport_name : ''
+  );
   const [prefectures, setPrefectures] = React.useState<
     Prefecture[] | undefined
   >();
   const [prefecture, setPrefecture] = React.useState('');
   const [cities, setCities] = React.useState<City[] | undefined>();
-  const [city, setCity] = React.useState('');
+  const [city, setCity] = React.useState<string>('');
+  const [description, setDescription] = React.useState<string>(
+    team ? team.description : ''
+  );
   const [imgageFile, setImageFile] = React.useState<File | null>(null);
   const uploadImageRef = useRef(null);
 
@@ -145,7 +154,8 @@ const TemplateProfileEdit: React.FC<Props> = (props: Props) => {
         id="fullWidth"
         rows={1}
         maxRows={1}
-        value={team?.team_name}
+        value={teamName}
+        onChange={(e) => setTeamName(e.target.value)}
       />
       <p>スポーツ *必須</p>
       <TextField
@@ -153,7 +163,8 @@ const TemplateProfileEdit: React.FC<Props> = (props: Props) => {
         id="fullWidth"
         rows={1}
         maxRows={1}
-        value={team?.sport_name}
+        value={sportName}
+        onChange={(e) => setSportName(e.target.value)}
       />
       <p>主な活動場所 *必須</p>
       <Grid container>
@@ -207,7 +218,8 @@ const TemplateProfileEdit: React.FC<Props> = (props: Props) => {
         multiline
         rows={4}
         maxRows={4}
-        value={team?.description}
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
       />
       <p>チーム画像 *必須</p>
       <Button
@@ -224,13 +236,31 @@ const TemplateProfileEdit: React.FC<Props> = (props: Props) => {
           onChange={handleUploadImageChange}
         />
       </Button>
-      <CardMedia component="img" alt="" image={imageUrl} />
+      {imageUrl ? (
+        <CardMedia
+          component="img"
+          alt="upload image"
+          image={imageUrl}
+          sx={{ height: '300px', width: '300px' }}
+        />
+      ) : (
+        <Box
+          sx={{ height: '300px', width: '300px', backgroundColor: 'black' }}
+        />
+      )}
       <p />
       <Box textAlign="center">
         <Button
           id="fullWidth"
           onClick={() => {
-            console.log('Button pushed!'); // eslint-disable-line no-console
+            // eslint-disable-next-line no-console
+            console.log(
+              `teamName: ${teamName}`,
+              `sportName: ${sportName}`,
+              `prefecture: ${prefecture}`,
+              `city: ${city}`,
+              `description: ${description}`
+            );
           }}
         >
           登録
