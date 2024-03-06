@@ -1,8 +1,8 @@
 import React from 'react';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import SendIcon from '@mui/icons-material/Send';
+
+import { SpoconButton } from '../1_atoms/SpoconButton';
 
 export interface Props {
   newMessage: string;
@@ -30,9 +30,7 @@ const SendMessageField: React.FC<Props> = (props: Props) => {
       </Grid>
       <Grid container justifyContent="end">
         <Grid item>
-          <Button onClick={() => setSendFlag(true)}>
-            <SendIcon />
-          </Button>
+          <SpoconButton onClick={() => setSendFlag(true)} iconName="send" />
         </Grid>
       </Grid>
     </>
