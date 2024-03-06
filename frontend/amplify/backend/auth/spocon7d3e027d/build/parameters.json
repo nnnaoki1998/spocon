@@ -1,6 +1,6 @@
 {
   "identityPoolName": "spocon7d3e027d_identitypool_7d3e027d",
-  "allowUnauthenticatedIdentities": false,
+  "allowUnauthenticatedIdentities": true,
   "resourceNameTruncated": "spocon7d3e027d",
   "userPoolName": "spocon7d3e027d_userpool_7d3e027d",
   "autoVerifiedAttributes": [

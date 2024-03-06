@@ -467,6 +467,53 @@
       ],
       "Condition": "CreateAuthUploads"
     },
+    "S3GuestPublicPolicy": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": {
+                "Fn::Split": [
+                  ",",
+                  {
+                    "Ref": "s3PermissionsGuestPublic"
+                  }
+                ]
+              },
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:s3:::",
+                      {
+                        "Ref": "S3Bucket"
+                      },
+                      "/public/*"
+                    ]
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "PolicyName": {
+          "Ref": "s3PublicPolicy"
+        },
+        "Roles": [
+          {
+            "Ref": "unauthRoleName"
+          }
+        ]
+      },
+      "DependsOn": [
+        "S3Bucket"
+      ],
+      "Condition": "CreateGuestPublic"
+    },
     "S3AuthReadPolicy": {
       "Type": "AWS::IAM::Policy",
       "Properties": {
