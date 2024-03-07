@@ -15,6 +15,7 @@ import { styled } from '@mui/material/styles';
 import axios from 'axios';
 
 import { TypeTeam, Prefecture, City } from '../utils/TypeDefinitions';
+import { TagsInput } from '../utils/TagsInput';
 
 export interface Props {
   team: TypeTeam | undefined;
@@ -89,6 +90,7 @@ const TemplateProfileEdit: React.FC<Props> = (props: Props) => {
   );
   const [imgageFile, setImageFile] = React.useState<File | null>(null);
   const uploadImageRef = useRef(null);
+  const [sports, setSports] = React.useState<string[]>(['野球']);
 
   const handlePrefectureChange = (event: SelectChangeEvent) => {
     console.log(event.target); // eslint-disable-line no-console
@@ -158,14 +160,14 @@ const TemplateProfileEdit: React.FC<Props> = (props: Props) => {
         onChange={(e) => setTeamName(e.target.value)}
       />
       <p>スポーツ *必須</p>
-      <TextField
-        fullWidth
-        id="fullWidth"
-        rows={1}
-        maxRows={1}
-        value={sportName}
-        onChange={(e) => setSportName(e.target.value)}
-      />
+      <Box sx={{ border: '1px solid grey', padding: 1 }}>
+        <TagsInput
+          tags={sports}
+          onChangeTags={(newSports) => {
+            setSports(newSports);
+          }}
+        />
+      </Box>
       <p>主な活動場所 *必須</p>
       <Grid container>
         <Grid item xs={6}>
