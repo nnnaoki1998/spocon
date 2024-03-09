@@ -1,12 +1,5 @@
 use spocon_db;
 
-insert into user (id, name, email)
-values (1, '範馬刃牙' ,'baki@baki.com'),
-       (2, '範馬勇次郎' ,'yujiro@baki.com'),
-       (3, '愚地独歩' ,'doppo@baki.com'),
-       (4, '花山薫' ,'kaoru@baki.com'),
-       (5, '烈海王' ,'kaio@baki.com');
-
 insert into sport (id, name)
 values (1, 'バスケットボール'),
        (2, 'サッカー'),
@@ -47,3 +40,10 @@ values ( 1, 'b6d8a45d-ed81-f229-27dc-4a216b239740',  'チーム1', 1, 1,  'path1
        (23, 'd3fb555c-dac1-017c-418d-cd6dd4913c4f', 'チーム23', 3, 3, 'path23', '説明23', '山梨県', '甲府市'),
        (24, '1550c8b2-d922-7020-ab82-939649c80355', 'チーム24', 4, 4, 'path24', '説明24', '岐阜県', '岐阜市'),
        (25, '801c5766-b5e9-8f71-4b9a-f7a470603b82', 'チーム25', 5, 5, 'path25', '説明25', '静岡県', '富士宮市');
+
+insert into user (id, name, email, team_id)
+values (1, '範馬刃牙' ,'baki@baki.com', 1),
+       (2, '範馬勇次郎' ,'yujiro@baki.com', 2),
+       (3, '愚地独歩' ,'doppo@baki.com', 3),
+       (4, '花山薫' ,'kaoru@baki.com', 4),
+       (5, '烈海王' ,'kaio@baki.com', 5);

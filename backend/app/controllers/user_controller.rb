@@ -1,7 +1,7 @@
 class UserController < ApplicationController
   def index
     begin
-      render :json => User.all
+      render :json => User.select("id, name, team_id").order(:id)
     rescue => e
       render :json => { "error class" => e.class, "error message" => e.message }, status: 500
     end
@@ -32,6 +32,6 @@ class UserController < ApplicationController
   private
 
   def user_params
-    params.permit(:name, :email)
+    params.permit(:name, :email, :team_id)
   end
 end
