@@ -28,7 +28,7 @@ export const useSignIn = () => {
     auth
       .signIn(email, password)
       .then(() => {
-        navigate({ pathname: '/top' });
+        navigate({ pathname: '/imageSample' });
       })
       .catch((error: Error) => {
         handleSignInError(error);
