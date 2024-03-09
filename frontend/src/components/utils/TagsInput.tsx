@@ -32,28 +32,26 @@ export const Badge: React.FC<Props> = (props: Props) => {
       >
         {children}
       </Button>
-      {onClose && (
-        <Button
-          variant="outlined"
-          color="primary"
-          size="medium"
-          sx={{
-            border: '1px',
-            minWidth: 0,
-            maxHeight: 1,
-            marginLeft: '-1px',
-            marginRight: '3px',
-            paddingx: 0,
-            borderTopLeftRadius: 0,
-            borderTopRightRadius: 'sm',
-            borderBottomRightRadius: 'sm',
-            borderBottomLeftRadius: 0,
-          }}
-          onClick={() => onClose && onClose()}
-        >
-          ×
-        </Button>
-      )}
+      <Button
+        variant="outlined"
+        color="primary"
+        size="medium"
+        sx={{
+          border: '1px',
+          minWidth: 0,
+          maxHeight: 1,
+          marginLeft: '-1px',
+          marginRight: '3px',
+          paddingx: 0,
+          borderTopLeftRadius: 0,
+          borderTopRightRadius: 'sm',
+          borderBottomRightRadius: 'sm',
+          borderBottomLeftRadius: 0,
+        }}
+        onClick={() => onClose && onClose()}
+      >
+        x
+      </Button>
     </>
   );
 };
