@@ -33,23 +33,15 @@
 # Ignore node_modules
 /frontend/node_modules
 
-/frontend/amplify/team-provider-info.json
+# Ignore amplify
+/frontend/amplify/.config/
 /frontend/amplify/\#current-cloud-backend
-/frontend/amplify/.config/local-*
-/frontend/amplify/logs
-/frontend/amplify/mock-data
-/frontend/amplify/mock-api-resources
-/frontend/amplify/backend/amplify-meta.json
-/frontend/amplify/backend/.temp
-/frontend/build/
-/frontend/dist/
+/frontend/amplify/backend/*
+!/frontend/amplify/backend/api/spocon/schema.graphql # shcema.graphqlのみ独自で修正する必要があるためignoreから外す
+/frontend/amplify/hooks
+/frontend/amplify/cli.json
+/frontend/amplify/team-provider-info.json
 /frontend/src/aws-exports.ts
-/frontend/awsconfiguration.json
-/frontend/amplifyconfiguration.json
-/frontend/amplifyconfiguration.dart
-/frontend/amplify-build-config.json
-/frontend/amplify-gradle-config.json
-/frontend/amplifytools.xcconfig
 
 ## Ignores for both backend and frontend directory
 .env
