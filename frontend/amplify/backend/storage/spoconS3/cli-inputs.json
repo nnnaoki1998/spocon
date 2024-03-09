@@ -1,0 +1,14 @@
+{
+  "resourceName": "spoconS3",
+  "policyUUID": "1ea30db2",
+  "bucketName": "spocon",
+  "storageAccess": "authAndGuest",
+  "guestAccess": [
+    "READ"
+  ],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ"
+  ],
+  "groupAccess": {}
+}

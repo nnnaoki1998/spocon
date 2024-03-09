@@ -7,7 +7,7 @@ import { Top } from './components/5_pages/Top';
 import { Profile } from './components/5_pages/Profile';
 import { Chat } from './components/5_pages/Chat';
 import { Test } from './components/5_pages/Test';
-
+import { ImageSample } from './components/5_pages/ImageSample';
 import { TopBackup } from './pages/top/Top';
 import { ChatBackup } from './pages/chat/Chat';
 
@@ -24,6 +24,7 @@ export const Router: React.FC = () => (
       <Route path="/test/:id" element={<Test />} />
       <Route path="/top-backup" element={<TopBackup />} />
       <Route path="/chat-backup" element={<ChatBackup />} />
+      <Route path="/imageSample" element={<ImageSample />} />
       <Route path="/*" element={<p>Page Not Found</p>} />
     </Routes>
   </BrowserRouter>
