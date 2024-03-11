@@ -8,6 +8,6 @@ interface Props {
 
 // ログイン後に表示する画面に使用する。
 export const PrivateRoute: React.FC<Props> = ({ children }) => {
-  const isAuthenticated = useAuth();
-  return isAuthenticated ? <div>{children}</div> : <Navigate to="/" />;
+  const auth = useAuth();
+  return auth.isAuthenticated ? <div>{children}</div> : <Navigate to="/" />;
 };
