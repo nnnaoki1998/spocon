@@ -7,7 +7,7 @@ type CurrentAuthenticatedUserResult = {
   };
 };
 
-type UseAuth = {
+export type UseAuth = {
   isLoading: boolean;
   isAuthenticated: boolean;
   email: string;
@@ -87,3 +87,4 @@ export const useProvideAuth = (): UseAuth => {
     resendConfirmationCode,
   };
 };
+

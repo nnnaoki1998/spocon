@@ -9,10 +9,12 @@ import { TemplateProfile } from '../4_templates/TemplateProfile';
 
 import { TypeTeam } from '../utils/TypeDefinitions';
 import { getTeam } from '../utils/DummyApi';
+import { useAuth } from '../../hooks/auth/useAuth';
 
 const defaultTheme = createTheme();
 
 const Profile: React.FC = () => {
+  const auth = useAuth();
   const { teamId } = useParams<{ teamId: string }>();
   const [team, setTeam] = React.useState<TypeTeam>();
 
@@ -34,7 +36,7 @@ const Profile: React.FC = () => {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <SpoconAppBar />
+      <SpoconAppBar auth={auth} />
       <main>
         <Box
           sx={{
@@ -52,3 +54,4 @@ const Profile: React.FC = () => {
 };
 
 export { Profile };
+

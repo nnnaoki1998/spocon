@@ -14,10 +14,12 @@ import { ImgMediaCard } from './Card';
 import { Selector } from './Selector';
 import { SpoconAppBar } from '../3_organisms/SpoconAppBar';
 import { createRelayChatRoom } from '../../feature/api/chat';
+import { useAuth } from '../../hooks/auth/useAuth';
 
 const defaultTheme = createTheme();
 
 const Top: React.FC = () => {
+  const auth = useAuth();
   const myTeamId = 'teamId01';
   const [page, setPage] = React.useState(1);
   const [teamInfos, setTeamInfos] = React.useState<TeamInfo[]>([]);
@@ -46,7 +48,7 @@ const Top: React.FC = () => {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <SpoconAppBar />
+      <SpoconAppBar auth={auth} />
       <main>
         <Box
           sx={{
@@ -114,3 +116,4 @@ const Top: React.FC = () => {
 };
 
 export { Top };
+
