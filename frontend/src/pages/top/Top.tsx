@@ -4,13 +4,11 @@ import axios from 'axios';
 import { PrivateRoute } from '../../components/PrivateRoute';
 import { backendUrl } from '../../config';
 import { useAuth } from '../../hooks/auth/useAuth';
+import { useSignOut } from '../../hooks/signOut/useSignOut';
 
 export const TopBackup: React.FC = () => {
   const auth = useAuth();
-
-  if (auth.isLoading) {
-    return <div />;
-  }
+  const { executeSignOut } = useSignOut();
 
   useEffect(() => {
     axios
@@ -23,6 +21,10 @@ export const TopBackup: React.FC = () => {
       });
   }, []);
 
+  if (auth.isLoading) {
+    return <div />;
+  }
+
   return (
     <PrivateRoute>
       <div>email: {auth.email}</div>
@@ -30,11 +32,9 @@ export const TopBackup: React.FC = () => {
         <Link to="/chat">チャット画面に遷移</Link>
       </div>
       <div>
-        <Link to="/">
-          <button type="button" onClick={() => auth.signOut}>
-            ログアウト
-          </button>
-        </Link>
+        <button type="submit" onClick={() => executeSignOut()}>
+          ログアウト
+        </button>
       </div>
     </PrivateRoute>
   );
