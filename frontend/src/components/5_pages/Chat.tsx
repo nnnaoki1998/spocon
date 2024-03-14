@@ -13,6 +13,7 @@ import {
   pushChatMessage,
 } from '../../feature/api/chat';
 import { SpoconAppBar } from '../3_organisms/SpoconAppBar';
+import { useAuth } from '../../hooks/auth/useAuth';
 
 const defaultTheme = createTheme({
   components: {
@@ -28,6 +29,7 @@ const defaultTheme = createTheme({
 });
 
 const Chat: React.FC = () => {
+  const auth = useAuth();
   const myTeamId = 'teamId01';
   const [chatRooms, setChatRooms] = React.useState<TypeTest>([]);
   const [chatRoomId, setChatRoomId] = React.useState<string | undefined>('');
@@ -112,7 +114,7 @@ const Chat: React.FC = () => {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <SpoconAppBar />
+      <SpoconAppBar auth={auth} />
       <main>
         <TemplateChat
           myTeamId={myTeamId}
@@ -129,3 +131,4 @@ const Chat: React.FC = () => {
 };
 
 export { Chat };
+

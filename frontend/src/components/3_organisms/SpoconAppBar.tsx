@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useNavigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -8,18 +9,27 @@ import Button from '@mui/material/Button';
 import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
 import {
-  Divider,
   ListItem,
   ListItemButton,
   ListItemIcon,
   ListItemText,
 } from '@mui/material';
-import InboxIcon from '@mui/icons-material/Inbox'; // Import the 'InboxIcon' component
-import MailIcon from '@mui/icons-material/Mail'; // Import the 'MailIcon' component
+import HomeIcon from '@mui/icons-material/Home';
+import Sms from '@mui/icons-material/Sms';
+import Person from '@mui/icons-material/Person';
+import { UseAuth } from '../../hooks/auth/useAuth';
+import { useSignOut } from '../../hooks/signOut/useSignOut';
 
 type Anchor = 'left';
 
-const SpoconAppBar: React.FC = () => {
+interface Props {
+  auth: UseAuth;
+}
+
+const SpoconAppBar: React.FC<Props> = (props: Props) => {
+  const { auth } = props;
+  const { executeSignOut } = useSignOut();
+  const navigateTo = useNavigate();
   const [state, setState] = React.useState({ left: false });
 
   const toggleDrawer =
@@ -44,29 +54,30 @@ const SpoconAppBar: React.FC = () => {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
+        <ListItem key="トップ" disablePadding>
+          <ListItemButton onClick={() => navigateTo({ pathname: '/top' })}>
+            <ListItemIcon>
+              <HomeIcon />
+            </ListItemIcon>
+            <ListItemText primary="トップ" />
+          </ListItemButton>
+        </ListItem>
+        <ListItem key="チャット" disablePadding>
+          <ListItemButton onClick={() => navigateTo({ pathname: '/chat' })}>
+            <ListItemIcon>
+              <Sms />
+            </ListItemIcon>
+            <ListItemText primary="チャット" />
+          </ListItemButton>
+        </ListItem>
+        <ListItem key="プロフィール" disablePadding>
+          <ListItemButton onClick={() => navigateTo({ pathname: '/profile' })}>
+            <ListItemIcon>
+              <Person />
+            </ListItemIcon>
+            <ListItemText primary="プロフィール" />
+          </ListItemButton>
+        </ListItem>
       </List>
     </Box>
   );
@@ -96,20 +107,32 @@ const SpoconAppBar: React.FC = () => {
           <Typography variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
             SpoCon
           </Typography>
-          <Button
-            color="primary"
-            sx={{ color: 'white' }}
-            onClick={() => console.log('Button is clicked.')} // eslint-disable-line no-console
-          >
-            Register
-          </Button>
-          <Button
-            color="primary"
-            sx={{ color: 'white' }}
-            onClick={() => console.log('Button is clicked.')} // eslint-disable-line no-console
-          >
-            Login
-          </Button>
+          {auth.isAuthenticated ? (
+            <Button
+              color="primary"
+              sx={{ color: 'white' }}
+              onClick={() => executeSignOut()}
+            >
+              SIGNOUT
+            </Button>
+          ) : (
+            <>
+              <Button
+                color="primary"
+                sx={{ color: 'white' }}
+                onClick={() => navigateTo({ pathname: '/signup' })}
+              >
+                SIGNUP
+              </Button>
+              <Button
+                color="primary"
+                sx={{ color: 'white' }}
+                onClick={() => navigateTo({ pathname: '/' })}
+              >
+                SIGNIN
+              </Button>
+            </>
+          )}
         </Toolbar>
       </AppBar>
       <Toolbar />
@@ -118,3 +141,4 @@ const SpoconAppBar: React.FC = () => {
 };
 
 export { SpoconAppBar };
+
