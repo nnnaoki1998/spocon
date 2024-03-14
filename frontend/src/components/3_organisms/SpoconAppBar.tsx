@@ -32,8 +32,6 @@ const SpoconAppBar: React.FC<Props> = (props: Props) => {
   const navigateTo = useNavigate();
   const [state, setState] = React.useState({ left: false });
 
-  console.log(auth); // eslint-disable-line no-console
-
   const toggleDrawer =
     (anchor: Anchor, open: boolean) =>
     (event: React.KeyboardEvent | React.MouseEvent) => {
