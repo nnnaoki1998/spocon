@@ -14,6 +14,7 @@ import CardMedia from '@mui/material/CardMedia';
 import { styled } from '@mui/material/styles';
 import axios from 'axios';
 import { Storage } from 'aws-amplify';
+import { v4 as uuidv4 } from 'uuid';
 import { backendUrl } from '../../config';
 
 import {
@@ -125,7 +126,7 @@ const TemplateProfileEdit: React.FC<Props> = (props: Props) => {
     if (!selectedSportId) {
       return;
     }
-    const iconPath = Storage.put('teamImage', imgageFile, {
+    const iconPath = Storage.put(uuidv4(), imgageFile, {
       contentType: 'image/png',
     })
       .then((result) => result)
