@@ -13,9 +13,14 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import CardMedia from '@mui/material/CardMedia';
 import { styled } from '@mui/material/styles';
 import axios from 'axios';
+import { backendUrl } from '../../config';
 
-import { TypeTeam, Prefecture, City } from '../utils/TypeDefinitions';
-import { TagsInput } from '../utils/TagsInput';
+import {
+  TypeTeam,
+  Prefecture,
+  City,
+  SportInfo,
+} from '../utils/TypeDefinitions';
 
 export interface Props {
   team: TypeTeam | undefined;
@@ -90,15 +95,13 @@ const TemplateProfileEdit: React.FC<Props> = (props: Props) => {
   );
   const [imgageFile, setImageFile] = React.useState<File | null>(null);
   const uploadImageRef = useRef(null);
-  const [sports, setSports] = React.useState<string[]>(['野球']);
+  const [sports, setSports] = React.useState<SportInfo[]>([]);
 
   const handlePrefectureChange = (event: SelectChangeEvent) => {
-    console.log(event.target); // eslint-disable-line no-console
     setPrefecture(event.target.value);
   };
 
   const handleCityChange = (event: SelectChangeEvent) => {
-    console.log(event.target); // eslint-disable-line no-console
     setCity(event.target.value);
   };
 
@@ -112,6 +115,19 @@ const TemplateProfileEdit: React.FC<Props> = (props: Props) => {
   };
 
   const { imageUrl } = useGetImageUrl({ file: imgageFile });
+
+  useEffect(() => {
+    axios
+      .get(`${backendUrl}/sport`)
+      .then((res) => {
+        // eslint-disable-next-line
+        setSports(res.data); // なぜか型安全にならない（もう少し調べる）
+        console.log(res.data); // eslint-disable-line no-console
+      })
+      .catch((err) => {
+        console.log(err); // eslint-disable-line no-console
+      });
+  }, []);
 
   useEffect(() => {
     axios
@@ -159,14 +175,25 @@ const TemplateProfileEdit: React.FC<Props> = (props: Props) => {
         value={teamName}
         onChange={(e) => setTeamName(e.target.value)}
       />
-      <p>スポーツ *必須</p>
-      <Box sx={{ border: '1px solid grey', padding: 1 }}>
-        <TagsInput
-          tags={sports}
-          onChangeTags={(newSports) => {
-            setSports(newSports);
-          }}
-        />
+      <Box sx={{ minWidth: 120 }}>
+        <p>スポーツ種別 *必須</p>
+        <FormControl fullWidth>
+          <InputLabel id="select-sport-type">スポーツ</InputLabel>
+          <Select
+            labelId="select-sport-type"
+            id="select-sport"
+            value={sportName}
+            label="スポーツ"
+            onChange={(e) => setSportName(e.target.value)}
+            sx={{ width: '100%' }}
+          >
+            {sports?.map((item) => (
+              <MenuItem key={item.name} value={item.name}>
+                {item.name}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
       </Box>
       <p>主な活動場所 *必須</p>
       <Grid container>

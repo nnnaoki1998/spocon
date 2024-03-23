@@ -57,6 +57,13 @@ export type TeamInfos =
     } | null)[]
   | undefined;
 
+export type SportInfo = {
+  id: number;
+  name: string;
+  createdAt: string; // TODO: バックエンドから返さないようにできないか検討
+  updatedAt: string; // TODO: バックエンドから返さないようにできないか検討
+};
+
 export interface Prefecture {
   prefCode: number;
   prefName: string;
