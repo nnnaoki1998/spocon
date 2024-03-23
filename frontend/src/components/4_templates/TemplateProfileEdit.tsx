@@ -13,6 +13,7 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import CardMedia from '@mui/material/CardMedia';
 import { styled } from '@mui/material/styles';
 import axios from 'axios';
+import { Storage } from 'aws-amplify';
 import { backendUrl } from '../../config';
 
 import {
@@ -94,7 +95,7 @@ const TemplateProfileEdit: React.FC<Props> = (props: Props) => {
     team ? team.description : ''
   );
   const [imgageFile, setImageFile] = React.useState<File | null>(null);
-  const uploadImageRef = useRef(null);
+  const SelectedImageRef = useRef(null);
   const [sports, setSports] = React.useState<SportInfo[]>([]);
 
   const handlePrefectureChange = (event: SelectChangeEvent) => {
@@ -105,7 +106,7 @@ const TemplateProfileEdit: React.FC<Props> = (props: Props) => {
     setCity(event.target.value);
   };
 
-  const handleUploadImageChange = (
+  const handleSelectedImageChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     if (event.currentTarget?.files && event.currentTarget.files[0]) {
@@ -115,6 +116,23 @@ const TemplateProfileEdit: React.FC<Props> = (props: Props) => {
   };
 
   const { imageUrl } = useGetImageUrl({ file: imgageFile });
+
+  const updateTeamProfile = () => {
+    const selectedSportId = sports.find(
+      (sport) => sport.name === sportName
+    )?.id;
+    // TODO: エラーメッセージを検討
+    if (!selectedSportId) {
+      return;
+    }
+    const iconPath = Storage.put('teamImage', imgageFile, {
+      contentType: 'image/png',
+    })
+      .then((result) => result)
+      .catch((error) => {
+        console.log(error); // eslint-disable-line no-console
+      });
+  };
 
   useEffect(() => {
     axios
@@ -260,9 +278,9 @@ const TemplateProfileEdit: React.FC<Props> = (props: Props) => {
       >
         UPLOAD IMAGE
         <VisuallyHiddenInput
-          ref={uploadImageRef}
+          ref={SelectedImageRef}
           type="file"
-          onChange={handleUploadImageChange}
+          onChange={handleSelectedImageChange}
         />
       </Button>
       {imageUrl ? (
