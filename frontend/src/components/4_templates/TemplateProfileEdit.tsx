@@ -23,6 +23,7 @@ import {
   SportInfo,
   TypeTeam,
 } from '../utils/TypeDefinitions';
+import { useGetImageUrl } from '../../hooks/utils/useGetImageUrl';
 
 export interface Props {
   team: TypeTeam | undefined;
@@ -39,34 +40,6 @@ const VisuallyHiddenInput = styled('input')({
   whiteSpace: 'nowrap',
   width: 1,
 });
-
-type Args = {
-  file: File | null;
-};
-
-const useGetImageUrl = ({ file }: Args) => {
-  const [imageUrl, setImageUrl] = React.useState('');
-
-  useEffect(() => {
-    if (!file) {
-      return;
-    }
-
-    const reader: FileReader | null = new FileReader();
-    reader.onloadend = () => {
-      // base64のimageUrlを生成する。
-      const base64 = reader && reader.result;
-      if (base64 && typeof base64 === 'string') {
-        setImageUrl(base64);
-      }
-    };
-    reader.readAsDataURL(file);
-  }, [file]);
-
-  return {
-    imageUrl,
-  };
-};
 
 const TemplateProfileEdit: React.FC<Props> = (props: Props) => {
   const { team } = props;
@@ -130,7 +103,6 @@ const TemplateProfileEdit: React.FC<Props> = (props: Props) => {
     getSports()
       .then((res) => {
         setSports(res.data);
-        console.log(res.data); // eslint-disable-line no-console
       })
       .catch((err) => {
         console.log(err); // eslint-disable-line no-console
