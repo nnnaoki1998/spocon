@@ -1,29 +1,29 @@
-import React, { useEffect, useRef } from 'react';
-import Card from '@mui/material/Card';
-import Typography from '@mui/material/Typography';
-import TextField from '@mui/material/TextField';
-import Grid from '@mui/material/Grid';
-import Button from '@mui/material/Button';
-import Box from '@mui/material/Box';
-import FormControl from '@mui/material/FormControl';
-import InputLabel from '@mui/material/InputLabel';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-import MenuItem from '@mui/material/MenuItem';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
+import FormControl from '@mui/material/FormControl';
+import Grid from '@mui/material/Grid';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
-import axios, { AxiosResponse } from 'axios';
 import { Storage } from 'aws-amplify';
+import axios, { AxiosResponse } from 'axios';
+import React, { useEffect, useRef } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import { backendUrl, resasApiKey, resasApiUrl } from '../../config';
+import { backendUrl } from '../../config';
 
-import {
-  TypeTeam,
-  Prefecture,
-  City,
-  SportInfo,
-} from '../utils/TypeDefinitions';
 import { getCities, getPrefectures } from '../../feature/api/external/resas';
+import {
+  City,
+  Prefecture,
+  SportInfo,
+  TypeTeam,
+} from '../utils/TypeDefinitions';
 
 export interface Props {
   team: TypeTeam | undefined;
@@ -43,11 +43,6 @@ const VisuallyHiddenInput = styled('input')({
 
 type Args = {
   file: File | null;
-};
-
-type ResasApiResponse<T> = {
-  message: string | null;
-  result: T[];
 };
 
 const useGetImageUrl = ({ file }: Args) => {
