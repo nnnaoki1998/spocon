@@ -4,15 +4,15 @@ import {
   ChatMessagesByChatRoomIdQuery,
   RelayChatRoomTeamsByTeamIdQuery,
   CreateChatMessageMutation,
-} from '../../API';
+} from '../../../API';
 import {
   createRelayChatRoomTeam,
   createChatMessage,
-} from '../../graphql/mutations';
+} from '../../../graphql/mutations';
 import {
   chatMessagesByChatRoomId,
   relayChatRoomTeamsByTeamId,
-} from '../../graphql/queries';
+} from '../../../graphql/queries';
 
 /** GraphQLのQueryのレスポンスの型に使用する */
 interface GraphQLQueryResult<T> {

@@ -7,7 +7,7 @@ import {
   getChatMessages,
   getChatRooms,
   pushChatMessage,
-} from '../../feature/api/chat';
+} from '../../feature/api/internal/chat';
 import './Chat.css';
 
 /**

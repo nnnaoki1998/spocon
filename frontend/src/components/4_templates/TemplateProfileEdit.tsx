@@ -23,6 +23,7 @@ import {
   City,
   SportInfo,
 } from '../utils/TypeDefinitions';
+import { getPrefectures } from '../../feature/api/external/resas';
 
 export interface Props {
   team: TypeTeam | undefined;
@@ -144,15 +145,12 @@ const TemplateProfileEdit: React.FC<Props> = (props: Props) => {
   }, []);
 
   useEffect(() => {
-    axios
-      .get(`${resasApiUrl}/prefectures`, {
-        headers: { 'X-API-KEY': resasApiKey },
-      })
-      .then((res: AxiosResponse<ResasApiResponse<Prefecture>>) => {
+    getPrefectures()
+      .then((res) => {
         setPrefectures(res.data.result);
       })
-      .catch(() => {
-        console.log('Failed to call /prefectures'); // eslint-disable-line no-console
+      .catch((err) => {
+        console.log(err); // eslint-disable-line no-console
       });
   }, []);
 

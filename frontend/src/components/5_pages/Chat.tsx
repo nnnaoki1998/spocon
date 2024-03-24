@@ -11,7 +11,7 @@ import {
   getChatMessages,
   getChatRooms,
   pushChatMessage,
-} from '../../feature/api/chat';
+} from '../../feature/api/internal/chat';
 import { SpoconAppBar } from '../3_organisms/SpoconAppBar';
 import { useAuth } from '../../hooks/auth/useAuth';
 
