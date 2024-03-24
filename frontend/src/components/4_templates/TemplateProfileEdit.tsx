@@ -15,15 +15,11 @@ import { Storage } from 'aws-amplify';
 import React, { useEffect, useRef } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
-import { getCities, getPrefectures } from '../../feature/api/external/resas';
-import { getSports } from '../../feature/api/internal/sport';
-import {
-  City,
-  Prefecture,
-  SportInfo,
-  TypeTeam,
-} from '../utils/TypeDefinitions';
+import { getCities } from '../../feature/api/external/resas';
+import { useGetSports } from '../../hooks/sport/useGetSports';
 import { useGetImageUrl } from '../../hooks/utils/useGetImageUrl';
+import { useGetPrefectures } from '../../hooks/utils/useGetPrefectures';
+import { City, TypeTeam } from '../utils/TypeDefinitions';
 
 export interface Props {
   team: TypeTeam | undefined;
@@ -49,9 +45,6 @@ const TemplateProfileEdit: React.FC<Props> = (props: Props) => {
   const [sportName, setSportName] = React.useState<string>(
     team ? team.sport_name : ''
   );
-  const [prefectures, setPrefectures] = React.useState<
-    Prefecture[] | undefined
-  >();
   const [prefecture, setPrefecture] = React.useState('');
   const [cities, setCities] = React.useState<City[] | undefined>();
   const [city, setCity] = React.useState<string>('');
@@ -60,7 +53,9 @@ const TemplateProfileEdit: React.FC<Props> = (props: Props) => {
   );
   const [imgageFile, setImageFile] = React.useState<File | null>(null);
   const SelectedImageRef = useRef(null);
-  const [sports, setSports] = React.useState<SportInfo[]>([]);
+
+  const { prefectures } = useGetPrefectures();
+  const { sports } = useGetSports();
 
   const handlePrefectureChange = (event: SelectChangeEvent) => {
     setPrefecture(event.target.value);
@@ -98,26 +93,6 @@ const TemplateProfileEdit: React.FC<Props> = (props: Props) => {
         console.log(error); // eslint-disable-line no-console
       });
   };
-
-  useEffect(() => {
-    getSports()
-      .then((res) => {
-        setSports(res.data);
-      })
-      .catch((err) => {
-        console.log(err); // eslint-disable-line no-console
-      });
-  }, []);
-
-  useEffect(() => {
-    getPrefectures()
-      .then((res) => {
-        setPrefectures(res.data.result);
-      })
-      .catch(() => {
-        console.log('Failed to call /prefectures'); // eslint-disable-line no-console
-      });
-  }, []);
 
   useEffect(() => {
     prefectures?.forEach((pref) => {
