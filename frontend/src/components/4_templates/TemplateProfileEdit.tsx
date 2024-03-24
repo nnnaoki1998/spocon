@@ -15,7 +15,7 @@ import { styled } from '@mui/material/styles';
 import axios, { AxiosResponse } from 'axios';
 import { Storage } from 'aws-amplify';
 import { v4 as uuidv4 } from 'uuid';
-import { backendUrl } from '../../config';
+import { backendUrl, resasApiKey, resasApiUrl } from '../../config';
 
 import {
   TypeTeam,
@@ -27,16 +27,6 @@ import {
 export interface Props {
   team: TypeTeam | undefined;
 }
-
-interface NodeEnv {
-  REACT_APP_RESAS_API_URL?: string;
-  REACT_APP_RESAS_API_KEY?: string;
-}
-
-const RESAS_API_URL = (process.env as NodeEnv)
-  .REACT_APP_RESAS_API_URL as string;
-const RESAS_API_KEY = (process.env as NodeEnv)
-  .REACT_APP_RESAS_API_KEY as string;
 
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',
@@ -59,7 +49,7 @@ type ResasApiResponse<T> = {
   result: T[];
 };
 
-export const useGetImageUrl = ({ file }: Args) => {
+const useGetImageUrl = ({ file }: Args) => {
   const [imageUrl, setImageUrl] = React.useState('');
 
   useEffect(() => {
@@ -121,6 +111,7 @@ const TemplateProfileEdit: React.FC<Props> = (props: Props) => {
     }
   };
 
+  // stateのimgageFileが変更されたら、画像URLを取得する
   const { imageUrl } = useGetImageUrl({ file: imgageFile });
 
   const updateTeamProfile = () => {
@@ -154,8 +145,8 @@ const TemplateProfileEdit: React.FC<Props> = (props: Props) => {
 
   useEffect(() => {
     axios
-      .get(`${RESAS_API_URL}/prefectures`, {
-        headers: { 'X-API-KEY': RESAS_API_KEY },
+      .get(`${resasApiUrl}/prefectures`, {
+        headers: { 'X-API-KEY': resasApiKey },
       })
       .then((res: AxiosResponse<ResasApiResponse<Prefecture>>) => {
         setPrefectures(res.data.result);
@@ -169,8 +160,8 @@ const TemplateProfileEdit: React.FC<Props> = (props: Props) => {
     prefectures?.forEach((pref) => {
       if (pref.prefName === prefecture) {
         axios
-          .get(`${RESAS_API_URL}/cities?prefCode=${pref.prefCode}`, {
-            headers: { 'X-API-KEY': RESAS_API_KEY },
+          .get(`${resasApiUrl}/cities?prefCode=${pref.prefCode}`, {
+            headers: { 'X-API-KEY': resasApiKey },
           })
           .then((response: AxiosResponse<ResasApiResponse<City>>) => {
             setCities(response.data.result);
