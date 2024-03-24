@@ -296,7 +296,6 @@ const TemplateProfileEdit: React.FC<Props> = (props: Props) => {
           sx={{ height: '300px', width: '300px', backgroundColor: 'black' }}
         />
       )}
-      <p />
       <Box textAlign="center">
         <Button
           id="fullWidth"

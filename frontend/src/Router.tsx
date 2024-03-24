@@ -21,7 +21,7 @@ export const Router: React.FC = () => (
       <Route path="/top" element={<Top />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="/profile/:teamId" element={<Profile />} />
-      <Route path="/profile-edit" element={<ProfileEdit />} />
+      <Route path="/profile-edit/:teamId" element={<ProfileEdit />} />
       <Route path="/chat" element={<Chat />} />
       <Route path="/test/:id" element={<Test />} />
       <Route path="/top-backup" element={<TopBackup />} />
