@@ -12,7 +12,7 @@ import MenuItem from '@mui/material/MenuItem';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import CardMedia from '@mui/material/CardMedia';
 import { styled } from '@mui/material/styles';
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { Storage } from 'aws-amplify';
 import { v4 as uuidv4 } from 'uuid';
 import { backendUrl } from '../../config';
@@ -52,6 +52,11 @@ const VisuallyHiddenInput = styled('input')({
 
 type Args = {
   file: File | null;
+};
+
+type ResasApiResponse<T> = {
+  message: string | null;
+  result: T[];
 };
 
 export const useGetImageUrl = ({ file }: Args) => {
@@ -138,9 +143,8 @@ const TemplateProfileEdit: React.FC<Props> = (props: Props) => {
   useEffect(() => {
     axios
       .get(`${backendUrl}/sport`)
-      .then((res) => {
-        // eslint-disable-next-line
-        setSports(res.data); // なぜか型安全にならない（もう少し調べる）
+      .then((res: AxiosResponse<SportInfo[]>) => {
+        setSports(res.data);
         console.log(res.data); // eslint-disable-line no-console
       })
       .catch((err) => {
@@ -153,9 +157,8 @@ const TemplateProfileEdit: React.FC<Props> = (props: Props) => {
       .get(`${RESAS_API_URL}/prefectures`, {
         headers: { 'X-API-KEY': RESAS_API_KEY },
       })
-      .then((response) => {
-        // eslint-disable-next-line
-        setPrefectures(response.data.result);
+      .then((res: AxiosResponse<ResasApiResponse<Prefecture>>) => {
+        setPrefectures(res.data.result);
       })
       .catch(() => {
         console.log('Failed to call /prefectures'); // eslint-disable-line no-console
@@ -169,8 +172,7 @@ const TemplateProfileEdit: React.FC<Props> = (props: Props) => {
           .get(`${RESAS_API_URL}/cities?prefCode=${pref.prefCode}`, {
             headers: { 'X-API-KEY': RESAS_API_KEY },
           })
-          .then((response) => {
-            // eslint-disable-next-line
+          .then((response: AxiosResponse<ResasApiResponse<City>>) => {
             setCities(response.data.result);
           })
           .catch(() => {
