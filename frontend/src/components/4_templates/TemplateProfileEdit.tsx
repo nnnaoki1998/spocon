@@ -12,12 +12,11 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
 import { Storage } from 'aws-amplify';
-import axios, { AxiosResponse } from 'axios';
 import React, { useEffect, useRef } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import { backendUrl } from '../../config';
 
 import { getCities, getPrefectures } from '../../feature/api/external/resas';
+import { getSports } from '../../feature/api/internal/sport';
 import {
   City,
   Prefecture,
@@ -128,9 +127,8 @@ const TemplateProfileEdit: React.FC<Props> = (props: Props) => {
   };
 
   useEffect(() => {
-    axios
-      .get(`${backendUrl}/sport`)
-      .then((res: AxiosResponse<SportInfo[]>) => {
+    getSports()
+      .then((res) => {
         setSports(res.data);
         console.log(res.data); // eslint-disable-line no-console
       })
