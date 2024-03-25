@@ -64,6 +64,11 @@ export type SportInfo = {
   updatedAt: string; // TODO: バックエンドから返さないようにできないか検討
 };
 
+export type GradeInfo = {
+  id: number;
+  name: string;
+};
+
 export interface Prefecture {
   prefCode: number;
   prefName: string;

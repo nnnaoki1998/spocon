@@ -23,6 +23,7 @@ import { useGetPrefectures } from '../../hooks/prefecture/useGetPrefectures';
 import { useHandlePrefectureChange } from '../../hooks/prefecture/useHandlePrefectureChange';
 import { useGetSports } from '../../hooks/sport/useGetSports';
 import { TypeTeam } from '../utils/TypeDefinitions';
+import { useGetGrades } from '../../hooks/grade/useGetGrades';
 
 export interface Props {
   team: TypeTeam | undefined;
@@ -53,6 +54,8 @@ const TemplateProfileEdit: React.FC<Props> = (props: Props) => {
   );
   const SelectedImageRef = useRef(null);
 
+  // グレード一覧を取得する
+  const { grades } = useGetGrades();
   // スポーツ種別一覧を取得する
   const { sports } = useGetSports();
   // 都道府県一覧を取得する
