@@ -9,12 +9,14 @@ import { TemplateProfileEdit } from '../4_templates/TemplateProfileEdit';
 
 import { TypeTeam } from '../utils/TypeDefinitions';
 import { getTeam } from '../utils/DummyApi';
+import { useAuth } from '../../hooks/auth/useAuth';
 
 const defaultTheme = createTheme();
 
 const ProfileEdit: React.FC = () => {
   const { teamId } = useParams<{ teamId: string }>();
   const [team, setTeam] = React.useState<TypeTeam>();
+  const auth = useAuth();
 
   const fetchTeamInfo = () => {
     let id;
@@ -32,7 +34,7 @@ const ProfileEdit: React.FC = () => {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <SpoconAppBar />
+      <SpoconAppBar auth={auth} />
       <main>
         <Box
           sx={{

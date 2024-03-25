@@ -17,9 +17,10 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { getCities } from '../../feature/api/external/resas';
 import { useGetSports } from '../../hooks/sport/useGetSports';
-import { useGetImageUrl } from '../../hooks/utils/useGetImageUrl';
-import { useGetPrefectures } from '../../hooks/utils/useGetPrefectures';
+import { useGetImageUrl } from '../../hooks/image/useGetImageUrl';
+import { useGetPrefectures } from '../../hooks/prefecture/useGetPrefectures';
 import { City, TypeTeam } from '../utils/TypeDefinitions';
+import { useHandlePrefectureChange } from '../../hooks/prefecture/useHandlePrefectureChange';
 
 export interface Props {
   team: TypeTeam | undefined;
@@ -45,7 +46,6 @@ const TemplateProfileEdit: React.FC<Props> = (props: Props) => {
   const [sportName, setSportName] = React.useState<string>(
     team ? team.sport_name : ''
   );
-  const [prefecture, setPrefecture] = React.useState('');
   const [cities, setCities] = React.useState<City[] | undefined>();
   const [city, setCity] = React.useState<string>('');
   const [description, setDescription] = React.useState<string>(
@@ -54,12 +54,9 @@ const TemplateProfileEdit: React.FC<Props> = (props: Props) => {
   const [imgageFile, setImageFile] = React.useState<File | null>(null);
   const SelectedImageRef = useRef(null);
 
+  const { prefecture, handlePrefectureChange } = useHandlePrefectureChange();
   const { prefectures } = useGetPrefectures();
   const { sports } = useGetSports();
-
-  const handlePrefectureChange = (event: SelectChangeEvent) => {
-    setPrefecture(event.target.value);
-  };
 
   const handleCityChange = (event: SelectChangeEvent) => {
     setCity(event.target.value);

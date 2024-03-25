@@ -131,4 +131,3 @@ const Chat: React.FC = () => {
 };
 
 export { Chat };
-
