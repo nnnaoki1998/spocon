@@ -46,6 +46,9 @@ const TemplateProfileEdit: React.FC<Props> = (props: Props) => {
   const [teamName, setTeamName] = React.useState<string>(
     team ? team.team_name : ''
   );
+  const [gradeName, setGradeName] = React.useState<string>(
+    team ? team.grade_name : ''
+  );
   const [sportName, setSportName] = React.useState<string>(
     team ? team.sport_name : ''
   );
@@ -102,6 +105,26 @@ const TemplateProfileEdit: React.FC<Props> = (props: Props) => {
         value={teamName}
         onChange={(e) => setTeamName(e.target.value)}
       />
+      <Box sx={{ minWidth: 120 }}>
+        <p>グレード種別 *必須</p>
+        <FormControl fullWidth>
+          <InputLabel id="select-grade-type">グレード</InputLabel>
+          <Select
+            labelId="select-grade-type"
+            id="select-grade"
+            value={gradeName}
+            label="グレード"
+            onChange={(e) => setGradeName(e.target.value)}
+            sx={{ width: '100%' }}
+          >
+            {grades?.map((item) => (
+              <MenuItem key={item.name} value={item.name}>
+                {item.name}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      </Box>
       <Box sx={{ minWidth: 120 }}>
         <p>スポーツ種別 *必須</p>
         <FormControl fullWidth>
