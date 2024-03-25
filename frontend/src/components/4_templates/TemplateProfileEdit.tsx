@@ -7,22 +7,22 @@ import FormControl from '@mui/material/FormControl';
 import Grid from '@mui/material/Grid';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Select from '@mui/material/Select';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
 import { Storage } from 'aws-amplify';
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
-import { getCities } from '../../feature/api/external/resas';
-import { useGetSports } from '../../hooks/sport/useGetSports';
-import { useGetImageUrl } from '../../hooks/image/useGetImageUrl';
-import { useGetPrefectures } from '../../hooks/prefecture/useGetPrefectures';
-import { City, TypeTeam } from '../utils/TypeDefinitions';
-import { useHandlePrefectureChange } from '../../hooks/prefecture/useHandlePrefectureChange';
 import { useGetCities } from '../../hooks/city/useGetCities';
 import { useHandleCityChange } from '../../hooks/city/useHandleCityChange';
+import { useGetImageUrl } from '../../hooks/image/useGetImageUrl';
+import { useHandleImageChange } from '../../hooks/image/useHandleImageChange';
+import { useGetPrefectures } from '../../hooks/prefecture/useGetPrefectures';
+import { useHandlePrefectureChange } from '../../hooks/prefecture/useHandlePrefectureChange';
+import { useGetSports } from '../../hooks/sport/useGetSports';
+import { TypeTeam } from '../utils/TypeDefinitions';
 
 export interface Props {
   team: TypeTeam | undefined;
@@ -51,26 +51,22 @@ const TemplateProfileEdit: React.FC<Props> = (props: Props) => {
   const [description, setDescription] = React.useState<string>(
     team ? team.description : ''
   );
-  const [imgageFile, setImageFile] = React.useState<File | null>(null);
   const SelectedImageRef = useRef(null);
 
-  const { prefectures } = useGetPrefectures();
-  const { prefecture, handlePrefectureChange } = useHandlePrefectureChange();
-  const { cities } = useGetCities(prefectures, prefecture);
-  const { city, handleCityChange } = useHandleCityChange();
+  // スポーツ種別一覧を取得する
   const { sports } = useGetSports();
-
-  const handleImageChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    if (event.currentTarget?.files && event.currentTarget.files[0]) {
-      const targetFile = event.currentTarget.files[0];
-      setImageFile(targetFile);
-    }
-  };
-
+  // 都道府県一覧を取得する
+  const { prefectures } = useGetPrefectures();
+  // 都道府県が変更されたら、prefectureを更新する
+  const { prefecture, handlePrefectureChange } = useHandlePrefectureChange();
+  // 都道府県が変更されたら、市区町村一覧を取得する
+  const { cities } = useGetCities(prefectures, prefecture);
+  // 市区町村が変更されたら、cityを更新する
+  const { city, handleCityChange } = useHandleCityChange();
+  // 画像ファイルが変更されたら、imageFileを更新する
+  const { imageFile, handleImageChange } = useHandleImageChange();
   // stateのimgageFileが変更されたら、画像URLを取得する
-  const { imageUrl } = useGetImageUrl({ file: imgageFile });
+  const { imageUrl } = useGetImageUrl({ file: imageFile });
 
   const updateTeamProfile = () => {
     const selectedSportId = sports.find(
@@ -80,7 +76,7 @@ const TemplateProfileEdit: React.FC<Props> = (props: Props) => {
     if (!selectedSportId) {
       return;
     }
-    const iconPath = Storage.put(uuidv4(), imgageFile, {
+    const iconPath = Storage.put(uuidv4(), imageFile, {
       contentType: 'image/png',
     })
       .then((result) => result)
