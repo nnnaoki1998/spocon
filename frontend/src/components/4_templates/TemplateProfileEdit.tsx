@@ -21,6 +21,8 @@ import { useGetImageUrl } from '../../hooks/image/useGetImageUrl';
 import { useGetPrefectures } from '../../hooks/prefecture/useGetPrefectures';
 import { City, TypeTeam } from '../utils/TypeDefinitions';
 import { useHandlePrefectureChange } from '../../hooks/prefecture/useHandlePrefectureChange';
+import { useGetCities } from '../../hooks/city/useGetCities';
+import { useHandleCityChange } from '../../hooks/city/useHandleCityChange';
 
 export interface Props {
   team: TypeTeam | undefined;
@@ -46,23 +48,19 @@ const TemplateProfileEdit: React.FC<Props> = (props: Props) => {
   const [sportName, setSportName] = React.useState<string>(
     team ? team.sport_name : ''
   );
-  const [cities, setCities] = React.useState<City[] | undefined>();
-  const [city, setCity] = React.useState<string>('');
   const [description, setDescription] = React.useState<string>(
     team ? team.description : ''
   );
   const [imgageFile, setImageFile] = React.useState<File | null>(null);
   const SelectedImageRef = useRef(null);
 
-  const { prefecture, handlePrefectureChange } = useHandlePrefectureChange();
   const { prefectures } = useGetPrefectures();
+  const { prefecture, handlePrefectureChange } = useHandlePrefectureChange();
+  const { cities } = useGetCities(prefectures, prefecture);
+  const { city, handleCityChange } = useHandleCityChange();
   const { sports } = useGetSports();
 
-  const handleCityChange = (event: SelectChangeEvent) => {
-    setCity(event.target.value);
-  };
-
-  const handleSelectedImageChange = (
+  const handleImageChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     if (event.currentTarget?.files && event.currentTarget.files[0]) {
@@ -90,20 +88,6 @@ const TemplateProfileEdit: React.FC<Props> = (props: Props) => {
         console.log(error); // eslint-disable-line no-console
       });
   };
-
-  useEffect(() => {
-    prefectures?.forEach((pref) => {
-      if (pref.prefName === prefecture) {
-        getCities(pref.prefCode)
-          .then((res) => {
-            setCities(res.data.result);
-          })
-          .catch(() => {
-            console.log('Failed to call /cities'); // eslint-disable-line no-console
-          });
-      }
-    });
-  }, [prefecture]);
 
   return (
     <Card sx={{ flexGrow: 1, p: 10 }}>
@@ -206,7 +190,7 @@ const TemplateProfileEdit: React.FC<Props> = (props: Props) => {
         <VisuallyHiddenInput
           ref={SelectedImageRef}
           type="file"
-          onChange={handleSelectedImageChange}
+          onChange={handleImageChange}
         />
       </Button>
       {imageUrl ? (
