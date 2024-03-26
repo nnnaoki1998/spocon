@@ -24,6 +24,7 @@ import { useHandlePrefectureChange } from '../../hooks/prefecture/useHandlePrefe
 import { useGetSports } from '../../hooks/sport/useGetSports';
 import { TypeTeam } from '../utils/TypeDefinitions';
 import { useGetGrades } from '../../hooks/grade/useGetGrades';
+import { updateTeamInfo } from '../../feature/api/internal/team';
 
 export interface Props {
   team: TypeTeam | undefined;
@@ -43,6 +44,7 @@ const VisuallyHiddenInput = styled('input')({
 
 const TemplateProfileEdit: React.FC<Props> = (props: Props) => {
   const { team } = props;
+  const id = team ? team.id : 1;
   const [teamName, setTeamName] = React.useState<string>(
     team ? team.team_name : ''
   );
@@ -74,7 +76,7 @@ const TemplateProfileEdit: React.FC<Props> = (props: Props) => {
   // stateのimgageFileが変更されたら、画像URLを取得する
   const { imageUrl } = useGetImageUrl({ file: imageFile });
 
-  const updateTeamProfile = () => {
+  const updateTeamProfile = async () => {
     const selectedSportId = sports.find(
       (sport) => sport.name === sportName
     )?.id;
@@ -82,12 +84,35 @@ const TemplateProfileEdit: React.FC<Props> = (props: Props) => {
     if (!selectedSportId) {
       return;
     }
-    const iconPath = Storage.put(uuidv4(), imageFile, {
+    const selectedGradeId = grades.find(
+      (grade) => grade.name === gradeName
+    )?.id;
+    // TODO: エラーメッセージを検討
+    if (!selectedGradeId) {
+      return;
+    }
+    const putResult = await Storage.put(uuidv4(), imageFile, {
       contentType: 'image/png',
-    })
-      .then((result) => result)
-      .catch((error) => {
-        console.log(error); // eslint-disable-line no-console
+    });
+    await updateTeamInfo(
+      id,
+      teamName,
+      selectedSportId,
+      selectedGradeId,
+      putResult.key,
+      description,
+      prefecture,
+      city
+    );
+  };
+
+  const handleUpdateTeamProfile = () => {
+    updateTeamProfile()
+      .then(() => {
+        console.log('updateTeamProfile');
+      })
+      .catch((e) => {
+        console.log(e);
       });
   };
 
@@ -228,19 +253,7 @@ const TemplateProfileEdit: React.FC<Props> = (props: Props) => {
         />
       )}
       <Box textAlign="center">
-        <Button
-          id="fullWidth"
-          onClick={() => {
-            // eslint-disable-next-line no-console
-            console.log(
-              `teamName: ${teamName}`,
-              `sportName: ${sportName}`,
-              `prefecture: ${prefecture}`,
-              `city: ${city}`,
-              `description: ${description}`
-            );
-          }}
-        >
+        <Button id="fullWidth" onClick={() => handleUpdateTeamProfile()}>
           登録
         </Button>
       </Box>

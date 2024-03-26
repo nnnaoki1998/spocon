@@ -49,6 +49,8 @@ module.exports = {
         unnamedComponents: 'arrow-function',
       },
     ],
+    // バックエンドAPIのインターフェースでキャメルケースを使用するため、許可する
+    'camelcase': 'off',
   },
   settings: {
     'import/resolver': {
