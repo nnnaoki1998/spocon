@@ -16,7 +16,7 @@ const ProfileEdit: React.FC = () => {
   const { teamId } = useParams<{ teamId: string }>();
   // TODO: 数値以外のバリデーション検討
   if (teamId === undefined) {
-    console.error('teamIdが選択されていません')
+    console.error('teamIdが選択されていません');
     return <p>teamIdが選択されていません</p>;
   }
   const { team } = useGetTeam(parseInt(teamId, 10));
