@@ -12,7 +12,7 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
 import { Storage } from 'aws-amplify';
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import { useGetCities } from '../../hooks/city/useGetCities';
@@ -45,18 +45,10 @@ const VisuallyHiddenInput = styled('input')({
 const TemplateProfileEdit: React.FC<Props> = (props: Props) => {
   const { team } = props;
   const id = team ? team.id : 1;
-  const [teamName, setTeamName] = React.useState<string>(
-    team ? team.team_name : ''
-  );
-  const [gradeName, setGradeName] = React.useState<string>(
-    team ? team.grade_name : ''
-  );
-  const [sportName, setSportName] = React.useState<string>(
-    team ? team.sport_name : ''
-  );
-  const [description, setDescription] = React.useState<string>(
-    team ? team.description : ''
-  );
+  const [teamName, setTeamName] = React.useState<string>('');
+  const [gradeName, setGradeName] = React.useState<string>('');
+  const [sportName, setSportName] = React.useState<string>('');
+  const [description, setDescription] = React.useState<string>('');
   const SelectedImageRef = useRef(null);
 
   // グレード一覧を取得する
@@ -65,16 +57,25 @@ const TemplateProfileEdit: React.FC<Props> = (props: Props) => {
   const { sports } = useGetSports();
   // 都道府県一覧を取得する
   const { prefectures } = useGetPrefectures();
-  // 都道府県が変更されたら、prefectureを更新する
+  // 選択中の都道府県を更新する
   const { prefecture, handlePrefectureChange } = useHandlePrefectureChange();
-  // 都道府県が変更されたら、市区町村一覧を取得する
+  // 市区町村一覧を取得する
   const { cities } = useGetCities(prefectures, prefecture);
-  // 市区町村が変更されたら、cityを更新する
+  // 選択中の市区町村を更新する
   const { city, handleCityChange } = useHandleCityChange();
-  // 画像ファイルが変更されたら、imageFileを更新する
+  // 選択中の画像ファイルを更新する
   const { imageFile, handleImageChange } = useHandleImageChange();
-  // stateのimgageFileが変更されたら、画像URLを取得する
+  // 画像URLを取得する
   const { imageUrl } = useGetImageUrl({ file: imageFile });
+
+  useEffect(() => {
+    if (team) {
+      setTeamName(team.team_name);
+      setGradeName(team.grade_name);
+      setSportName(team.sport_name);
+      setDescription(team.description);
+    }
+  }, [team]);
 
   const updateTeamProfile = async () => {
     const selectedSportId = sports.find(
@@ -119,14 +120,12 @@ const TemplateProfileEdit: React.FC<Props> = (props: Props) => {
   return (
     <Card sx={{ flexGrow: 1, p: 10 }}>
       <Typography variant="h4" component="div">
-        チーム登録
+        チーム編集
       </Typography>
       <p>チーム名 *必須</p>
       <TextField
         fullWidth
         id="fullWidth"
-        rows={1}
-        maxRows={1}
         value={teamName}
         onChange={(e) => setTeamName(e.target.value)}
       />

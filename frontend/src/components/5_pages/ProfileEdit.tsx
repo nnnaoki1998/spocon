@@ -1,36 +1,26 @@
-import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import React from 'react';
+import { useParams } from 'react-router-dom';
 
 import { SpoconAppBar } from '../3_organisms/SpoconAppBar';
 import { TemplateProfileEdit } from '../4_templates/TemplateProfileEdit';
 
-import { TypeTeam } from '../utils/TypeDefinitions';
-import { getTeam } from '../utils/DummyApi';
 import { useAuth } from '../../hooks/auth/useAuth';
+import { useGetTeam } from '../../hooks/team/useGetTeam';
 
 const defaultTheme = createTheme();
 
 const ProfileEdit: React.FC = () => {
   const { teamId } = useParams<{ teamId: string }>();
-  const [team, setTeam] = React.useState<TypeTeam>();
+  // TODO: 数値以外のバリデーション検討
+  if (teamId === undefined) {
+    console.error('teamIdが選択されていません')
+    return <p>teamIdが選択されていません</p>;
+  }
+  const { team } = useGetTeam(parseInt(teamId, 10));
   const auth = useAuth();
-
-  const fetchTeamInfo = () => {
-    let id;
-    if (teamId) {
-      id = parseInt(teamId, 10);
-    } else {
-      id = parseInt('1', 10);
-    }
-    setTeam(getTeam(id));
-  };
-
-  useEffect(() => {
-    fetchTeamInfo();
-  }, []);
 
   return (
     <ThemeProvider theme={defaultTheme}>
