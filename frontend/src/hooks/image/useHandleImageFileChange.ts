@@ -1,7 +1,7 @@
 import { ChangeEvent, useState } from 'react';
 
 /** stateに保持する画像ファイルを変更する */
-export const useHandleImageChange = () => {
+export const useHandleImageFile = () => {
   const [imageFile, setImageFile] = useState<File | null>(null);
 
   const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {

@@ -1,4 +1,4 @@
-type Args = {
+export type Args = {
   file: File | null;
 };
 
