@@ -1,7 +1,7 @@
 import { SelectChangeEvent } from '@mui/material';
 import { useState } from 'react';
 
-/** 選択中の都道府県を保持するカスタムフック */
+/** stateに保持する都道府県を変更する */
 export const useHandlePrefectureChange = () => {
   const [prefecture, setPrefecture] = useState('');
 

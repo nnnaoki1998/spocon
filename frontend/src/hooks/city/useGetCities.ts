@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { City, Prefecture } from '../../components/utils/TypeDefinitions';
 import { getCities } from '../../feature/api/external/resas';
 
+/** 都道府県から市区町村一覧を取得する */
 export const useGetCities = (
   prefectures: Prefecture[] | undefined,
   prefecture: string

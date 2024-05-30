@@ -1,5 +1,6 @@
 import { ChangeEvent, useState } from 'react';
 
+/** stateに保持する画像ファイルを変更する */
 export const useHandleImageChange = () => {
   const [imageFile, setImageFile] = useState<File | null>(null);
 

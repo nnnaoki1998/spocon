@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { getSports } from '../../feature/api/internal/sport';
 import { SportInfo } from '../../components/utils/TypeDefinitions';
 
-/** スポーツ一覧を取得するカスタムフック */
+/** スポーツ一覧を取得する */
 export const useGetSports = () => {
   const [sports, setSports] = useState<SportInfo[]>([]);
 

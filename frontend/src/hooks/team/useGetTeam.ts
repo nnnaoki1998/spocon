@@ -2,9 +2,10 @@ import { useEffect, useState } from 'react';
 import { TypeTeam } from '../../components/utils/TypeDefinitions';
 import { getTeam } from '../../feature/api/internal/team';
 
+/** チームIDからチーム情報を取得する */
 export const useGetTeam = (teamId: number) => {
   const [team, setTeam] = useState<TypeTeam>();
-  console.log(teamId);
+  console.log(teamId); // eslint-disable-line no-console
 
   useEffect(() => {
     getTeam(teamId)
@@ -12,7 +13,7 @@ export const useGetTeam = (teamId: number) => {
         setTeam(res.data);
       })
       .catch((err) => {
-        console.error(err);
+        console.error(err); // eslint-disable-line no-console
       });
   }, []);
 

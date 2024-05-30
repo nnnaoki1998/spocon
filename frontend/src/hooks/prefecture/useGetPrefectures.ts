@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { getPrefectures } from '../../feature/api/external/resas';
 import { Prefecture } from '../../components/utils/TypeDefinitions';
 
-/** 都道府県一覧を取得するカスタムフック */
+/** 都道府県一覧を取得する */
 export const useGetPrefectures = () => {
   const [prefectures, setPrefectures] = useState<Prefecture[] | undefined>();
 
