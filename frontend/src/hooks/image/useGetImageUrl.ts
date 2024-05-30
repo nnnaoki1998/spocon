@@ -4,7 +4,7 @@ type Args = {
   file: File | null;
 };
 
-/** ファイル引数として受け取り、そのファイルのURLを返す */
+/** 指定されたファイルのURLを返す */
 export const useGetImageUrl = ({ file }: Args) => {
   const [imageUrl, setImageUrl] = React.useState('');
 

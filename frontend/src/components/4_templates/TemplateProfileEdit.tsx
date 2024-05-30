@@ -15,16 +15,16 @@ import { Storage } from 'aws-amplify';
 import React, { useEffect, useRef } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
+import { updateTeamInfo } from '../../feature/api/internal/team';
 import { useGetCities } from '../../hooks/city/useGetCities';
 import { useHandleCityChange } from '../../hooks/city/useHandleCityChange';
-import { useGetImageUrl } from '../../hooks/image/useGetImageUrl';
+import { useGetGrades } from '../../hooks/grade/useGetGrades';
 import { useHandleImageChange } from '../../hooks/image/useHandleImageChange';
 import { useGetPrefectures } from '../../hooks/prefecture/useGetPrefectures';
 import { useHandlePrefectureChange } from '../../hooks/prefecture/useHandlePrefectureChange';
 import { useGetSports } from '../../hooks/sport/useGetSports';
+import { getFileUrl } from '../../utils/getFileUrl';
 import { TypeTeam } from '../utils/TypeDefinitions';
-import { useGetGrades } from '../../hooks/grade/useGetGrades';
-import { updateTeamInfo } from '../../feature/api/internal/team';
 
 export interface Props {
   team: TypeTeam | undefined;
@@ -49,7 +49,9 @@ const TemplateProfileEdit: React.FC<Props> = (props: Props) => {
   const [gradeName, setGradeName] = React.useState<string>('');
   const [sportName, setSportName] = React.useState<string>('');
   const [description, setDescription] = React.useState<string>('');
+  const [imageUrl, setImageUrl] = React.useState<string>('');
   const SelectedImageRef = useRef(null);
+  const isGetFileUrlFirstRender = useRef(true);
 
   // グレード一覧を取得する
   const { grades } = useGetGrades();
@@ -65,8 +67,20 @@ const TemplateProfileEdit: React.FC<Props> = (props: Props) => {
   const { city, handleCityChange } = useHandleCityChange();
   // 選択中の画像ファイルを更新する
   const { imageFile, handleImageChange } = useHandleImageChange();
-  // 画像URLを取得する
-  const { imageUrl } = useGetImageUrl({ file: imageFile });
+
+  /**
+   * S3から画像を取得する
+   * @param iconPath S3に保存されている画像のパス
+   */
+  const getImageUrl = (iconPath: string) => {
+    Storage.get(iconPath)
+      .then((result) => {
+        setImageUrl(result);
+      })
+      .catch((error) => {
+        console.log(error); // eslint-disable-line no-console
+      });
+  };
 
   useEffect(() => {
     if (team) {
@@ -74,9 +88,26 @@ const TemplateProfileEdit: React.FC<Props> = (props: Props) => {
       setGradeName(team.grade_name);
       setSportName(team.sport_name);
       setDescription(team.description);
+      getImageUrl(team.icon_path);
     }
   }, [team]);
 
+  useEffect(() => {
+    // 初回レンダリング時は何もしない
+    if (isGetFileUrlFirstRender.current) {
+      isGetFileUrlFirstRender.current = false;
+      return;
+    }
+    const asyncSetImageUrl = async () => {
+      const fileUel = await getFileUrl({ file: imageFile });
+      setImageUrl(fileUel);
+    };
+    asyncSetImageUrl().catch((e) => {
+      console.log(e); // eslint-disable-line no-console
+    });
+  }, [imageFile]);
+
+  /** チーム情報を更新する */
   const updateTeamProfile = async () => {
     const selectedSportId = sports.find(
       (sport) => sport.name === sportName
@@ -107,13 +138,14 @@ const TemplateProfileEdit: React.FC<Props> = (props: Props) => {
     );
   };
 
+  /** チーム情報の更新処理を呼び出す */
   const handleUpdateTeamProfile = () => {
     updateTeamProfile()
       .then(() => {
-        console.log('updateTeamProfile');
+        console.log('updateTeamProfile'); // eslint-disable-line no-console
       })
       .catch((e) => {
-        console.log(e);
+        console.log(e); // eslint-disable-line no-console
       });
   };
 
@@ -253,7 +285,7 @@ const TemplateProfileEdit: React.FC<Props> = (props: Props) => {
       )}
       <Box textAlign="center">
         <Button id="fullWidth" onClick={() => handleUpdateTeamProfile()}>
-          登録
+          更新
         </Button>
       </Box>
     </Card>
