@@ -1,8 +1,6 @@
 import { Storage } from 'aws-amplify';
-/**
- * ストレージから画像を取得する
- * @param iconPath S3に保存されている画像のパス
- */
+
+/** ストレージから画像URLを取得する */
 export const useGetImageUrlFromStorage = (
   iconPath: string,
   setImageUrl: React.Dispatch<React.SetStateAction<string>>
