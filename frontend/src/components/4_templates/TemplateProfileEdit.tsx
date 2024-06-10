@@ -26,6 +26,7 @@ import { useHandlePrefectureChange } from '../../hooks/prefecture/useHandlePrefe
 import { useGetSports } from '../../hooks/sport/useGetSports';
 import { TypeTeam } from '../utils/TypeDefinitions';
 import { useGetImageUrlFromStorage } from '../../hooks/image/useGetImageUrlFromStorage';
+import { SpoconTextField } from '../1_atoms/SpoconTextField';
 
 export interface Props {
   team: TypeTeam | undefined;
@@ -132,9 +133,9 @@ const TemplateProfileEdit: React.FC<Props> = (props: Props) => {
         チーム編集
       </Typography>
       <p>チーム名 *必須</p>
-      <TextField
-        fullWidth
-        id="fullWidth"
+      <SpoconTextField
+        id="profile-edit-team-name"
+        label="チーム名"
         value={teamName}
         onChange={(e) => setTeamName(e.target.value)}
       />
