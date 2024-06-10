@@ -8,8 +8,6 @@ import Grid from '@mui/material/Grid';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
-import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
 import { Storage } from 'aws-amplify';
 import React, { useState, useEffect, useRef } from 'react';
@@ -27,6 +25,7 @@ import { useGetSports } from '../../hooks/sport/useGetSports';
 import { TypeTeam } from '../utils/TypeDefinitions';
 import { useGetImageUrlFromStorage } from '../../hooks/image/useGetImageUrlFromStorage';
 import { SpoconTextField } from '../1_atoms/SpoconTextField';
+import { SpoconPageTitle } from '../1_atoms/SpoconPageTitle';
 
 export interface Props {
   team: TypeTeam | undefined;
@@ -129,9 +128,7 @@ const TemplateProfileEdit: React.FC<Props> = (props: Props) => {
 
   return (
     <Card sx={{ flexGrow: 1, p: 10 }}>
-      <Typography variant="h4" component="div">
-        チーム編集
-      </Typography>
+      <SpoconPageTitle title="チーム編集" />
       <p>チーム名 *必須</p>
       <SpoconTextField
         id="profile-edit-team-name"
@@ -225,9 +222,9 @@ const TemplateProfileEdit: React.FC<Props> = (props: Props) => {
         </Grid>
       </Grid>
       <p>チーム紹介文 *必須</p>
-      <TextField
-        fullWidth
-        id="fullWidth"
+      <SpoconTextField
+        id="profile-edit-description"
+        label="チーム紹介文"
         multiline
         rows={4}
         maxRows={4}
