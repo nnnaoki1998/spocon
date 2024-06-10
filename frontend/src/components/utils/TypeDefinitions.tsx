@@ -5,7 +5,8 @@ export type TypeTeam = {
   reception_status: string;
   icon_path: string;
   description: string;
-  address: string;
+  address_state: string;
+  address_city: string;
   sport_name: string;
   grade_name: string;
 };

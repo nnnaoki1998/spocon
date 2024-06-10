@@ -12,7 +12,7 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
 import { Storage } from 'aws-amplify';
-import React, { useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import { updateTeamInfo } from '../../feature/api/internal/team';
@@ -46,11 +46,13 @@ const VisuallyHiddenInput = styled('input')({
 const TemplateProfileEdit: React.FC<Props> = (props: Props) => {
   const { team } = props;
   const id = team ? team.id : 1;
-  const [teamName, setTeamName] = React.useState<string>('');
-  const [gradeName, setGradeName] = React.useState<string>('');
-  const [sportName, setSportName] = React.useState<string>('');
-  const [description, setDescription] = React.useState<string>('');
-  const [imageUrl, setImageUrl] = React.useState<string>('');
+  const [teamName, setTeamName] = useState<string>('');
+  const [gradeName, setGradeName] = useState<string>('');
+  const [sportName, setSportName] = useState<string>('');
+  const [prefecture, setPrefecture] = useState<string>('');
+  const [city, setCity] = useState<string>('');
+  const [description, setDescription] = useState<string>('');
+  const [imageUrl, setImageUrl] = useState<string>('');
   const SelectedImageRef = useRef(null);
 
   // グレード一覧を取得する
@@ -60,11 +62,11 @@ const TemplateProfileEdit: React.FC<Props> = (props: Props) => {
   // 都道府県一覧を取得する
   const { prefectures } = useGetPrefectures();
   // 選択中の都道府県を更新する
-  const { prefecture, handlePrefectureChange } = useHandlePrefectureChange();
+  const { handlePrefectureChange } = useHandlePrefectureChange(setPrefecture);
   // 市区町村一覧を取得する
   const { cities } = useGetCities(prefectures, prefecture);
   // 選択中の市区町村を更新する
-  const { city, handleCityChange } = useHandleCityChange();
+  const { handleCityChange } = useHandleCityChange(setCity);
   // 選択中の画像ファイルを更新する
   const { imageFile, handleImageChange } = useHandleImageFile();
   // ファイルから画像URLを取得する
@@ -75,6 +77,8 @@ const TemplateProfileEdit: React.FC<Props> = (props: Props) => {
       setTeamName(team.team_name);
       setGradeName(team.grade_name);
       setSportName(team.sport_name);
+      setPrefecture(team.address_state);
+      setCity(team.address_city);
       setDescription(team.description);
       useGetImageUrlFromStorage(team.icon_path, setImageUrl);
     }
