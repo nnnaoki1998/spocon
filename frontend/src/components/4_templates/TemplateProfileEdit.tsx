@@ -1,12 +1,6 @@
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
-import CardMedia from '@mui/material/CardMedia';
-import Grid from '@mui/material/Grid';
-import { styled } from '@mui/material/styles';
 import { Storage } from 'aws-amplify';
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import { updateTeamInfo } from '../../feature/api/internal/team';
@@ -14,36 +8,17 @@ import { useGetCities } from '../../hooks/city/useGetCities';
 import { useHandleCityChange } from '../../hooks/city/useHandleCityChange';
 import { useGetGrades } from '../../hooks/grade/useGetGrades';
 import { useGetImageUrlFromFile } from '../../hooks/image/useGetImageUrlFromFile';
+import { useGetImageUrlFromStorage } from '../../hooks/image/useGetImageUrlFromStorage';
 import { useHandleImageFile } from '../../hooks/image/useHandleImageFileChange';
 import { useGetPrefectures } from '../../hooks/prefecture/useGetPrefectures';
 import { useHandlePrefectureChange } from '../../hooks/prefecture/useHandlePrefectureChange';
 import { useGetSports } from '../../hooks/sport/useGetSports';
-import {
-  GradeInfo,
-  Prefecture,
-  SportInfo,
-  TypeTeam,
-} from '../utils/TypeDefinitions';
-import { useGetImageUrlFromStorage } from '../../hooks/image/useGetImageUrlFromStorage';
-import { SpoconTextField } from '../1_atoms/SpoconTextField';
-import { SpoconPageTitle } from '../1_atoms/SpoconPageTitle';
-import { SpoconSelectField } from '../2_molecules/SpoconSelectField';
+import { ProfileEdit } from '../3_organisms/OrganismProfileEdit';
+import { TypeTeam } from '../utils/TypeDefinitions';
 
 export interface Props {
   team: TypeTeam | undefined;
 }
-
-const VisuallyHiddenInput = styled('input')({
-  clip: 'rect(0 0 0 0)',
-  clipPath: 'inset(50%)',
-  height: 1,
-  overflow: 'hidden',
-  position: 'absolute',
-  bottom: 0,
-  left: 0,
-  whiteSpace: 'nowrap',
-  width: 1,
-});
 
 const TemplateProfileEdit: React.FC<Props> = (props: Props) => {
   const { team } = props;
@@ -55,7 +30,6 @@ const TemplateProfileEdit: React.FC<Props> = (props: Props) => {
   const [city, setCity] = useState<string>('');
   const [description, setDescription] = useState<string>('');
   const [imageUrl, setImageUrl] = useState<string>('');
-  const SelectedImageRef = useRef(null);
 
   // グレード一覧を取得する
   const { grades } = useGetGrades();
@@ -130,113 +104,27 @@ const TemplateProfileEdit: React.FC<Props> = (props: Props) => {
 
   return (
     <Card sx={{ flexGrow: 1, p: 10 }}>
-      <SpoconPageTitle title="チーム編集" />
-      <p>チーム名 *必須</p>
-      <SpoconTextField
-        id="profile-edit-team-name"
-        label="チーム名"
-        value={teamName}
-        onChange={(e) => setTeamName(e.target.value)}
+      <ProfileEdit
+        teamName={teamName}
+        setTeamName={setTeamName}
+        gradeName={gradeName}
+        setGradeName={setGradeName}
+        sportName={sportName}
+        setSportName={setSportName}
+        prefecture={prefecture}
+        city={city}
+        description={description}
+        setDescription={setDescription}
+        imageUrl={imageUrl}
+        handleImageChange={handleImageChange}
+        handleUpdateTeamProfile={handleUpdateTeamProfile}
+        handlePrefectureChange={handlePrefectureChange}
+        handleCityChange={handleCityChange}
+        grades={grades}
+        sports={sports}
+        prefectures={prefectures}
+        cities={cities}
       />
-      <Box sx={{ minWidth: 120 }}>
-        <p>グレード種別 *必須</p>
-        <SpoconSelectField
-          selectFieldId="profile-edit-select-field-grade"
-          labelId="profile-edit-select-label-grade"
-          label="グレード"
-          selectionItems={grades}
-          getSelectionItemKey={(item: GradeInfo) => String(item.id)}
-          getSlectionItemName={(item: GradeInfo) => item.name}
-          value={gradeName}
-          onChange={(e) => setGradeName(e.target.value)}
-        />
-      </Box>
-      <Box sx={{ minWidth: 120 }}>
-        <p>スポーツ種別 *必須</p>
-        <SpoconSelectField
-          selectFieldId="profile-edit-select-field-sport"
-          labelId="profile-edit-select-label-sport"
-          label="スポーツ"
-          selectionItems={sports}
-          getSelectionItemKey={(item: SportInfo) => String(item.id)}
-          getSlectionItemName={(item: SportInfo) => item.name}
-          value={sportName}
-          onChange={(e) => setSportName(e.target.value)}
-        />
-      </Box>
-      <p>主な活動場所 *必須</p>
-      <Grid container>
-        <Grid item xs={6}>
-          {prefectures && (
-            <SpoconSelectField
-              selectFieldId="profile-edit-select-field-prefecture"
-              labelId="profile-edit-select-label-prefecture"
-              label="都道府県"
-              selectionItems={prefectures}
-              getSelectionItemKey={(item: Prefecture) => String(item.prefCode)}
-              getSlectionItemName={(item: Prefecture) => item.prefName}
-              value={prefecture}
-              onChange={handlePrefectureChange}
-            />
-          )}
-        </Grid>
-        <Grid item xs={6}>
-          {cities && (
-            <SpoconSelectField
-              selectFieldId="profile-edit-select-field-city"
-              labelId="profile-edit-select-label-city"
-              label="市区町村"
-              selectionItems={cities}
-              getSelectionItemKey={(item) => String(item.cityCode)}
-              getSlectionItemName={(item) => item.cityName}
-              value={city}
-              onChange={handleCityChange}
-            />
-          )}
-        </Grid>
-      </Grid>
-      <p>チーム紹介文 *必須</p>
-      <SpoconTextField
-        id="profile-edit-description"
-        label="チーム紹介文"
-        multiline
-        rows={4}
-        maxRows={4}
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-      />
-      <p>チーム画像 *必須</p>
-      <Button
-        component="label"
-        role={undefined}
-        variant="contained"
-        tabIndex={-1}
-        startIcon={<CloudUploadIcon />}
-      >
-        UPLOAD IMAGE
-        <VisuallyHiddenInput
-          ref={SelectedImageRef}
-          type="file"
-          onChange={handleImageChange}
-        />
-      </Button>
-      {imageUrl ? (
-        <CardMedia
-          component="img"
-          alt="upload image"
-          image={imageUrl}
-          sx={{ height: '300px', width: '300px' }}
-        />
-      ) : (
-        <Box
-          sx={{ height: '300px', width: '300px', backgroundColor: 'black' }}
-        />
-      )}
-      <Box textAlign="center">
-        <Button id="fullWidth" onClick={() => handleUpdateTeamProfile()}>
-          更新
-        </Button>
-      </Box>
     </Card>
   );
 };
