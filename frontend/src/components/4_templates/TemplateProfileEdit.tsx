@@ -22,10 +22,11 @@ import { useHandleImageFile } from '../../hooks/image/useHandleImageFileChange';
 import { useGetPrefectures } from '../../hooks/prefecture/useGetPrefectures';
 import { useHandlePrefectureChange } from '../../hooks/prefecture/useHandlePrefectureChange';
 import { useGetSports } from '../../hooks/sport/useGetSports';
-import { TypeTeam } from '../utils/TypeDefinitions';
+import { GradeInfo, TypeTeam } from '../utils/TypeDefinitions';
 import { useGetImageUrlFromStorage } from '../../hooks/image/useGetImageUrlFromStorage';
 import { SpoconTextField } from '../1_atoms/SpoconTextField';
 import { SpoconPageTitle } from '../1_atoms/SpoconPageTitle';
+import { SpoconSelectField } from '../2_molecules/SpoconSelectField';
 
 export interface Props {
   team: TypeTeam | undefined;
@@ -138,23 +139,16 @@ const TemplateProfileEdit: React.FC<Props> = (props: Props) => {
       />
       <Box sx={{ minWidth: 120 }}>
         <p>グレード種別 *必須</p>
-        <FormControl fullWidth>
-          <InputLabel id="select-grade-type">グレード</InputLabel>
-          <Select
-            labelId="select-grade-type"
-            id="select-grade"
-            value={gradeName}
-            label="グレード"
-            onChange={(e) => setGradeName(e.target.value)}
-            sx={{ width: '100%' }}
-          >
-            {grades?.map((item) => (
-              <MenuItem key={item.name} value={item.name}>
-                {item.name}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
+        <SpoconSelectField
+          selectFieldId="profile-edit-select-field-grade"
+          labelId="profile-edit-select-grade-label"
+          label="グレード"
+          selectionItems={grades}
+          getSelectionItemKey={(item: GradeInfo) => String(item.id)}
+          getSlectionItemName={(item: GradeInfo) => item.name}
+          value={gradeName}
+          onChange={(e) => setGradeName(e.target.value)}
+        />
       </Box>
       <Box sx={{ minWidth: 120 }}>
         <p>スポーツ種別 *必須</p>
