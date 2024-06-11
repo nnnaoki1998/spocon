@@ -22,7 +22,12 @@ import { useHandleImageFile } from '../../hooks/image/useHandleImageFileChange';
 import { useGetPrefectures } from '../../hooks/prefecture/useGetPrefectures';
 import { useHandlePrefectureChange } from '../../hooks/prefecture/useHandlePrefectureChange';
 import { useGetSports } from '../../hooks/sport/useGetSports';
-import { GradeInfo, TypeTeam } from '../utils/TypeDefinitions';
+import {
+  GradeInfo,
+  Prefecture,
+  SportInfo,
+  TypeTeam,
+} from '../utils/TypeDefinitions';
 import { useGetImageUrlFromStorage } from '../../hooks/image/useGetImageUrlFromStorage';
 import { SpoconTextField } from '../1_atoms/SpoconTextField';
 import { SpoconPageTitle } from '../1_atoms/SpoconPageTitle';
@@ -141,7 +146,7 @@ const TemplateProfileEdit: React.FC<Props> = (props: Props) => {
         <p>グレード種別 *必須</p>
         <SpoconSelectField
           selectFieldId="profile-edit-select-field-grade"
-          labelId="profile-edit-select-grade-label"
+          labelId="profile-edit-select-label-grade"
           label="グレード"
           selectionItems={grades}
           getSelectionItemKey={(item: GradeInfo) => String(item.id)}
@@ -152,67 +157,46 @@ const TemplateProfileEdit: React.FC<Props> = (props: Props) => {
       </Box>
       <Box sx={{ minWidth: 120 }}>
         <p>スポーツ種別 *必須</p>
-        <FormControl fullWidth>
-          <InputLabel id="select-sport-type">スポーツ</InputLabel>
-          <Select
-            labelId="select-sport-type"
-            id="select-sport"
-            value={sportName}
-            label="スポーツ"
-            onChange={(e) => setSportName(e.target.value)}
-            sx={{ width: '100%' }}
-          >
-            {sports?.map((item) => (
-              <MenuItem key={item.name} value={item.name}>
-                {item.name}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
+        <SpoconSelectField
+          selectFieldId="profile-edit-select-field-sport"
+          labelId="profile-edit-select-label-sport"
+          label="スポーツ"
+          selectionItems={sports}
+          getSelectionItemKey={(item: SportInfo) => String(item.id)}
+          getSlectionItemName={(item: SportInfo) => item.name}
+          value={sportName}
+          onChange={(e) => setSportName(e.target.value)}
+        />
       </Box>
       <p>主な活動場所 *必須</p>
       <Grid container>
         <Grid item xs={6}>
-          <FormControl fullWidth id="fullWidth">
-            <InputLabel id="demo-simple-select-autowidth-label">
-              都道府県
-            </InputLabel>
-            <Select
-              labelId="demo-simple-select-autowidth-label"
-              id="demo-simple-select-autowidth"
-              value={prefecture}
+          {prefectures && (
+            <SpoconSelectField
+              selectFieldId="profile-edit-select-field-prefecture"
+              labelId="profile-edit-select-label-prefecture"
               label="都道府県"
+              selectionItems={prefectures}
+              getSelectionItemKey={(item: Prefecture) => String(item.prefCode)}
+              getSlectionItemName={(item: Prefecture) => item.prefName}
+              value={prefecture}
               onChange={handlePrefectureChange}
-              autoWidth
-            >
-              {prefectures?.map((item) => (
-                <MenuItem key={item.prefName} value={item.prefName}>
-                  {item.prefName}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
+            />
+          )}
         </Grid>
         <Grid item xs={6}>
-          <FormControl fullWidth id="fullWidth">
-            <InputLabel id="demo-simple-select-autowidth-label">
-              市区町村
-            </InputLabel>
-            <Select
-              labelId="demo-simple-select-autowidth-label"
-              id="demo-simple-select-autowidth"
-              value={city}
+          {cities && (
+            <SpoconSelectField
+              selectFieldId="profile-edit-select-field-city"
+              labelId="profile-edit-select-label-city"
               label="市区町村"
+              selectionItems={cities}
+              getSelectionItemKey={(item) => String(item.cityCode)}
+              getSlectionItemName={(item) => item.cityName}
+              value={city}
               onChange={handleCityChange}
-              autoWidth
-            >
-              {cities?.map((item) => (
-                <MenuItem key={item.cityName} value={item.cityName}>
-                  {item.cityName}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
+            />
+          )}
         </Grid>
       </Grid>
       <p>チーム紹介文 *必須</p>
