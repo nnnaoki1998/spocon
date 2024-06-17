@@ -89,7 +89,7 @@ export const ProfileEdit: React.FC<ProfileEditProps> = ({
         onChange={(e) => setTeamName(e.target.value)}
       />
       <Box sx={{ minWidth: 120 }}>
-        <SpoconSelectForm 
+        <SpoconSelectForm
           selectFieldId="profile-edit-select-field-grade"
           isRequired
           labelId="profile-edit-select-label-grade"
@@ -102,7 +102,7 @@ export const ProfileEdit: React.FC<ProfileEditProps> = ({
         />
       </Box>
       <Box sx={{ minWidth: 120 }}>
-        <SpoconSelectForm 
+        <SpoconSelectForm
           selectFieldId="profile-edit-select-field-sport"
           isRequired
           labelId="profile-edit-select-label-sport"
@@ -145,7 +145,7 @@ export const ProfileEdit: React.FC<ProfileEditProps> = ({
           )}
         </Grid>
       </Grid>
-      <SpoconTextForm 
+      <SpoconTextForm
         id="profile-edit-description"
         isRequired
         label="チーム紹介文"
