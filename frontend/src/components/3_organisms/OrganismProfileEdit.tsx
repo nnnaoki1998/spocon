@@ -17,6 +17,9 @@ import {
 } from '../utils/TypeDefinitions';
 import { SpoconTextField } from '../1_atoms/SpoconTextField';
 import { SpoconPageTitle } from '../1_atoms/SpoconPageTitle';
+import { SpoconTextForm } from '../2_molecules/SpoconTextForm';
+import { SpoconFormLabel } from '../1_atoms/SpoconFormLabel';
+import { SpoconSelectForm } from '../2_molecules/SpoconSelectForm';
 
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',
@@ -78,17 +81,17 @@ export const ProfileEdit: React.FC<ProfileEditProps> = ({
   return (
     <Box>
       <SpoconPageTitle title="チーム編集" />
-      <p>チーム名 *必須</p>
-      <SpoconTextField
+      <SpoconTextForm
         id="profile-edit-team-name"
+        isRequired
         label="チーム名"
         value={teamName}
         onChange={(e) => setTeamName(e.target.value)}
       />
       <Box sx={{ minWidth: 120 }}>
-        <p>グレード種別 *必須</p>
-        <SpoconSelectField
+        <SpoconSelectForm 
           selectFieldId="profile-edit-select-field-grade"
+          isRequired
           labelId="profile-edit-select-label-grade"
           label="グレード"
           selectionItems={grades}
@@ -99,9 +102,9 @@ export const ProfileEdit: React.FC<ProfileEditProps> = ({
         />
       </Box>
       <Box sx={{ minWidth: 120 }}>
-        <p>スポーツ種別 *必須</p>
-        <SpoconSelectField
+        <SpoconSelectForm 
           selectFieldId="profile-edit-select-field-sport"
+          isRequired
           labelId="profile-edit-select-label-sport"
           label="スポーツ"
           selectionItems={sports}
@@ -111,7 +114,7 @@ export const ProfileEdit: React.FC<ProfileEditProps> = ({
           onChange={(e) => setSportName(e.target.value)}
         />
       </Box>
-      <p>主な活動場所 *必須</p>
+      <SpoconFormLabel label="主な活動場所" isRequired />
       <Grid container>
         <Grid item xs={6}>
           {prefectures && (
@@ -142,9 +145,9 @@ export const ProfileEdit: React.FC<ProfileEditProps> = ({
           )}
         </Grid>
       </Grid>
-      <p>チーム紹介文 *必須</p>
-      <SpoconTextField
+      <SpoconTextForm 
         id="profile-edit-description"
+        isRequired
         label="チーム紹介文"
         multiline
         rows={4}
@@ -152,7 +155,7 @@ export const ProfileEdit: React.FC<ProfileEditProps> = ({
         value={description}
         onChange={(e) => setDescription(e.target.value)}
       />
-      <p>チーム画像 *必須</p>
+      <SpoconFormLabel label="チーム画像" isRequired />
       <Button
         component="label"
         role={undefined}
