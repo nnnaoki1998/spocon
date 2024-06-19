@@ -1,7 +1,7 @@
 import { Box, SelectChangeEvent } from '@mui/material';
 import React from 'react';
 import { SpoconFormLabel } from '../1_atoms/SpoconFormLabel';
-import { SpoconSelectField } from './SpoconSelectField';
+import { SpoconSelectField } from '../1_atoms/SpoconSelectField';
 
 interface Props<T> {
   selectFieldId: string;

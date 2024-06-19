@@ -1,4 +1,3 @@
-import React, { useRef } from 'react';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import {
   Box,
@@ -8,18 +7,18 @@ import {
   SelectChangeEvent,
   styled,
 } from '@mui/material';
-import { SpoconSelectField } from '../2_molecules/SpoconSelectField';
+import React, { useRef } from 'react';
+import { SpoconFormLabel } from '../1_atoms/SpoconFormLabel';
+import { SpoconPageTitle } from '../1_atoms/SpoconPageTitle';
+import { SpoconSelectField } from '../1_atoms/SpoconSelectField';
+import { SpoconSelectForm } from '../2_molecules/SpoconSelectForm';
+import { SpoconTextForm } from '../2_molecules/SpoconTextForm';
 import {
   City,
   GradeInfo,
   Prefecture,
   SportInfo,
 } from '../utils/TypeDefinitions';
-import { SpoconTextField } from '../1_atoms/SpoconTextField';
-import { SpoconPageTitle } from '../1_atoms/SpoconPageTitle';
-import { SpoconTextForm } from '../2_molecules/SpoconTextForm';
-import { SpoconFormLabel } from '../1_atoms/SpoconFormLabel';
-import { SpoconSelectForm } from '../2_molecules/SpoconSelectForm';
 
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',
@@ -88,32 +87,28 @@ export const ProfileEdit: React.FC<ProfileEditProps> = ({
         value={teamName}
         onChange={(e) => setTeamName(e.target.value)}
       />
-      <Box sx={{ minWidth: 120 }}>
-        <SpoconSelectForm
-          selectFieldId="profile-edit-select-field-grade"
-          isRequired
-          labelId="profile-edit-select-label-grade"
-          label="グレード"
-          selectionItems={grades}
-          getSelectionItemKey={(item: GradeInfo) => String(item.id)}
-          getSlectionItemName={(item: GradeInfo) => item.name}
-          value={gradeName}
-          onChange={(e) => setGradeName(e.target.value)}
-        />
-      </Box>
-      <Box sx={{ minWidth: 120 }}>
-        <SpoconSelectForm
-          selectFieldId="profile-edit-select-field-sport"
-          isRequired
-          labelId="profile-edit-select-label-sport"
-          label="スポーツ"
-          selectionItems={sports}
-          getSelectionItemKey={(item: SportInfo) => String(item.id)}
-          getSlectionItemName={(item: SportInfo) => item.name}
-          value={sportName}
-          onChange={(e) => setSportName(e.target.value)}
-        />
-      </Box>
+      <SpoconSelectForm
+        selectFieldId="profile-edit-select-field-grade"
+        isRequired
+        labelId="profile-edit-select-label-grade"
+        label="グレード"
+        selectionItems={grades}
+        getSelectionItemKey={(item: GradeInfo) => String(item.id)}
+        getSlectionItemName={(item: GradeInfo) => item.name}
+        value={gradeName}
+        onChange={(e) => setGradeName(e.target.value)}
+      />
+      <SpoconSelectForm
+        selectFieldId="profile-edit-select-field-sport"
+        isRequired
+        labelId="profile-edit-select-label-sport"
+        label="スポーツ"
+        selectionItems={sports}
+        getSelectionItemKey={(item: SportInfo) => String(item.id)}
+        getSlectionItemName={(item: SportInfo) => item.name}
+        value={sportName}
+        onChange={(e) => setSportName(e.target.value)}
+      />
       <SpoconFormLabel label="主な活動場所" isRequired />
       <Grid container>
         <Grid item xs={6}>
