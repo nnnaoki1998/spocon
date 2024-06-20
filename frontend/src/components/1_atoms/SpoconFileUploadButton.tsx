@@ -21,7 +21,7 @@ type Props = {
 
 export const SpoconFileUploadButton: React.FC<Props> = ({
   label,
-  onChange: onChangeFunction,
+  onChange,
 }) => {
   const SelectedImageRef = useRef(null);
   return (
@@ -37,7 +37,7 @@ export const SpoconFileUploadButton: React.FC<Props> = ({
       <VisuallyHiddenInput
         ref={SelectedImageRef}
         type="file"
-        onChange={onChangeFunction}
+        onChange={onChange}
       />
     </Button>
   );

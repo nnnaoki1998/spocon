@@ -14,6 +14,7 @@ import {
   Prefecture,
   SportInfo,
 } from '../utils/TypeDefinitions';
+import { SpoconFileUploadForm } from '../2_molecules/SpoconFileUploadForm';
 
 interface ProfileEditProps {
   teamName: string;
@@ -130,9 +131,13 @@ export const ProfileEdit: React.FC<ProfileEditProps> = ({
       value={description}
       onChange={(e) => setDescription(e.target.value)}
     />
-    <SpoconFormLabel label="チーム画像" isRequired />
-    <SpoconFileUploadButton label="UPLOAD IMAGE" onChange={handleImageChange} />
-    <SpoconImageDisplayBox imageUrl={imageUrl} />
+    <SpoconFileUploadForm
+      formLabel="チーム画像"
+      isRequired
+      buttonLabel="UPLOAD IMAGE"
+      onChange={handleImageChange}
+      imageUrl={imageUrl}
+    />
     <Box textAlign="center" sx={{ mt: 4 }}>
       <SpoconButton
         size="large"
