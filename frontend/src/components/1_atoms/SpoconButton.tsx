@@ -2,13 +2,24 @@ import React from 'react';
 import Button from '@mui/material/Button';
 
 export interface Props {
-  onClickFunction: React.Dispatch<React.SetStateAction<boolean>>;
+  size?: 'small' | 'medium' | 'large';
+  variant?: 'text' | 'outlined' | 'contained';
+  label: string;
+  onClickFunction: () => void;
 }
 
-const SpoconButton: React.FC<Props> = (props: Props) => {
-  const { onClickFunction } = props;
+export const SpoconButton: React.FC<Props> = ({
+  size,
+  variant,
+  label,
+  onClickFunction,
+}) => (
+  <Button size={size} variant={variant} onClick={onClickFunction}>
+    {label}
+  </Button>
+);
 
-  return <Button onClick={() => onClickFunction(true)} />;
+SpoconButton.defaultProps = {
+  size: 'medium',
+  variant: 'contained',
 };
-
-export { SpoconButton };
