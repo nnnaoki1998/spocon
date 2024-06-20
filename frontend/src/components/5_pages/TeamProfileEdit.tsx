@@ -5,14 +5,15 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 
 import { SpoconAppBar } from '../3_organisms/SpoconAppBar';
-import { TemplateProfileEdit } from '../4_templates/TemplateProfileEdit';
 
+import { TeamProfileWritableType } from '../../constants/TeamProfileWritableType';
 import { useAuth } from '../../hooks/auth/useAuth';
 import { useGetTeam } from '../../hooks/team/useGetTeam';
+import { TeamProfileWritableFrame } from '../4_templates/TeamProfileWritableFrame';
 
 const defaultTheme = createTheme();
 
-const ProfileEdit: React.FC = () => {
+export const TeamProfileEdit: React.FC = () => {
   const { teamId } = useParams<{ teamId: string }>();
   // TODO: 数値以外のバリデーション検討
   if (teamId === undefined) {
@@ -32,12 +33,13 @@ const ProfileEdit: React.FC = () => {
           }}
         >
           <Container maxWidth="md">
-            <TemplateProfileEdit team={team} />
+            <TeamProfileWritableFrame
+              writableType={TeamProfileWritableType.Edit}
+              team={team}
+            />
           </Container>
         </Box>
       </main>
     </ThemeProvider>
   );
 };
-
-export { ProfileEdit };
