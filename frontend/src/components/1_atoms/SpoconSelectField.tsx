@@ -7,7 +7,7 @@ import {
 } from '@mui/material';
 import React from 'react';
 
-interface Props<T> {
+type Props<T> = {
   selectFieldId: string;
   labelId: string;
   label: string;
@@ -16,7 +16,7 @@ interface Props<T> {
   getSlectionItemName: (item: T) => string;
   value: string;
   onChange: (e: SelectChangeEvent<string>) => void;
-}
+};
 
 export const SpoconSelectField = <T,>({
   selectFieldId,

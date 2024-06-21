@@ -1,7 +1,7 @@
 import React from 'react';
 import TextField from '@mui/material/TextField';
 
-interface Props {
+type Props = {
   id: string;
   label: string;
   multiline?: boolean;
@@ -9,7 +9,7 @@ interface Props {
   maxRows?: number;
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-}
+};
 
 export const SpoconTextField: React.FC<Props> = ({
   id,

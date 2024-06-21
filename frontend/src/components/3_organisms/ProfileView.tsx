@@ -7,9 +7,9 @@ import { useNavigate } from 'react-router-dom';
 import { Box, Button } from '@mui/material';
 import { TypeTeam } from '../utils/TypeDefinitions';
 
-export interface Props {
+type Props = {
   team: TypeTeam | undefined;
-}
+};
 
 const ProfileView: React.FC<Props> = (props: Props) => {
   const { team } = props;
@@ -35,7 +35,8 @@ const ProfileView: React.FC<Props> = (props: Props) => {
       </Typography>
       <p>住所</p>
       <Typography variant="h5" component="div">
-        {team.address}
+        {/* TODO: デザインに沿って修正する */}
+        {team.address_state} {team.address_city}
       </Typography>
       <p>チーム紹介文</p>
       <Typography variant="h5" component="div">

@@ -3,7 +3,7 @@ import React from 'react';
 import { SpoconFormLabel } from '../1_atoms/SpoconFormLabel';
 import { SpoconSelectField } from '../1_atoms/SpoconSelectField';
 
-interface Props<T> {
+type Props<T> = {
   selectFieldId: string;
   isRequired: boolean;
   labelId: string;
@@ -13,7 +13,7 @@ interface Props<T> {
   getSlectionItemName: (item: T) => string;
   value: string;
   onChange: (e: SelectChangeEvent<string>) => void;
-}
+};
 
 export const SpoconSelectForm = <T,>({
   selectFieldId,
