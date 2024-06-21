@@ -21,10 +21,10 @@ import { SpoconFileUploadForm } from '../2_molecules/SpoconFileUploadForm';
 import { SpoconSelectForm } from '../2_molecules/SpoconSelectForm';
 import { SpoconTextForm } from '../2_molecules/SpoconTextForm';
 import {
-  City,
-  GradeInfo,
-  Prefecture,
-  SportInfo,
+  TypeCity,
+  TypeGrade,
+  TypePrefecture,
+  TypeSport,
   TypeTeam,
 } from '../utils/TypeDefinitions';
 
@@ -139,8 +139,8 @@ export const TeamProfileWritableView: React.FC<Props> = ({
         labelId="profile-edit-select-label-grade"
         label="グレード"
         selectionItems={grades}
-        getSelectionItemKey={(item: GradeInfo) => String(item.id)}
-        getSlectionItemName={(item: GradeInfo) => item.name}
+        getSelectionItemKey={(item: TypeGrade) => String(item.id)}
+        getSlectionItemName={(item: TypeGrade) => item.name}
         value={gradeName}
         onChange={(e) => setGradeName(e.target.value)}
       />
@@ -150,8 +150,8 @@ export const TeamProfileWritableView: React.FC<Props> = ({
         labelId="profile-edit-select-label-sport"
         label="スポーツ"
         selectionItems={sports}
-        getSelectionItemKey={(item: SportInfo) => String(item.id)}
-        getSlectionItemName={(item: SportInfo) => item.name}
+        getSelectionItemKey={(item: TypeSport) => String(item.id)}
+        getSlectionItemName={(item: TypeSport) => item.name}
         value={sportName}
         onChange={(e) => setSportName(e.target.value)}
       />
@@ -164,8 +164,10 @@ export const TeamProfileWritableView: React.FC<Props> = ({
               labelId="profile-edit-select-label-prefecture"
               label="都道府県"
               selectionItems={prefectures}
-              getSelectionItemKey={(item: Prefecture) => String(item.prefCode)}
-              getSlectionItemName={(item: Prefecture) => item.prefName}
+              getSelectionItemKey={(item: TypePrefecture) =>
+                String(item.prefCode)
+              }
+              getSlectionItemName={(item: TypePrefecture) => item.prefName}
               value={prefecture}
               onChange={handlePrefectureChange}
             />
@@ -178,8 +180,8 @@ export const TeamProfileWritableView: React.FC<Props> = ({
               labelId="profile-edit-select-label-city"
               label="市区町村"
               selectionItems={cities}
-              getSelectionItemKey={(item: City) => String(item.cityCode)}
-              getSlectionItemName={(item: City) => item.cityName}
+              getSelectionItemKey={(item: TypeCity) => String(item.cityCode)}
+              getSlectionItemName={(item: TypeCity) => item.cityName}
               value={city}
               onChange={handleCityChange}
             />

@@ -1,13 +1,16 @@
 import { useEffect, useState } from 'react';
-import { City, Prefecture } from '../../components/utils/TypeDefinitions';
+import {
+  TypeCity,
+  TypePrefecture,
+} from '../../components/utils/TypeDefinitions';
 import { getCities } from '../../feature/api/external/resas';
 
 /** 都道府県から市区町村一覧を取得する */
 export const useGetCities = (
-  prefectures: Prefecture[] | undefined,
+  prefectures: TypePrefecture[] | undefined,
   prefecture: string
 ) => {
-  const [cities, setCities] = useState<City[] | undefined>();
+  const [cities, setCities] = useState<TypeCity[] | undefined>();
 
   useEffect(() => {
     prefectures?.forEach((pref) => {

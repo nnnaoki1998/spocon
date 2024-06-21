@@ -44,38 +44,24 @@ export type TeamInfo = {
   uuid: string;
 };
 
-export type TeamInfos =
-  | ({
-      address: string;
-      description: string;
-      grade_name: string;
-      icon_path: string;
-      id: number;
-      reception_status: string;
-      sport_name: string;
-      team_name: string;
-      uuid: string;
-    } | null)[]
-  | undefined;
-
-export type SportInfo = {
+export type TypeSport = {
   id: number;
   name: string;
   createdAt: string; // TODO: バックエンドから返さないようにできないか検討
   updatedAt: string; // TODO: バックエンドから返さないようにできないか検討
 };
 
-export type GradeInfo = {
+export type TypeGrade = {
   id: number;
   name: string;
 };
 
-export interface Prefecture {
+export interface TypePrefecture {
   prefCode: number;
   prefName: string;
 }
 
-export interface City {
+export interface TypeCity {
   cityCode: number;
   cityName: string;
   bigCityFlag: number;

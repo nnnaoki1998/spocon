@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { getSports } from '../../feature/api/internal/sport';
-import { SportInfo } from '../../components/utils/TypeDefinitions';
+import { TypeSport } from '../../components/utils/TypeDefinitions';
 
 /** スポーツ一覧を取得する */
 export const useGetSports = () => {
-  const [sports, setSports] = useState<SportInfo[]>([]);
+  const [sports, setSports] = useState<TypeSport[]>([]);
 
   useEffect(() => {
     getSports()

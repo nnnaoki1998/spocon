@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import { GradeInfo } from '../../components/utils/TypeDefinitions';
+import { TypeGrade } from '../../components/utils/TypeDefinitions';
 import { getGrades } from '../../feature/api/internal/grade';
 
 /** グレード一覧を取得する */
 export const useGetGrades = () => {
-  const [grades, setGrades] = useState<GradeInfo[]>([]);
+  const [grades, setGrades] = useState<TypeGrade[]>([]);
 
   useEffect(() => {
     getGrades()

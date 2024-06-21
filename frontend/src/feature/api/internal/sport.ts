@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
-import { SportInfo } from '../../../components/utils/TypeDefinitions';
+import { TypeSport } from '../../../components/utils/TypeDefinitions';
 import { backendUrl } from '../../../config';
 
 /** スポーツ一覧を取得します */
-export const getSports = async (): Promise<AxiosResponse<SportInfo[]>> =>
+export const getSports = async (): Promise<AxiosResponse<TypeSport[]>> =>
   axios.get(`${backendUrl}/sport`);

@@ -1,5 +1,8 @@
 import axios, { AxiosResponse } from 'axios';
-import { City, Prefecture } from '../../../components/utils/TypeDefinitions';
+import {
+  TypeCity,
+  TypePrefecture,
+} from '../../../components/utils/TypeDefinitions';
 import { resasApiKey, resasApiUrl } from '../../../config';
 
 type ResasApiResponse<T> = {
@@ -9,7 +12,7 @@ type ResasApiResponse<T> = {
 
 /** 都道府県一覧を取得します */
 export const getPrefectures = async (): Promise<
-  AxiosResponse<ResasApiResponse<Prefecture>>
+  AxiosResponse<ResasApiResponse<TypePrefecture>>
 > =>
   axios.get(`${resasApiUrl}/prefectures`, {
     headers: { 'X-API-KEY': resasApiKey },
@@ -18,7 +21,7 @@ export const getPrefectures = async (): Promise<
 /** 市区町村一覧を取得します */
 export const getCities = async (
   prefCode: number
-): Promise<AxiosResponse<ResasApiResponse<City>>> =>
+): Promise<AxiosResponse<ResasApiResponse<TypeCity>>> =>
   axios.get(`${resasApiUrl}/cities?prefCode=${prefCode}`, {
     headers: { 'X-API-KEY': resasApiKey },
   });
