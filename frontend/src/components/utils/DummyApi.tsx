@@ -1,4 +1,4 @@
-import { TypeTeam } from './TypeDefinitions';
+import { TypeTeam } from '../../types';
 import * as dummy from './DummyData';
 
 export const getTeam = (teamId: number) => {

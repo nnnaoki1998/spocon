@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 import { useNavigate } from 'react-router-dom';
 
 import Button from '@mui/material/Button';
-import { TeamInfo } from '../utils/TypeDefinitions';
+import { TeamInfo } from '../../types';
 
 const basePathToProfile = '/profile';
 const basePathToChat = '/chat2';

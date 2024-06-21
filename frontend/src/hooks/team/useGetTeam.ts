@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { TypeTeam } from '../../components/utils/TypeDefinitions';
+import { TypeTeam } from '../../types';
 import { getTeam } from '../../feature/api/internal/team';
 
 /** チームIDからチーム情報を取得する */

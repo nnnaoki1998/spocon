@@ -1,8 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
-import {
-  TypeCity,
-  TypePrefecture,
-} from '../../../components/utils/TypeDefinitions';
+import { TypeCity, TypePrefecture } from '../../../types';
 import { resasApiKey, resasApiUrl } from '../../../config';
 
 type ResasApiResponse<T> = {

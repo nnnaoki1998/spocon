@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
-import { TypeSport } from '../../../components/utils/TypeDefinitions';
+import { TypeSport } from '../../../types';
 import { backendUrl } from '../../../config';
 
 /** スポーツ一覧を取得します */

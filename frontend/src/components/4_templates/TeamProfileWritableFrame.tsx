@@ -2,7 +2,7 @@ import { Card } from '@mui/material';
 import React from 'react';
 import { TeamProfileWritableType } from '../../constants/TeamProfileWritableType';
 import { TeamProfileWritableView } from '../3_organisms/TeamProfileWritableView';
-import { TypeTeam } from '../utils/TypeDefinitions';
+import { TypeTeam } from '../../types';
 
 type Props = {
   writableType: TeamProfileWritableType;

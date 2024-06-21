@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getPrefectures } from '../../feature/api/external/resas';
-import { TypePrefecture } from '../../components/utils/TypeDefinitions';
+import { TypePrefecture } from '../../types';
 
 /** 都道府県一覧を取得する */
 export const useGetPrefectures = () => {

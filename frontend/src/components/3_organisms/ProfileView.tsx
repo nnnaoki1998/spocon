@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 
 import { useNavigate } from 'react-router-dom';
 import { Box, Button } from '@mui/material';
-import { TypeTeam } from '../utils/TypeDefinitions';
+import { TypeTeam } from '../../types';
 
 type Props = {
   team: TypeTeam | undefined;

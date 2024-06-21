@@ -1,4 +1,4 @@
-import { TypeTeam } from './TypeDefinitions';
+import { TypeTeam } from '../../types';
 
 export const teamList1: TypeTeam[] = [
   {

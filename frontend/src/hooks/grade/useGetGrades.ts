@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { TypeGrade } from '../../components/utils/TypeDefinitions';
+import { TypeGrade } from '../../types';
 import { getGrades } from '../../feature/api/internal/grade';
 
 /** グレード一覧を取得する */

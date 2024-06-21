@@ -8,7 +8,7 @@ import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import axios from 'axios';
 
-import { TeamInfo } from '../utils/TypeDefinitions';
+import { TeamInfo } from '../../types';
 import { prefectures, sports, grades } from '../utils/DummyData';
 import { ImgMediaCard } from './Card';
 import { Selector } from './Selector';

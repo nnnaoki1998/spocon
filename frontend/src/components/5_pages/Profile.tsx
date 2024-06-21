@@ -7,7 +7,7 @@ import Container from '@mui/material/Container';
 import { SpoconAppBar } from '../3_organisms/SpoconAppBar';
 import { TemplateProfile } from '../4_templates/TemplateProfile';
 
-import { TypeTeam } from '../utils/TypeDefinitions';
+import { TypeTeam } from '../../types';
 import { getTeam } from '../utils/DummyApi';
 import { useAuth } from '../../hooks/auth/useAuth';
 

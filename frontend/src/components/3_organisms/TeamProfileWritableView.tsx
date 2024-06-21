@@ -26,7 +26,7 @@ import {
   TypePrefecture,
   TypeSport,
   TypeTeam,
-} from '../utils/TypeDefinitions';
+} from '../../types';
 
 type Props = {
   writableType: TeamProfileWritableType;

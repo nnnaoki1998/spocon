@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 import { backendUrl } from '../../../config';
-import { TypeTeam } from '../../../components/utils/TypeDefinitions';
+import { TypeTeam } from '../../../types';
 
 /** チーム情報を取得します */
 export const getTeam = async (id: number): Promise<AxiosResponse<TypeTeam>> =>

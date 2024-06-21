@@ -6,7 +6,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 
 import Button from '@mui/material/Button';
-import { TeamInfo } from '../utils/TypeDefinitions';
+import { TeamInfo } from '../../types';
 
 export interface Props {
   teamInfo: TeamInfo;

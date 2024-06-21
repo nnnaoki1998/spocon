@@ -3,7 +3,7 @@ import { API } from 'aws-amplify';
 import { GraphQLSubscription } from '@aws-amplify/api';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-import { TypeTest } from '../utils/TypeDefinitions';
+import { TypeTest } from '../../types';
 import { TemplateChat } from '../4_templates/TemplateChat';
 import { ChatMessage, OnCreateChatMessageSubscription } from '../../API';
 import { onCreateChatMessage } from '../../graphql/subscriptions';

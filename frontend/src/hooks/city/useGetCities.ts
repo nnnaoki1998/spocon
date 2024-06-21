@@ -1,8 +1,5 @@
 import { useEffect, useState } from 'react';
-import {
-  TypeCity,
-  TypePrefecture,
-} from '../../components/utils/TypeDefinitions';
+import { TypeCity, TypePrefecture } from '../../types';
 import { getCities } from '../../feature/api/external/resas';
 
 /** 都道府県から市区町村一覧を取得する */

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getSports } from '../../feature/api/internal/sport';
-import { TypeSport } from '../../components/utils/TypeDefinitions';
+import { TypeSport } from '../../types';
 
 /** スポーツ一覧を取得する */
 export const useGetSports = () => {

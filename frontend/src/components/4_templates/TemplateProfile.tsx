@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { TypeTeam } from '../utils/TypeDefinitions';
+import { TypeTeam } from '../../types';
 import { ProfileView } from '../3_organisms/ProfileView';
 
 type Props = {
