@@ -1,8 +1,9 @@
+import { ThemeProvider, createTheme } from '@mui/material';
+import { Amplify, Storage } from 'aws-amplify';
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
-import { Amplify, Storage } from 'aws-amplify';
-import { Router } from './Router';
 import { AuthProvider } from './AuthProvider';
+import { Router } from './Router';
 import awsExports from './aws-exports';
 
 Amplify.configure({ ...awsExports });
@@ -18,8 +19,12 @@ if (!container) throw new Error('Failed to find the root element.')
 
 const root = createRoot(container)
 
+const defaultTheme = createTheme();
+
 root.render(
     <AuthProvider>
-      <Router />
+      <ThemeProvider theme={defaultTheme}>
+        <Router />
+      </ThemeProvider>
     </AuthProvider>
 );
