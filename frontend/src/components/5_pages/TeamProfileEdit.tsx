@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 
 import { TeamProfileWritableType } from '../../constants/TeamProfileWritableType';
 import { useAuth } from '../../hooks/auth/useAuth';
-import { useGetTeam } from '../../hooks/team/useGetTeam';
 import { TeamProfileWritableFrame } from '../4_templates/TeamProfileWritableFrame';
 
 export const TeamProfileEdit: React.FC = () => {
@@ -12,14 +11,15 @@ export const TeamProfileEdit: React.FC = () => {
   if (teamId === undefined) {
     return <p>teamIdが選択されていません</p>;
   }
-  const { team } = useGetTeam(parseInt(teamId, 10));
+  // NOTE: idは数値である必要があるのか、検討
+  const teamIdNumber = parseInt(teamId, 10);
   const auth = useAuth();
 
   return (
     <TeamProfileWritableFrame
       auth={auth}
       writableType={TeamProfileWritableType.Edit}
-      team={team}
+      teamId={teamIdNumber}
     />
   );
 };
