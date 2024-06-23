@@ -1,7 +1,7 @@
 import { Storage } from 'aws-amplify';
 import { v4 as uuidv4 } from 'uuid';
 import { TypeGrade, TypeSport } from '../../types';
-import { updateTeamInfo } from '../api/internal/team';
+import { updateTeamInfo } from '../apis/internal/team';
 
 type UpdateTeamProfileProps = {
   teamId: number;

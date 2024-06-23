@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getSports } from '../../feature/api/internal/sport';
+import { getSports } from '../../features/apis/internal/sport';
 import { TypeSport } from '../../types';
 
 /** スポーツ一覧を取得する */

@@ -1,7 +1,7 @@
 import { Box, Grid } from '@mui/material';
 import React, { useState } from 'react';
 import { TeamProfileWritableType } from '../../constants/TeamProfileWritableType';
-import { handleUpdateTeamProfile } from '../../feature/models/team';
+import { handleUpdateTeamProfile } from '../../features/models/team';
 import { useGetCities } from '../../hooks/city/useGetCities';
 import { useHandleCityChange } from '../../hooks/city/useHandleCityChange';
 import { useGetGrades } from '../../hooks/grade/useGetGrades';

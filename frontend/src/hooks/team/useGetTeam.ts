@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { TypeTeam } from '../../types';
-import { getTeam } from '../../feature/api/internal/team';
+import { getTeam } from '../../features/apis/internal/team';
 
 /** チームIDからチーム情報を取得する */
 export const useGetTeam = (teamId: number) => {

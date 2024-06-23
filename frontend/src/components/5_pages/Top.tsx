@@ -13,7 +13,7 @@ import { prefectures, sports, grades } from '../utils/DummyData';
 import { ImgMediaCard } from './Card';
 import { Selector } from './Selector';
 import { SpoconAppBar } from '../3_organisms/SpoconAppBar';
-import { createRelayChatRoom } from '../../feature/api/internal/chat';
+import { createRelayChatRoom } from '../../features/apis/internal/chat';
 import { useAuth } from '../../hooks/auth/useAuth';
 
 const defaultTheme = createTheme();

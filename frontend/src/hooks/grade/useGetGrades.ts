@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { TypeGrade } from '../../types';
-import { getGrades } from '../../feature/api/internal/grade';
+import { getGrades } from '../../features/apis/internal/grade';
 
 /** グレード一覧を取得する */
 export const useGetGrades = () => {
