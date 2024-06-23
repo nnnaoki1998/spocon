@@ -141,4 +141,3 @@ const SpoconAppBar: React.FC<Props> = (props: Props) => {
 };
 
 export { SpoconAppBar };
-

@@ -3,7 +3,7 @@ import { API } from 'aws-amplify';
 import { GraphQLSubscription } from '@aws-amplify/api';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-import { TypeTest } from '../utils/TypeDefinitions';
+import { TypeTest } from '../../types';
 import { TemplateChat } from '../4_templates/TemplateChat';
 import { ChatMessage, OnCreateChatMessageSubscription } from '../../API';
 import { onCreateChatMessage } from '../../graphql/subscriptions';
@@ -11,7 +11,7 @@ import {
   getChatMessages,
   getChatRooms,
   pushChatMessage,
-} from '../../feature/api/chat';
+} from '../../features/apis/internal/chat';
 import { SpoconAppBar } from '../3_organisms/SpoconAppBar';
 import { useAuth } from '../../hooks/auth/useAuth';
 
@@ -131,4 +131,3 @@ const Chat: React.FC = () => {
 };
 
 export { Chat };
-

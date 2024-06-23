@@ -5,11 +5,13 @@ import { SignUp } from './pages/signup/SignUp'
 import { ConfirmSignUp } from './pages/confirmSignup/ConfirmSignUp'
 import { Top } from './components/5_pages/Top';
 import { Profile } from './components/5_pages/Profile';
+import { TeamProfileEdit } from './components/5_pages/TeamProfileEdit';
 import { Chat } from './components/5_pages/Chat';
 import { Test } from './components/5_pages/Test';
 import { ImageSample } from './components/5_pages/ImageSample';
 import { TopBackup } from './pages/top/Top';
 import { ChatBackup } from './pages/chat/Chat';
+import { TeamProfileRegistration } from './components/5_pages/TeamProfileRegistration';
 
 export const Router: React.FC = () => (
   <BrowserRouter>
@@ -20,6 +22,8 @@ export const Router: React.FC = () => (
       <Route path="/top" element={<Top />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="/profile/:teamId" element={<Profile />} />
+      <Route path="/profile-registration" element={<TeamProfileRegistration />} />
+      <Route path="/profile-edit/:teamId" element={<TeamProfileEdit />} />
       <Route path="/chat" element={<Chat />} />
       <Route path="/test/:id" element={<Test />} />
       <Route path="/top-backup" element={<TopBackup />} />

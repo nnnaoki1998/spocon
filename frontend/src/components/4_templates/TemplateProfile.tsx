@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { TypeTeam } from '../utils/TypeDefinitions';
+import { TypeTeam } from '../../types';
 import { ProfileView } from '../3_organisms/ProfileView';
 
-export interface Props {
+type Props = {
   team: TypeTeam | undefined;
-}
+};
 
 const TemplateProfile: React.FC<Props> = (props: Props) => {
   const { team } = props;

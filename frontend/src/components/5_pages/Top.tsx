@@ -8,12 +8,12 @@ import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import axios from 'axios';
 
-import { TeamInfo } from '../utils/TypeDefinitions';
+import { TeamInfo } from '../../types';
 import { prefectures, sports, grades } from '../utils/DummyData';
 import { ImgMediaCard } from './Card';
 import { Selector } from './Selector';
 import { SpoconAppBar } from '../3_organisms/SpoconAppBar';
-import { createRelayChatRoom } from '../../feature/api/chat';
+import { createRelayChatRoom } from '../../features/apis/internal/chat';
 import { useAuth } from '../../hooks/auth/useAuth';
 
 const defaultTheme = createTheme();
@@ -116,4 +116,3 @@ const Top: React.FC = () => {
 };
 
 export { Top };
-

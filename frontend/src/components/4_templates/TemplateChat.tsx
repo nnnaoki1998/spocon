@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 
-import { TypeTest } from '../utils/TypeDefinitions';
+import { TypeTest } from '../../types';
 import { ChatSideView } from '../3_organisms/ChatSideView';
 import { ChatMainView } from '../3_organisms/ChatMainView';
 import { ChatMessage } from '../../API';

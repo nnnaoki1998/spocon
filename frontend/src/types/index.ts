@@ -5,7 +5,8 @@ export type TypeTeam = {
   reception_status: string;
   icon_path: string;
   description: string;
-  address: string;
+  address_state: string;
+  address_city: string;
   sport_name: string;
   grade_name: string;
 };
@@ -43,16 +44,25 @@ export type TeamInfo = {
   uuid: string;
 };
 
-export type TeamInfos =
-  | ({
-      address: string;
-      description: string;
-      grade_name: string;
-      icon_path: string;
-      id: number;
-      reception_status: string;
-      sport_name: string;
-      team_name: string;
-      uuid: string;
-    } | null)[]
-  | undefined;
+export type TypeSport = {
+  id: number;
+  name: string;
+  createdAt: string; // TODO: バックエンドから返さないようにできないか検討
+  updatedAt: string; // TODO: バックエンドから返さないようにできないか検討
+};
+
+export type TypeGrade = {
+  id: number;
+  name: string;
+};
+
+export interface TypePrefecture {
+  prefCode: number;
+  prefName: string;
+}
+
+export interface TypeCity {
+  cityCode: number;
+  cityName: string;
+  bigCityFlag: number;
+}

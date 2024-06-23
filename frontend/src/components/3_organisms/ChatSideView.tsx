@@ -6,7 +6,7 @@ import ListItemText from '@mui/material/ListItemText';
 import Typography from '@mui/material/Typography';
 import ListItemButton from '@mui/material/ListItemButton';
 
-import { TypeTest } from '../utils/TypeDefinitions';
+import { TypeTest } from '../../types';
 
 export interface Props {
   chatRooms: TypeTest;
