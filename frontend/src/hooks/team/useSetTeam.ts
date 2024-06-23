@@ -7,8 +7,8 @@ type Props = {
   setTeamName: React.Dispatch<React.SetStateAction<string>>;
   setGradeName: React.Dispatch<React.SetStateAction<string>>;
   setSportName: React.Dispatch<React.SetStateAction<string>>;
-  setPrefecture: React.Dispatch<React.SetStateAction<string>>;
-  setCity: React.Dispatch<React.SetStateAction<string>>;
+  setPrefectureName: React.Dispatch<React.SetStateAction<string>>;
+  setCityName: React.Dispatch<React.SetStateAction<string>>;
   setDescription: React.Dispatch<React.SetStateAction<string>>;
   setImageUrl: React.Dispatch<React.SetStateAction<string>>;
 };
@@ -18,8 +18,8 @@ export const useSetTeam = ({
   setTeamName,
   setGradeName,
   setSportName,
-  setPrefecture,
-  setCity,
+  setPrefectureName,
+  setCityName,
   setDescription,
   setImageUrl,
 }: Props) => {
@@ -30,8 +30,8 @@ export const useSetTeam = ({
       setTeamName(team.team_name);
       setGradeName(team.grade_name);
       setSportName(team.sport_name);
-      setPrefecture(team.address_state);
-      setCity(team.address_city);
+      setPrefectureName(team.address_state);
+      setCityName(team.address_city);
       setDescription(team.description);
       useGetImageUrlFromStorage(team.icon_path, setImageUrl);
     }

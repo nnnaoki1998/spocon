@@ -32,8 +32,8 @@ export const TeamProfileWritableView: React.FC<Props> = ({
   const [teamName, setTeamName] = useState<string>('');
   const [gradeName, setGradeName] = useState<string>('');
   const [sportName, setSportName] = useState<string>('');
-  const [prefecture, setPrefecture] = useState<string>('');
-  const [city, setCity] = useState<string>('');
+  const [prefectureName, setPrefectureName] = useState<string>('');
+  const [cityName, setCityName] = useState<string>('');
   const [description, setDescription] = useState<string>('');
   const [imageUrl, setImageUrl] = useState<string>('');
 
@@ -44,11 +44,12 @@ export const TeamProfileWritableView: React.FC<Props> = ({
   // 都道府県一覧を取得する
   const { prefectures } = useGetPrefectures();
   // 選択中の都道府県を更新する
-  const { handlePrefectureChange } = useHandlePrefectureChange(setPrefecture);
+  const { handlePrefectureChange } =
+    useHandlePrefectureChange(setPrefectureName);
   // 市区町村一覧を取得する
-  const { cities } = useGetCities(prefectures, prefecture);
+  const { cities } = useGetCities(prefectures, prefectureName);
   // 選択中の市区町村を更新する
-  const { handleCityChange } = useHandleCityChange(setCity);
+  const { handleCityChange } = useHandleCityChange(setCityName);
   // 選択中の画像ファイルを更新する
   const { imageFile, handleImageChange } = useHandleImageFile();
   // ファイルから画像URLを取得する
@@ -59,8 +60,8 @@ export const TeamProfileWritableView: React.FC<Props> = ({
     setTeamName,
     setGradeName,
     setSportName,
-    setPrefecture,
-    setCity,
+    setPrefectureName,
+    setCityName,
     setDescription,
     setImageUrl,
   });
@@ -116,7 +117,7 @@ export const TeamProfileWritableView: React.FC<Props> = ({
                 String(item.prefCode)
               }
               getSlectionItemName={(item: TypePrefecture) => item.prefName}
-              value={prefecture}
+              value={prefectureName}
               onChange={handlePrefectureChange}
             />
           )}
@@ -130,7 +131,7 @@ export const TeamProfileWritableView: React.FC<Props> = ({
               selectionItems={cities}
               getSelectionItemKey={(item: TypeCity) => String(item.cityCode)}
               getSlectionItemName={(item: TypeCity) => item.cityName}
-              value={city}
+              value={cityName}
               onChange={handleCityChange}
             />
           )}
@@ -170,8 +171,8 @@ export const TeamProfileWritableView: React.FC<Props> = ({
               sportName,
               grades,
               gradeName,
-              prefecture,
-              city,
+              prefectureName,
+              cityName,
               description,
               imageFile,
             })

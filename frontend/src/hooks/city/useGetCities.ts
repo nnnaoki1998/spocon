@@ -5,13 +5,13 @@ import { getCities } from '../../features/apis/external/resas';
 /** 都道府県から市区町村一覧を取得する */
 export const useGetCities = (
   prefectures: TypePrefecture[] | undefined,
-  prefecture: string
+  prefectureName: string
 ) => {
   const [cities, setCities] = useState<TypeCity[] | undefined>();
 
   useEffect(() => {
     prefectures?.forEach((pref) => {
-      if (pref.prefName === prefecture) {
+      if (pref.prefName === prefectureName) {
         getCities(pref.prefCode)
           .then((res) => {
             setCities(res.data.result);
@@ -21,7 +21,7 @@ export const useGetCities = (
           });
       }
     });
-  }, [prefecture]);
+  }, [prefectureName]);
 
   return { cities };
 };

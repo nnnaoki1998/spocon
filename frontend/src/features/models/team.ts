@@ -10,8 +10,8 @@ type UpdateTeamProfileProps = {
   sportName: string;
   grades: TypeGrade[];
   gradeName: string;
-  prefecture: string;
-  city: string;
+  prefectureName: string;
+  cityName: string;
   description: string;
   imageFile: File | null;
 };
@@ -29,8 +29,8 @@ const updateTeamProfile = async ({
   sportName,
   grades,
   gradeName,
-  prefecture,
-  city,
+  prefectureName,
+  cityName,
   description,
   imageFile,
 }: UpdateTeamProfileProps) => {
@@ -54,8 +54,8 @@ const updateTeamProfile = async ({
     selectedGradeId,
     putResult.key,
     description,
-    prefecture,
-    city
+    prefectureName,
+    cityName
   );
 };
 
@@ -67,8 +67,8 @@ export const handleUpdateTeamProfile = ({
   sportName,
   grades,
   gradeName,
-  prefecture,
-  city,
+  prefectureName,
+  cityName,
   description,
   imageFile,
 }: UpdateTeamProfileProps) => {
@@ -79,8 +79,8 @@ export const handleUpdateTeamProfile = ({
     sportName,
     grades,
     gradeName,
-    prefecture,
-    city,
+    prefectureName,
+    cityName,
     description,
     imageFile,
   })

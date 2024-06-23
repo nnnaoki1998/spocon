@@ -14,8 +14,8 @@ export const updateTeamInfo = async (
   gradeId: number,
   iconPath: string,
   description: string,
-  prefecture: string,
-  city: string
+  prefectureName: string,
+  cityName: string
 ): Promise<void> =>
   axios.patch(`${backendUrl}/team/${id}`, {
     name,
@@ -23,6 +23,6 @@ export const updateTeamInfo = async (
     grade_id: gradeId,
     icon_path: iconPath,
     description,
-    address_state: prefecture,
-    address_city: city,
+    address_state: prefectureName,
+    address_city: cityName,
   });
