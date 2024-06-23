@@ -119,12 +119,14 @@ export const TeamProfileWritableView: React.FC<Props> = ({ teamId }) => {
           )}
         </Grid>
         <Grid item xs={6}>
-          {cities && (
+          {prefectures && (
             <SpoconSelectField
               selectFieldId="profile-edit-select-field-city"
               labelId="profile-edit-select-label-city"
               label="市区町村"
-              selectionItems={cities}
+              selectionItems={
+                cities === undefined ? ([] as TypeCity[]) : cities
+              }
               getSelectionItemKey={(item: TypeCity) => String(item.cityCode)}
               getSlectionItemName={(item: TypeCity) => item.cityName}
               value={cityName}
