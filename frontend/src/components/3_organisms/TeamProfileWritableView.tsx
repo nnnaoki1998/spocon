@@ -55,16 +55,18 @@ export const TeamProfileWritableView: React.FC<Props> = ({
   // ファイルから画像URLを取得する
   useGetImageUrlFromFile({ file: imageFile }, setImageUrl);
 
-  useSetTeam({
-    teamId,
-    setTeamName,
-    setGradeName,
-    setSportName,
-    setPrefectureName,
-    setCityName,
-    setDescription,
-    setImageUrl,
-  });
+  if (writableType === TeamProfileWritableType.Edit) {
+    useSetTeam({
+      teamId,
+      setTeamName,
+      setGradeName,
+      setSportName,
+      setPrefectureName,
+      setCityName,
+      setDescription,
+      setImageUrl,
+    });
+  }
 
   return (
     <Box>
