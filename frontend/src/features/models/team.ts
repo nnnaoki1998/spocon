@@ -141,7 +141,7 @@ const updateTeamProfile = async ({
 };
 
 /** チーム情報の更新処理を呼び出す */
-export const handleUpdateTeamProfile = ({
+export const handleToUpdateTeamProfile = ({
   teamId,
   teamName,
   sports,

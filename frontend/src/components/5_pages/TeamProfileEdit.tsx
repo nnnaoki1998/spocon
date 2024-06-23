@@ -1,7 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-import { TeamProfileWritableType } from '../../constants/TeamProfileWritableType';
 import { useAuth } from '../../hooks/auth/useAuth';
 import { TeamProfileWritableFrame } from '../4_templates/TeamProfileWritableFrame';
 
@@ -15,11 +14,5 @@ export const TeamProfileEdit: React.FC = () => {
   const teamIdNumber = parseInt(teamId, 10);
   const auth = useAuth();
 
-  return (
-    <TeamProfileWritableFrame
-      auth={auth}
-      writableType={TeamProfileWritableType.Edit}
-      teamId={teamIdNumber}
-    />
-  );
+  return <TeamProfileWritableFrame auth={auth} teamId={teamIdNumber} />;
 };

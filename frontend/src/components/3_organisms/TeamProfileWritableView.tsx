@@ -1,7 +1,9 @@
 import { Box, Grid } from '@mui/material';
 import React, { useState } from 'react';
-import { TeamProfileWritableType } from '../../constants/TeamProfileWritableType';
-import { handleUpdateTeamProfile } from '../../features/models/team';
+import {
+  handleToCreateTeamProfile,
+  handleToUpdateTeamProfile,
+} from '../../features/models/team';
 import { useGetCities } from '../../hooks/city/useGetCities';
 import { useHandleCityChange } from '../../hooks/city/useHandleCityChange';
 import { useGetGrades } from '../../hooks/grade/useGetGrades';
@@ -21,14 +23,10 @@ import { SpoconSelectForm } from '../2_molecules/SpoconSelectForm';
 import { SpoconTextForm } from '../2_molecules/SpoconTextForm';
 
 type Props = {
-  writableType: TeamProfileWritableType;
-  teamId: number;
+  teamId?: number;
 };
 
-export const TeamProfileWritableView: React.FC<Props> = ({
-  writableType,
-  teamId,
-}) => {
+export const TeamProfileWritableView: React.FC<Props> = ({ teamId }) => {
   const [teamName, setTeamName] = useState<string>('');
   const [gradeName, setGradeName] = useState<string>('');
   const [sportName, setSportName] = useState<string>('');
@@ -55,7 +53,7 @@ export const TeamProfileWritableView: React.FC<Props> = ({
   // ファイルから画像URLを取得する
   useGetImageUrlFromFile({ file: imageFile }, setImageUrl);
 
-  if (writableType === TeamProfileWritableType.Edit) {
+  if (teamId) {
     useSetTeam({
       teamId,
       setTeamName,
@@ -71,11 +69,7 @@ export const TeamProfileWritableView: React.FC<Props> = ({
   return (
     <Box>
       <SpoconPageTitle
-        title={
-          writableType === TeamProfileWritableType.Registration
-            ? 'チーム登録'
-            : 'チーム編集'
-        }
+        title={teamId === undefined ? 'チーム登録' : 'チーム編集'}
       />
       <SpoconTextForm
         id="profile-edit-team-name"
@@ -160,27 +154,41 @@ export const TeamProfileWritableView: React.FC<Props> = ({
         <SpoconButton
           size="large"
           variant="contained"
-          label={
-            writableType === TeamProfileWritableType.Registration
-              ? '登録'
-              : '更新'
-          }
-          onClickFunction={() =>
-            handleUpdateTeamProfile({
-              teamId,
-              teamName,
-              sports,
-              sportName,
-              grades,
-              gradeName,
-              prefectureName,
-              cityName,
-              description,
-              imageFile,
-            })
+          label={teamId === undefined ? '登録' : '更新'}
+          onClickFunction={
+            teamId === undefined
+              ? () =>
+                  handleToCreateTeamProfile({
+                    teamName,
+                    sports,
+                    sportName,
+                    grades,
+                    gradeName,
+                    prefectureName,
+                    cityName,
+                    description,
+                    imageFile,
+                  })
+              : () =>
+                  handleToUpdateTeamProfile({
+                    teamId,
+                    teamName,
+                    sports,
+                    sportName,
+                    grades,
+                    gradeName,
+                    prefectureName,
+                    cityName,
+                    description,
+                    imageFile,
+                  })
           }
         />
       </Box>
     </Box>
   );
+};
+
+TeamProfileWritableView.defaultProps = {
+  teamId: undefined,
 };
